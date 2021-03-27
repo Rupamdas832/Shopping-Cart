@@ -1,10 +1,10 @@
 import React, { useEffect, useReducer, useState } from 'react'
 import Products from '../Assets/Products'
-import CartReducer from './CartReducer'
+import { useCart } from './CartContext'
+
 
 const Cart = () => {
-
-    const [state, dispatch] = useReducer(CartReducer, Products)
+    const {state, dispatch} = useCart()
 
     const getTotal = (array) => {
         return array.reduce((total, {price,quantity}) => total + price*quantity,0)
