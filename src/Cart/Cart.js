@@ -1,5 +1,4 @@
 import React, { useEffect, useReducer, useState } from 'react'
-import Products from '../Assets/Products'
 import { useCart } from './CartContext'
 
 
@@ -9,28 +8,28 @@ const Cart = () => {
     const getTotal = (array) => {
         return array.reduce((total, {price,quantity}) => total + price*quantity,0)
     }
-
     return (
         <div>
             <h1>Cart</h1>
-            {state.map(cart => {
-                return <div className="ecommerceCard" key={cart.id}>
+            {state.cart.map(cartItem => {
+                const {id, name, price, quantity} = cartItem;
+                return <div className="ecommerceCard" key={cartItem.id}>
                 <div className="cardBody">
-                    <p>{cart.name}</p>
+                    <p>{name}</p>
                 <div className="cardPrice">
-                    <h4>{cart.price}</h4>
-                    <button className="btn unstyled" onClick={() => dispatch({type: "DEC", payload: cart.id})}>-</button>
-                    {cart.quantity}
-                    <button className="btn unstyled" onClick={() => dispatch({type: "INC", payload: cart.id})}>+</button>
+                    <h4>{price}</h4>
+                    <button className="btn unstyled" onClick={() => dispatch({type: "DEC_COUNT", payload: id})}>-</button>
+                    {quantity}
+                    <button className="btn unstyled" onClick={() => dispatch({type: "INC_COUNT", payload: id})}>+</button>
                 </div>
                 </div>
                 <div className="cardFooter">
-                    <button className="btn outline" onClick={() => dispatch({type: "WISHLIST", payload: cart.id})}><i class="far fa-heart"></i></button>
-                    <button className="btn" onClick={() => dispatch({type: "REMOVE", payload: cart.id})}>Remove</button>
+                    <button className="btn outline" onClick={() => dispatch({type: "ADD_TO_WISHLIST", payload: cartItem})}><i class="far fa-heart"></i></button>
+                    <button className="btn" onClick={() => dispatch({type: "REMOVE_FROM_CART", payload: cartItem.id})}>Remove</button>
                 </div>   
             </div>
             })}
-            <h1>Total :- {getTotal(state)}</h1>
+            <h1>Total :- {getTotal(state.cart)}</h1>
         </div>
     )
 }

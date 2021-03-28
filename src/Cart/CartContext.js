@@ -11,7 +11,13 @@ export const useCart = () => {
 
 export const CartProvider = ({children}) => {
 
-    const [state, dispatch] = useReducer(CartReducer, Products)
+    const initialState = {
+        products: Products, 
+        wishlist: [],
+        cart: []
+    }
+
+    const [state, dispatch] = useReducer(CartReducer, initialState)
 
     return <CartContext.Provider value={ {state, dispatch} }>{children}</CartContext.Provider>
 }
