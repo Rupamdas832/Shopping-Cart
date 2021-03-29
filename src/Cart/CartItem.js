@@ -1,14 +1,18 @@
 import React from 'react'
 import { useCart } from './CartContext'
-import { FcLikePlaceholder, FcLike } from "react-icons/fc";
 
 const CartItem = ({cartItem}) => {
     
     const {id, name, price, quantity, isWishlist} = cartItem;
     const {dispatch} = useCart()
 
+    const toggleWishlist = (id) => {
+        {isWishlist ? (dispatch({type: "REMOVE_FROM_WISHLIST", payload: id})) : (dispatch({type: "ADD_TO_WISHLIST", payload: id}))}
+        dispatch({type: "REMOVE_FROM_CART", payload: id})
+    }
+
     return (
-        <div className="ecommerceCard" key={cartItem.id}>
+        <div className="ecommerceCard" key={id}>
                 <div className="cardBody">
                     <p>{name}</p>
                 <div className="cardPrice">
@@ -19,8 +23,8 @@ const CartItem = ({cartItem}) => {
                 </div>
                 </div>
                 <div className="cardFooter">
-                    <button className="btn outline" onClick={() => dispatch({type: "ADD_TO_WISHLIST", payload: cartItem})}>{isWishlist ? <FcLike/> : <FcLikePlaceholder/>}</button>
-                    <button className="btn" onClick={() => dispatch({type: "REMOVE_FROM_CART", payload: cartItem.id})}>Remove</button>
+                    <button className="btn outline" onClick={() => toggleWishlist(id)}>Move To Wishlist</button>
+                    <button className="btn" onClick={() => dispatch({type: "REMOVE_FROM_CART", payload: id})}>Remove</button>
                 </div>   
             </div>
     )

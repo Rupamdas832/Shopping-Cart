@@ -6,6 +6,10 @@ const ProductItem = ({product}) => {
     const {id, name, price, img, isWishlist} = product
     const {dispatch} = useCart()
 
+    const toggleWishlist = () => {
+        {isWishlist ? (dispatch({type: "REMOVE_FROM_WISHLIST", payload: id})) : (dispatch({type: "ADD_TO_WISHLIST", payload: id}))}  
+    }
+
     return (
         <div className="ecommerceCard">
                 <div className="cardImg">
@@ -19,7 +23,7 @@ const ProductItem = ({product}) => {
                 </div>
                 </div>
                 <div className="cardFooter">
-                    <button className="btn outline" onClick={() => dispatch({type: "ADD_TO_WISHLIST", payload: id})}>{isWishlist ? <FcLike/> : <FcLikePlaceholder/>}</button>
+                    <button className="btn outline" onClick={() => toggleWishlist(id)}>{isWishlist ? <FcLike/> : <FcLikePlaceholder/>}</button>
                     <button className="btn" onClick={() => dispatch({type: "ADD_TO_CART", payload: product})}>Add to Cart</button>
                 </div>   
             </div>

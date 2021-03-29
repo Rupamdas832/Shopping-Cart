@@ -25,6 +25,13 @@ const CartReducer = (state,action) => {
                 }
                 return product
             })}
+        case "REMOVE_FROM_WISHLIST":
+            return {...state, products: state.products.map(product => {
+                if(product.id === action.payload){
+                    return {...product, isWishlist: false}
+                }
+                return product
+            })}
         default:
             return state
     }
