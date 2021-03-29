@@ -1,7 +1,7 @@
-import React, { useEffect, useReducer, useState } from 'react'
+import React from 'react'
 import { useCart } from './CartContext'
 import CartItem from './CartItem';
-
+import "./CartList.css"
 
 const CartList = () => {
     const {state} = useCart()
@@ -10,12 +10,19 @@ const CartList = () => {
         return array.reduce((total, {price,quantity}) => total + price*quantity,0)
     }
     return (
-        <div>
+        <div className="cartContainer">
             <h1>Cart</h1>
-            {state.cart.map(cartItem => {
-                return <CartItem cartItem={cartItem}/>
-            })}
-            <h1>Total :- {getTotal(state.cart)}</h1>
+            <div className="cartListContainer">
+                <div className="cartList">
+                    {state.cart.map(cartItem => {
+                        return <CartItem cartItem={cartItem}/>
+                    })}
+                </div>
+                <div className="cartTotal">
+                    <h1>Total :- {getTotal(state.cart)}</h1>
+                </div>
+            </div>
+            
         </div>
     )
 }

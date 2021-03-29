@@ -14,6 +14,7 @@ const HeroSection = ({route}) => {
                     return <CartList/>
                 case "wishlist":
                     return <WishList/>
+                default: return <Home/>
             }
             <ProductsList/>
 }

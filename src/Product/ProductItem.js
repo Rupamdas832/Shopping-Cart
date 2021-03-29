@@ -13,12 +13,12 @@ const ProductItem = ({product}) => {
     return (
         <div className="ecommerceCard">
                 <div className="cardImg">
-                    <img src={img}/>
+                    <img src={img} alt="product"/>
                 </div>
                 <div className="cardBody">
                     <p>{name}</p>
                 <div className="cardPrice">
-                    <h4>{price}</h4>
+                    <h4>₹ {price}</h4>
                     <h5>50% off</h5>
                 </div>
                 </div>

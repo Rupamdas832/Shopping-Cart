@@ -15,8 +15,14 @@ const Header = ({setRoute}) => {
         <button class="navBtn ecommerce" onClick={() => setRoute("products")}>Products</button>
     </div>
     <div class="navAction ecommerce">
-        <button class="btn unstyled" onClick={() => setRoute("wishlist")}><i class="fab fa-gratipay"></i></button>
-        <button class="btn unstyled" onClick={() => setRoute("cart")}><i class="fas fa-shopping-bag"></i></button>
+        <div className="tooltip">
+            <button className="btn unstyled" onClick={() => setRoute("wishlist")}><i class="fab fa-gratipay"></i></button>
+            <span className="tooltipText">WishList</span>
+        </div>
+        <div className="tooltip">
+            <button className="btn unstyled" onClick={() => setRoute("cart")}><i class="fas fa-shopping-bag"></i></button>
+            <span className="tooltipText">Shopping Bag</span>
+        </div>
     </div>
 </div>
     )

@@ -14,11 +14,12 @@ const WishList = () => {
                 <div className="cardBody">
                     <p>{name}</p>
                 <div className="cardPrice">
-                    <h4>{price}</h4>
+                    <h4>₹ {price}</h4>
                 </div>
                 </div>
                 <div className="cardFooter">
-                    <button className="btn" onClick={() => dispatch({type: "REMOVE_FROM_WISHLIST", payload: id})}>Remove</button>
+                    <button className="btn outline" onClick={() => dispatch({type: "REMOVE_FROM_WISHLIST", payload: id})}>Remove</button>
+                    <button className="btn" onClick={() => dispatch({type: "ADD_TO_CART", payload: product})}>Add to Cart</button>
                 </div>   
             </div>}
                 </div> 
