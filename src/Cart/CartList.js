@@ -14,12 +14,14 @@ const CartList = () => {
             <h1>Cart</h1>
             <div className="cartListContainer">
                 <div className="cartList">
+                    {state.cart.length === 0 ? <p>Your Shopping bag is empty!</p> : null}
                     {state.cart.map(cartItem => {
                         return <CartItem cartItem={cartItem}/>
                     })}
                 </div>
                 <div className="cartTotal">
-                    <h1>Total :- {getTotal(state.cart)}</h1>
+                    <p>Total :- {getTotal(state.cart)}</p>
+                    <button className="actionBtn">Checkout</button>
                 </div>
             </div>
             

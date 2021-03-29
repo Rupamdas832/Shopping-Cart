@@ -1,5 +1,23 @@
-.productList{
+.productListContainer{
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+}
+.productLeftContainer{
+    padding: 0 1rem;
+}
+.productLeftContainer ul{
+    list-style: none;
+}
+.productLeftContainer li{
+    list-style: none;
+    margin-left: -2rem;
+}
+.productLeftContainer ul:hover{
+    cursor: pointer;
+}
+.productRightContainer{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    padding: 0 1rem;
 }
