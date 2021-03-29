@@ -13,7 +13,6 @@ export const CartProvider = ({children}) => {
 
     const initialState = {
         products: Products, 
-        wishlist: [],
         cart: []
     }
 

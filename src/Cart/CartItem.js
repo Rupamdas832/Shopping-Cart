@@ -1,19 +1,14 @@
-import React, { useEffect, useReducer, useState } from 'react'
+import React from 'react'
 import { useCart } from './CartContext'
+import { FcLikePlaceholder, FcLike } from "react-icons/fc";
 
+const CartItem = ({cartItem}) => {
+    
+    const {id, name, price, quantity, isWishlist} = cartItem;
+    const {dispatch} = useCart()
 
-const Cart = () => {
-    const {state, dispatch} = useCart()
-
-    const getTotal = (array) => {
-        return array.reduce((total, {price,quantity}) => total + price*quantity,0)
-    }
     return (
-        <div>
-            <h1>Cart</h1>
-            {state.cart.map(cartItem => {
-                const {id, name, price, quantity} = cartItem;
-                return <div className="ecommerceCard" key={cartItem.id}>
+        <div className="ecommerceCard" key={cartItem.id}>
                 <div className="cardBody">
                     <p>{name}</p>
                 <div className="cardPrice">
@@ -24,14 +19,11 @@ const Cart = () => {
                 </div>
                 </div>
                 <div className="cardFooter">
-                    <button className="btn outline" onClick={() => dispatch({type: "ADD_TO_WISHLIST", payload: cartItem})}><i class="far fa-heart"></i></button>
+                    <button className="btn outline" onClick={() => dispatch({type: "ADD_TO_WISHLIST", payload: cartItem})}>{isWishlist ? <FcLike/> : <FcLikePlaceholder/>}</button>
                     <button className="btn" onClick={() => dispatch({type: "REMOVE_FROM_CART", payload: cartItem.id})}>Remove</button>
                 </div>   
             </div>
-            })}
-            <h1>Total :- {getTotal(state.cart)}</h1>
-        </div>
     )
 }
 
-export default Cart
+export default CartItem

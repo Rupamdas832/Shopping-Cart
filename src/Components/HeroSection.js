@@ -1,5 +1,5 @@
 import React from 'react'
-import Cart from '../Cart/Cart'
+import CartList from '../Cart/CartList'
 import ProductsList from '../Product/ProductsList'
 import WishList from '../WishList/WishList'
 import Home from './Home'
@@ -11,7 +11,7 @@ const HeroSection = ({route}) => {
                 case "products":
                     return <ProductsList/>
                 case "cart":
-                    return <Cart/>
+                    return <CartList/>
                 case "wishlist":
                     return <WishList/>
             }

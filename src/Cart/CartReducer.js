@@ -19,7 +19,12 @@ const CartReducer = (state,action) => {
                 return cart
         })}
         case "ADD_TO_WISHLIST":
-            return {...state, wishlist: state.wishlist.concat(action.payload)}
+            return {...state, products: state.products.map(product => {
+                if(product.id === action.payload){
+                    return {...product, isWishlist: true}
+                }
+                return product
+            })}
         default:
             return state
     }

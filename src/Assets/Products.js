@@ -13,7 +13,7 @@ const Products =  [
       "img": "https://images.unsplash.com/photo-1597343781704-dc11f4ffd419?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mjl8fHJlZCUyMHNob3J0c3xlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
       "price": 500,
       "quantity": 1,
-      "isWishlist": false
+      "isWishlist": true
     },
     {
       "id": 3,
