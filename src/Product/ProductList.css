@@ -2,7 +2,9 @@
     display: grid;
     grid-template-columns: 1fr 5fr;
     margin-top: 4rem;
+   
 }
+
 .productLeftContainer{
     padding: 0 1rem;
 }
@@ -20,5 +22,14 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    align-items: center;
     padding: 0 1rem;
+    position: relative;
+}
+.spinner{
+    position: absolute;
+    left: 40%;
+}
+.ecommerceCard{
+    background-color: white;
 }

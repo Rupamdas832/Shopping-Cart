@@ -20,8 +20,14 @@ const CartList = () => {
                     })}
                 </div>
                 <div className="cartTotal">
-                    <p>Total :- {getTotal(state.cart)}</p>
-                    <button className="actionBtn">Checkout</button>
+                    <div className="cartPriceDetails">
+                        <h4>PRICE DETAILS</h4>
+                        <p>Price ₹{getTotal(state.cart)}</p>
+                        <p>Discount -₹40</p>
+                        <p>Delivery Charges  FREE</p>
+                        <h5>Total Amount ₹{getTotal(state.cart)}</h5>
+                        <button className="actionBtn">Checkout</button>
+                    </div>  
                 </div>
             </div>
             

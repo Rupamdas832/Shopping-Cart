@@ -7,29 +7,25 @@ const Header = ({setRoute}) => {
 
     const {state} = useStore()
     return (
-        <div class="navbar ecommerce">
-    <div class="navLogo">
+        <div className="navbar">
+    <div className="navLogo">
         LOGO
     </div>
-    <div class="navSearch ecommerce">
-        <label><i class="fab fa-searchengin"></i></label>
-        <input placeholder="Quick search anything"/>
+    <div className="navLinks">
+        <button className="navBtn" onClick={() => setRoute("home")}>Home</button>
+        <button className="navBtn" onClick={() => setRoute("products")}>Products</button>
     </div>
-    <div class="navLinks  ecommerce">
-        <button class="navBtn ecommerce" onClick={() => setRoute("home")}>Home</button>
-        <button class="navBtn ecommerce" onClick={() => setRoute("products")}>Products</button>
-    </div>
-    <div class="navAction ecommerce">
+    <div className="navAction">
         <div className="tooltip">
-            <button className="btn unstyled" onClick={() => setRoute("wishlist")}><FaHeart/></button>
-            <span className="tooltipText">WishList</span>
+            <button className="navBtn" onClick={() => setRoute("wishlist")}><FaHeart/></button>
+                <span className="tooltipText">WishList</span>
         </div>
         <div className="tooltip">
-            <button className="btn unstyled" onClick={() => setRoute("cart")}><FaShoppingBag/></button>
-            <span className="tooltipText">Shopping Bag</span>
-            {state.cart.length === 0 ? null : <span className="badge">{state.cart.length}</span>}
+            <button className="navBtn" onClick={() => setRoute("cart")}><FaShoppingBag/></button>
+                <span className="tooltipText">Shopping Bag</span>
+                {state.cart.length === 0 ? null : <span className="badge">{state.cart.length}</span>}
         </div>
-    </div>
+	</div>
 </div>
     )
 }

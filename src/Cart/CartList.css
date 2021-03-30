@@ -9,17 +9,47 @@
 .cartListContainer{
     display: grid;
     grid-template-columns: 2fr 1fr;
-    width: 50vw;
-    border: 1px solid black;
+    width: 60vw;
 }
 .cartList{
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-.cartTotal{
+.cartPriceDetails{
+    height: auto;
+    background-color: rgb(255, 255, 255);
+    padding: 1rem 1rem;
     display: flex;
     flex-direction: column;
-    padding: 1rem 1rem;
-    border-left: 1px solid black;
+}
+.cartPriceDetails h4{
+    border-bottom: 1px solid black;
+}
+.cartPriceDetails p{
+    font-size: 1rem;
+    
+}
+.cartPriceDetails h5{
+    border-bottom: 1px dotted rgb(138, 137, 137);
+    border-top: 1px dotted rgb(138, 137, 137);
+    padding: 1rem 0;
+    margin-bottom: 1rem;
+}
+.flatCard{
+    width: 35rem;
+    font-size: 1rem;
+}
+.imgFlat{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.imgFlat img{
+    width: 80%;
+    max-height: 15rem;
+}
+.detailFlat{
+    padding: 0 0 0 0;
 }

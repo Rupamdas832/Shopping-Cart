@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import MockServer from "../src/Api/mockServer";
+
+MockServer();
 
 ReactDOM.render(
   <React.StrictMode>

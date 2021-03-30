@@ -1,13 +1,29 @@
-import React, { useEffect } from 'react'
+import React, {useEffect} from 'react'
 import { useStore } from '../Store/context'
 import ProductItem from './ProductItem'
+import axios from "axios"
 import "./ProductList.css"
 
 const ProductsList = () => {
-    const {state} = useStore()
+    const {state, dispatch} = useStore()
+
     useEffect(() => {
-        console.log("State changed")
-    },[state.products])
+        async function fetchData() {
+            try {
+                const response = await axios.get("/api/products")
+                const data = await response.data.products
+                console.log(response)
+                if(response.status === 200){
+                    dispatch({type: "IS_LOADING"})
+                    dispatch({type: "LOAD_PRODUCTS", payload: data})
+                }
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        fetchData();
+    },[])
+    
     return (
         <div className="productListContainer">
             <div className="productLeftContainer">
@@ -29,6 +45,7 @@ const ProductsList = () => {
                 </div>
             </div>
             <div className="productRightContainer">
+            {state.isLoading === "loading" ? <div className="spinner"></div> : null}
             {state.products.map((product) => {
                 return <ProductItem product={product} key={product.id}/>
             })}

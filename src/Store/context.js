@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useReducer } from 'react'
-import Products from "../Assets/Products"
 import StoreReducer from '../Store/reducer'
 
 const StoreContext = createContext()
@@ -12,8 +11,9 @@ export const useStore = () => {
 export const StoreProvider = ({children}) => {
 
     const initialState = {
-        products: Products, 
-        cart: []
+        products: [], 
+        cart: [],
+        isLoading: "loading"
     }
 
     const [state, dispatch] = useReducer(StoreReducer, initialState)

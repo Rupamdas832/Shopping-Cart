@@ -3,7 +3,7 @@ import { useStore } from '../Store/context'
 import { FcLikePlaceholder, FcLike } from "react-icons/fc";
 
 const ProductItem = ({product}) => {
-    const {id, name, price, img, isWishlist} = product
+    const {id, name, price, img, isWishlist, discount} = product
     const {dispatch} = useStore()
 
     const toggleWishlist = () => {
@@ -19,7 +19,7 @@ const ProductItem = ({product}) => {
                     <p>{name}</p>
                 <div className="cardPrice">
                     <h4>₹ {price}</h4>
-                    <h5>50% off</h5>
+                    <h5>{discount}% off</h5>
                 </div>
                 </div>
                 <div className="cardFooter">
