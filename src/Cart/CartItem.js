@@ -1,10 +1,10 @@
 import React from 'react'
-import { useCart } from './CartContext'
+import { useStore } from '../Store/context'
 
 const CartItem = ({cartItem}) => {
     
     const {id, name, price, quantity, isWishlist} = cartItem;
-    const {dispatch} = useCart()
+    const {dispatch} = useStore()
 
     const toggleWishlist = (id) => {
         {isWishlist ? (dispatch({type: "REMOVE_FROM_WISHLIST", payload: id})) : (dispatch({type: "ADD_TO_WISHLIST", payload: id}))}

@@ -1,6 +1,7 @@
 .productListContainer{
     display: grid;
     grid-template-columns: 1fr 5fr;
+    margin-top: 4rem;
 }
 .productLeftContainer{
     padding: 0 1rem;

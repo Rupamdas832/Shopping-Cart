@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import './App.css';
-import { CartProvider } from './Cart/CartContext';
+import { StoreProvider } from './Store/context';
 import Header from './Components/Header';
 import HeroSection from './Components/HeroSection';
 
@@ -8,10 +8,10 @@ function App() {
   const [route, setRoute] = useState("home")
   return (
     <div className="App">
-    <CartProvider>
+    <StoreProvider>
       <Header setRoute={setRoute}/>
       <HeroSection route={route}/>
-    </CartProvider> 
+    </StoreProvider> 
     </div>
   );
 }

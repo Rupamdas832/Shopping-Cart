@@ -1,10 +1,11 @@
 import React from 'react'
+import "./Header.css"
 import {FaShoppingBag, FaHeart} from "react-icons/fa"
-import { useCart } from '../Cart/CartContext'
+import { useStore } from '../Store/context'
 
 const Header = ({setRoute}) => {
 
-    const {state} = useCart()
+    const {state} = useStore()
     return (
         <div class="navbar ecommerce">
     <div class="navLogo">
@@ -22,7 +23,6 @@ const Header = ({setRoute}) => {
         <div className="tooltip">
             <button className="btn unstyled" onClick={() => setRoute("wishlist")}><FaHeart/></button>
             <span className="tooltipText">WishList</span>
-            <span className="badge">5</span>
         </div>
         <div className="tooltip">
             <button className="btn unstyled" onClick={() => setRoute("cart")}><FaShoppingBag/></button>

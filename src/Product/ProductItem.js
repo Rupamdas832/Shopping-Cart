@@ -1,10 +1,10 @@
 import React from 'react'
-import {useCart} from "../Cart/CartContext"
+import { useStore } from '../Store/context'
 import { FcLikePlaceholder, FcLike } from "react-icons/fc";
 
 const ProductItem = ({product}) => {
     const {id, name, price, img, isWishlist} = product
-    const {dispatch} = useCart()
+    const {dispatch} = useStore()
 
     const toggleWishlist = () => {
         {isWishlist ? (dispatch({type: "REMOVE_FROM_WISHLIST", payload: id})) : (dispatch({type: "ADD_TO_WISHLIST", payload: id}))}  

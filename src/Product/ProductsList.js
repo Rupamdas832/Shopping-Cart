@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
-import { useCart } from '../Cart/CartContext'
+import { useStore } from '../Store/context'
 import ProductItem from './ProductItem'
 import "./ProductList.css"
 
 const ProductsList = () => {
-    const {state} = useCart()
+    const {state} = useStore()
     useEffect(() => {
         console.log("State changed")
     },[state.products])

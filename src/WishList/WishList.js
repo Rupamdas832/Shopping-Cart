@@ -1,11 +1,12 @@
 import React from 'react'
-import { useCart } from '../Cart/CartContext'
+import "./WishList.css"
+import { useStore } from '../Store/context'
 
 const WishList = () => {
 
-    const {state, dispatch} = useCart()
+    const {state, dispatch} = useStore()
     return (
-        <div>
+        <div className="wishlistContainer">
             <h1>WishList</h1>
             {state.products.map(product => {
                 const {id, name, price, isWishlist} = product;
