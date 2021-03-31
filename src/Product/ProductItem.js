@@ -1,13 +1,18 @@
 import React from 'react'
 import { useStore } from '../Store/context'
 import { FcLikePlaceholder, FcLike } from "react-icons/fc";
+import { Link } from 'react-router-dom';
 
 const ProductItem = ({product}) => {
-    const {id, name, price, img, isWishlist, discount, inStock} = product
+    const {id, name, price, img, isWishlist, discount, inStock, inCart} = product
     const {dispatch} = useStore()
 
     const toggleWishlist = () => {
         {isWishlist ? (dispatch({type: "REMOVE_FROM_WISHLIST", payload: id})) : (dispatch({type: "ADD_TO_WISHLIST", payload: id}))}  
+    }
+    const addToCart = (product) => {
+        product.inCart = true;
+        dispatch({type: "ADD_TO_CART", payload: product})
     }
 
     return (
@@ -27,7 +32,7 @@ const ProductItem = ({product}) => {
                 </div>
                 <div className="cardFooter">
                     <button className="btn outline" onClick={() => toggleWishlist(id)}>{isWishlist ? <FcLike/> : <FcLikePlaceholder/>}</button>
-                    <button className="btn" onClick={() => dispatch({type: "ADD_TO_CART", payload: product})}>Add to Cart</button>
+                    {inCart ? (<Link to="/cart"><button className="actionBtn">Go to Cart</button></Link>) : (<button className="btn" onClick={() => addToCart(product)}>Add to Cart</button>)}
                 </div>   
             </div>
     )

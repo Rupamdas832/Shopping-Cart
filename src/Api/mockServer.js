@@ -30,7 +30,7 @@ export default function MockServer() {
         },
         routes() {
             this.namespace = "api";
-            this.timing = 3000;
+            this.timing = 1500;
             this.resource("products");
         },
         

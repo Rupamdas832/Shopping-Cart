@@ -38,11 +38,7 @@
     justify-content: space-between;
 }
 .price.total{
-    border-bottom: 1px dotted rgb(138, 137, 137);
     border-top: 1px dotted rgb(138, 137, 137);
-}
-.actionBtn{
-    margin-top: 1rem;
 }
 .actionBtn:hover{
     background-color: var(--blue);

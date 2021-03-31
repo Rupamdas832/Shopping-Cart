@@ -1,28 +1,11 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import { useStore } from '../Store/context'
 import ProductItem from './ProductItem'
-import axios from "axios"
 import "./ProductList.css"
 
 const ProductsList = () => {
-    const {state, dispatch} = useStore()
+    const {state} = useStore()
 
-    useEffect(() => {
-        async function fetchData() {
-            try {
-                const response = await axios.get("/api/products")
-                const data = await response.data.products
-                if(response.status === 200){
-                    dispatch({type: "IS_LOADING"})
-                    dispatch({type: "LOAD_PRODUCTS", payload: data})
-                }
-            } catch (error) {
-                console.log(error)
-            }
-        }
-        fetchData();
-    },[])
-    
     return (
         <div className="productListContainer">
             <div className="productLeftContainer">
