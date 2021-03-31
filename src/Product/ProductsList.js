@@ -12,7 +12,6 @@ const ProductsList = () => {
             try {
                 const response = await axios.get("/api/products")
                 const data = await response.data.products
-                console.log(response)
                 if(response.status === 200){
                     dispatch({type: "IS_LOADING"})
                     dispatch({type: "LOAD_PRODUCTS", payload: data})

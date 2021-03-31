@@ -3,7 +3,7 @@ import { useStore } from '../Store/context'
 import { FcLikePlaceholder, FcLike } from "react-icons/fc";
 
 const ProductItem = ({product}) => {
-    const {id, name, price, img, isWishlist, discount} = product
+    const {id, name, price, img, isWishlist, discount, inStock} = product
     const {dispatch} = useStore()
 
     const toggleWishlist = () => {
@@ -12,6 +12,9 @@ const ProductItem = ({product}) => {
 
     return (
         <div className="ecommerceCard">
+                {!inStock && <div className="outOfStockCard">
+                    <h2>Out of Stock</h2>
+                </div>}
                 <div className="cardImg">
                     <img src={img} alt="product"/>
                 </div>

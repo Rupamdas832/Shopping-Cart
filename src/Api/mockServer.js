@@ -23,8 +23,8 @@ export default function MockServer() {
                     img: faker.random.image(),
                     desc: faker.commerce.productDescription(),
                     quantity: 1,
-                    discount: faker.random.number({"min": 10, "max": 50}),
-                    inStock: faker.random.boolean() 
+                    discount: faker.datatype.number({"min": 10, "max": 50}),
+                    inStock: faker.datatype.boolean() 
                     })
             }
         },

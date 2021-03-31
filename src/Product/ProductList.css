@@ -32,4 +32,16 @@
 }
 .ecommerceCard{
     background-color: white;
+    position: relative;
+}
+.outOfStockCard{
+    position: absolute;
+    background-color: rgba(138, 132, 132, 0.664);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: rgb(211, 210, 210);
 }
