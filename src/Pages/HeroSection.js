@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react'
-import {BrowserRouter, Switch, Route} from "react-router-dom"
+import {Switch, Route} from "react-router-dom"
 import CartList from '../Cart/CartList'
 import ProductsList from '../Product/ProductsList'
 import WishList from '../WishList/WishList'
@@ -20,6 +20,9 @@ const HeroSection = ({route}) => {
                 }
             } catch (error) {
                 console.log(error)
+            }
+            finally{
+                dispatch({type: "IS_LOADING"})
             }
         }
         fetchData();

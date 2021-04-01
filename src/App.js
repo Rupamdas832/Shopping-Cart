@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import './App.css';
 import { StoreProvider } from './Store/context';
-import Header from './Components/Header';
-import HeroSection from './Components/HeroSection';
+import Header from './Pages/Header';
+import HeroSection from './Pages/HeroSection';
 import { BrowserRouter } from 'react-router-dom';
 
 function App() {
