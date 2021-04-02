@@ -8,7 +8,7 @@ import axios from "axios"
 import { useStore } from '../Store/context'
 
 const HeroSection = ({route}) => {
-    const {dispatch} = useStore()
+    const {state, dispatch} = useStore()
     useEffect(() => {
         async function fetchData() {
             try {
@@ -27,6 +27,20 @@ const HeroSection = ({route}) => {
         }
         fetchData();
     },[])
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const response = await axios.get("/api/cart")
+                console.log(response, "FROM HERO")
+            } catch (error) {
+                console.log(error, "FROM HERO")
+            }
+            finally{
+                dispatch({type: "IS_LOADING"})
+            }
+        }
+        fetchData();
+    },[state.cart])
     return (
             <Switch>
                 <Route exact path="/" component={Home}/>

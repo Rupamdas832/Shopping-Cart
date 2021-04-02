@@ -12,6 +12,8 @@ export default function MockServer() {
 
         models: {
             product: Model,
+            cart: Model,
+            wishlist: Model
         },
 
         
@@ -27,11 +29,33 @@ export default function MockServer() {
                     inStock: faker.datatype.boolean() 
                     })
             }
+            server.create("cart",{
+                name: faker.commerce.productName(),
+                price: faker.commerce.price(),
+                img: faker.random.image(),
+                desc: faker.commerce.productDescription(),
+                quantity: 1,
+                discount: faker.datatype.number({"min": 10, "max": 50}),
+                inStock: faker.datatype.boolean() 
+                })
+            
         },
         routes() {
             this.namespace = "api";
             this.timing = 1500;
-            this.resource("products");
+
+            this.get("/products", (schema) => {
+                return schema.products.all()
+            })
+
+            this.get("/cart", (schema) => {
+                return schema.carts.all()
+            })
+            this.post("/cart", (schema, request) => {
+                let attrs = JSON.parse(request.requestBody)
+
+                return schema.carts.create(attrs)
+            })
         },
         
     })

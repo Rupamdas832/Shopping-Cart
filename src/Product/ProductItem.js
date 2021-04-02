@@ -2,6 +2,7 @@ import React from 'react'
 import { useStore } from '../Store/context'
 import { FcLikePlaceholder, FcLike } from "react-icons/fc";
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 const ProductItem = ({product}) => {
     const {id, name, price, img, isWishlist, discount, inStock, inCart} = product
@@ -12,7 +13,25 @@ const ProductItem = ({product}) => {
     }
     const addToCart = (product) => {
         product.inCart = true;
-        dispatch({type: "ADD_TO_CART", payload: product})
+        async function fetchData1() {
+            try {
+                const response = await axios.post("/api/cart", {
+                    body: product
+                })
+                
+                console.log(response)
+                if(response.status === 201){
+                    dispatch({type: "ADD_TO_CART", payload: product})
+                }
+                
+               
+            } catch (error) {
+                console.log(error)
+            }
+            
+        }
+        fetchData1();
+        
     }
 
     return (
