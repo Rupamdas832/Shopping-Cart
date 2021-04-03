@@ -9,29 +9,36 @@ const ProductItem = ({product}) => {
     const {dispatch} = useStore()
 
     const toggleWishlist = () => {
-        {isWishlist ? (dispatch({type: "REMOVE_FROM_WISHLIST", payload: id})) : (dispatch({type: "ADD_TO_WISHLIST", payload: id}))}  
+        if(isWishlist){
+            dispatch({type: "REMOVE_FROM_WISHLIST", payload: id})
+        } else {
+            async function fetchData() {
+                try {
+                    const response = await axios.post("/api/wishlist", product)
+                    if(response.status === 201){
+                        dispatch({type: "ADD_TO_WISHLIST", payload: id})
+                    }
+                } catch (error) {
+                    console.log(error)
+                }
+            }
+            fetchData();
+        }
     }
     const addToCart = (product) => {
         product.inCart = true;
-        async function fetchData1() {
+        async function fetchData() {
             try {
-                const response = await axios.post("/api/cart", {
-                    body: product
-                })
-                
-                console.log(response)
+                const response = await axios.post("/api/cart", product)
                 if(response.status === 201){
                     dispatch({type: "ADD_TO_CART", payload: product})
                 }
-                
-               
             } catch (error) {
                 console.log(error)
             }
             
         }
-        fetchData1();
-        
+        fetchData();  
     }
 
     return (

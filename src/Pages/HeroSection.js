@@ -31,7 +31,10 @@ const HeroSection = ({route}) => {
         async function fetchData() {
             try {
                 const response = await axios.get("/api/cart")
-                console.log(response, "FROM HERO")
+                const data = await response.data.carts
+                if(response.status){
+                    dispatch({type: "LOAD_CART_ITEMS", payload: data})
+                }
             } catch (error) {
                 console.log(error, "FROM HERO")
             }
@@ -40,7 +43,7 @@ const HeroSection = ({route}) => {
             }
         }
         fetchData();
-    },[state.cart])
+    },[])
     return (
             <Switch>
                 <Route exact path="/" component={Home}/>

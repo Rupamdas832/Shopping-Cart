@@ -4,6 +4,8 @@ const StoreReducer = (state,action) => {
             return {...state, isLoading: "success"}
         case "LOAD_PRODUCTS":
             return {...state, products: action.payload.map(product => ({...product, isWishlist: false, inCart: false}))}
+        case "LOAD_CART_ITEMS":
+            return {...state, cart: action.payload}
         case "ADD_TO_CART":
             return {...state, cart: state.cart.concat(action.payload)}
         case "REMOVE_FROM_CART":

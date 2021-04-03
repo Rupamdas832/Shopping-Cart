@@ -29,16 +29,6 @@ export default function MockServer() {
                     inStock: faker.datatype.boolean() 
                     })
             }
-            server.create("cart",{
-                name: faker.commerce.productName(),
-                price: faker.commerce.price(),
-                img: faker.random.image(),
-                desc: faker.commerce.productDescription(),
-                quantity: 1,
-                discount: faker.datatype.number({"min": 10, "max": 50}),
-                inStock: faker.datatype.boolean() 
-                })
-            
         },
         routes() {
             this.namespace = "api";
@@ -55,6 +45,14 @@ export default function MockServer() {
                 let attrs = JSON.parse(request.requestBody)
 
                 return schema.carts.create(attrs)
+            })
+            this.get("/wishlist", (schema) => {
+                return schema.wishlists.all()
+            })
+            this.post("/wishlist", (schema, request) => {
+                let attrs = JSON.parse(request.requestBody)
+
+                return schema.wishlists.create(attrs)
             })
         },
         
