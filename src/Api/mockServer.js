@@ -27,7 +27,8 @@ export default function MockServer() {
                     quantity: 1,
                     rating: faker.datatype.number({"min": 1, "max": 5}),
                     discount: faker.datatype.number({"min": 10, "max": 50}),
-                    inStock: faker.datatype.boolean() 
+                    inStock: faker.datatype.boolean(),
+                    isPrimeChoice: faker.datatype.boolean()
                     })
             }
         },

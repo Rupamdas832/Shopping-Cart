@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 const ProductItem = ({product}) => {
-    const {id, name, price, img, isWishlist, discount, inStock, inCart} = product
+    const {id, name, price, img, isWishlist, discount, inStock, inCart, isPrimeChoice} = product
     const {dispatch} = useStore()
 
     const toggleWishlist = () => {
@@ -46,12 +46,16 @@ const ProductItem = ({product}) => {
                 {!inStock && <div className="outOfStockCard">
                     <h2>Out of Stock</h2>
                 </div>}
+               {isPrimeChoice && <div className="cardBadge">
+                    <h5>Prime</h5>
+                </div>}
                 <div className="cardImg">
                     <img src={img} alt="product"/>
                 </div>
                 <div className="cardBody">
                     <p>{name}</p>
                 <div className="cardPrice">
+                {isPrimeChoice ? "Prime" : " "}
                     <h4>₹ {price}</h4>
                     <h5>{discount}% off</h5>
                 </div>
