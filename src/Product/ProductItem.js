@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 const ProductItem = ({product}) => {
-    const {id, name, price, img, isWishlist, discount, inStock, inCart, isPrimeChoice, rating} = product
+    const {id, name, price, img, isWishlist, discount, inStock, isPrimeChoice, rating, category} = product
     const {dispatch} = useStore()
 
     const toggleWishlist = () => {
@@ -40,7 +40,7 @@ const ProductItem = ({product}) => {
                 </div>
                 <div className="cardBody">
                     <div className="cardTitle">
-                        <p>{name}</p>
+                        <p>{name} ({category})</p>
                         <span><FaStar/>{rating}</span>    
                     </div>    
                 <div className="cardPrice">

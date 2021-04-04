@@ -9,7 +9,8 @@ const ProductsList = () => {
     const initialState = {
         sortBy: null,
         showPrimeChoice: false,
-        showInventoryAll: false
+        showInventoryAll: false,
+        category: null
     }
     const reducer = (state, action) => {
         switch (action.type) {
@@ -17,8 +18,16 @@ const ProductsList = () => {
                 return {...state, sortBy: action.payload}
             case "TOGGLE_INVENTORY":
                 return {...state, showInventoryAll: !state.showInventoryAll}
-                case "TOGGLE_PRIME_CHOICE":
+            case "TOGGLE_PRIME_CHOICE":
                 return {...state, showPrimeChoice: !state.showPrimeChoice}
+            case "CATEGORY":
+                return {...state, category: action.payload}
+            case "RESET":
+                return {...state, 
+                    sortBy: null,
+                    showPrimeChoice: false,
+                    showInventoryAll: false,
+                    category: null}
             default:
                 return state
         }
@@ -43,8 +52,25 @@ const ProductsList = () => {
         return productList.filter(({ inStock }) => (showInventoryAll ? true : inStock)).filter(({ isPrimeChoice }) => (showPrimeChoice ? isPrimeChoice : true))
     }
 
+    const getCategory = (productList, category) => {
+        if(category && category === "MEN"){
+            return productList.filter((product) => product.category === "MEN")
+        }
+        if(category && category === "WOMEN"){
+            return productList.filter((product) => product.category === "WOMEN")
+        }
+        if(category && category === "GIRL"){
+            return productList.filter((product) => product.category === "GIRL")
+        }
+        if(category && category === "BOY"){
+            return productList.filter((product) => product.category === "BOY")
+        }
+        return productList
+    }
+
     const sortedData = getSortedData(state.products, productState.sortBy)
-    const filteredData = getFilteredData(sortedData, productState.showPrimeChoice, productState.showInventoryAll)
+    const categoryData = getCategory(sortedData, productState.category)
+    const filteredData = getFilteredData(categoryData, productState.showPrimeChoice, productState.showInventoryAll)
     
 
     return (
@@ -95,6 +121,40 @@ const ProductsList = () => {
                          </label></li>
                     </ul>
                 </div>
+                <div className="productFilter">
+                    <p>Category</p>
+                    <ul>
+                    <li><label><input 
+                    type="radio" name="category" 
+                    onChange={() => productDispatch({type: "CATEGORY", payload: "MEN"})}
+                    checked={productState.category && productState.category === "MEN"}
+                />
+                Men
+                </label></li>
+                <li><label><input 
+                    type="radio" name="category"
+                    onChange={() => productDispatch({type: "CATEGORY", payload: "WOMEN"})}
+                    checked={productState.category && productState.category === "WOMEN"}
+                />
+                Women
+                </label></li>
+                <li><label><input 
+                    type="radio" name="category"
+                    onChange={() => productDispatch({type: "CATEGORY", payload: "GIRL"})}
+                    checked={productState.category && productState.category === "GIRL"}
+                />
+                Girl
+                </label></li>
+                <li><label><input 
+                    type="radio" name="category"
+                    onChange={() => productDispatch({type: "CATEGORY", payload: "BOY"})}
+                    checked={productState.category && productState.category === "BOY"}
+                />
+                Boy
+                </label></li>
+                    </ul>
+                </div>
+                <button onClick={() => productDispatch({type: "RESET"})} className="btn outline">RESET</button>
             </div>
             <div className="productRightContainer">
             {state.isLoading === "loading" ? <div className="spinner"></div> : null}

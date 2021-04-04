@@ -28,7 +28,11 @@ export default function MockServer() {
                     rating: parseFloat((Math.random()*5).toFixed(1)),
                     discount: faker.datatype.number({"min": 10, "max": 50}),
                     inStock: faker.datatype.boolean(),
-                    isPrimeChoice: faker.datatype.boolean()
+                    isPrimeChoice: faker.datatype.boolean(),
+                    category: faker.random.arrayElement([
+                        "MEN", "WOMEN", "GIRL", "BOY"
+                    ]),
+                    date: faker.date.past(),
                     })
             }
         },

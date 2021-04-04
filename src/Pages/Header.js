@@ -2,19 +2,23 @@ import React from 'react'
 import "./Header.css"
 import {FaShoppingBag, FaHeart} from "react-icons/fa"
 import { useStore } from '../Store/context'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 
 const Header = () => {
 
     const {state} = useStore()
+
+    const getAllCartItems = (array) => {
+        return array.reduce((total, {quantity}) => total + quantity,0)
+    }
     return (
         <div className="navbar">
     <div className="navLogo">
         LOGO
     </div>
     <div className="navLinks">
-        <Link to="/"><button className="navBtn">Home</button></Link>
-        <Link to="/products"><button className="navBtn">Products</button></Link>
+        <NavLink to="/" activeStyle={{fontWeight: "bold",color: "red"}}><button className="navBtn">Home</button></NavLink>
+        <NavLink to="/products" activeStyle={{fontWeight: "bold",color: "red"}}><button className="navBtn">Products</button></NavLink>
     </div>
     <div className="navAction">
         <div className="tooltip">
@@ -24,7 +28,7 @@ const Header = () => {
         <div className="tooltip">
             <Link to="/cart"><button className="navBtn"><FaShoppingBag/></button></Link>
                 <span className="tooltipText">Shopping Bag</span>
-                {state.cart.length === 0 ? null : <span className="badge">{state.cart.length}</span>}
+                {state.cart.length === 0 ? null : <span className="badge">{getAllCartItems(state.cart)}</span>}
         </div>
 	</div>
 </div>
