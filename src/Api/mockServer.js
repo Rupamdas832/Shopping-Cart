@@ -25,6 +25,7 @@ export default function MockServer() {
                     img: faker.random.image(),
                     desc: faker.commerce.productDescription(),
                     quantity: 1,
+                    rating: faker.datatype.number({"min": 1, "max": 5}),
                     discount: faker.datatype.number({"min": 10, "max": 50}),
                     inStock: faker.datatype.boolean() 
                     })

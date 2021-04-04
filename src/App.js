@@ -9,12 +9,10 @@ function App() {
   const [route, setRoute] = useState("home")
   return (
     <div className="App">
-    <StoreProvider>
       <BrowserRouter>
         <Header setRoute={setRoute}/>
         <HeroSection route={route}/>
       </BrowserRouter>
-    </StoreProvider> 
     </div>
   );
 }
