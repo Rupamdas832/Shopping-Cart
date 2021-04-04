@@ -2,12 +2,13 @@ import React, {useEffect} from 'react'
 import {Switch, Route} from "react-router-dom"
 import CartList from '../Cart/CartList'
 import ProductsList from '../Product/ProductsList'
+import ProductDetail from './ProductDetail'
 import WishList from '../WishList/WishList'
 import Home from './Home'
 import axios from "axios"
 import { useStore } from '../Store/context'
 
-const HeroSection = ({route}) => {
+const HeroSection = () => {
     const {state, dispatch} = useStore()
     useEffect(() => {
         async function fetchData() {
@@ -48,6 +49,7 @@ const HeroSection = ({route}) => {
             <Switch>
                 <Route exact path="/" component={Home}/>
                 <Route path="/products" component={ProductsList}/>
+                <Route path="/productDetail/:productId" component={ProductDetail}/>
                 <Route path="/cart" component={CartList}/>
                 <Route path="/wishlist" component={WishList}/>
             </Switch>

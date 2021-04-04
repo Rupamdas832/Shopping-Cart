@@ -26,21 +26,6 @@ const ProductItem = ({product}) => {
             fetchData();
         }
     }
-    const addToCart = (product) => {
-        product.inCart = true;
-        async function fetchData() {
-            try {
-                const response = await axios.post("/api/cart", product)
-                if(response.status === 201){
-                    dispatch({type: "ADD_TO_CART", payload: product})
-                }
-            } catch (error) {
-                console.log(error)
-            }
-            
-        }
-        fetchData();  
-    }
 
     return (
         <div className="ecommerceCard">
@@ -56,10 +41,8 @@ const ProductItem = ({product}) => {
                 <div className="cardBody">
                     <div className="cardTitle">
                         <p>{name}</p>
-                        <span><FaStar/>{rating}</span>
-                        
-                    </div>
-                    
+                        <span><FaStar/>{rating}</span>    
+                    </div>    
                 <div className="cardPrice">
                     <h4>₹ {price}</h4>
                     <h5>{discount}% off</h5>
@@ -67,7 +50,7 @@ const ProductItem = ({product}) => {
                 </div>
                 <div className="cardFooter">
                     <button className="btn outline" onClick={() => toggleWishlist(id)}>{isWishlist ? <FcLike/> : <FcLikePlaceholder/>}</button>
-                    {inCart ? (<Link to="/cart"><button className="actionBtn">Go to Cart</button></Link>) : (<button className="btn" onClick={() => addToCart(product)}>Add to Cart</button>)}
+                    <Link to={`/productDetail/${id}`}><button className="actionBtn">Detail...</button></Link>
                 </div>   
             </div>
     )

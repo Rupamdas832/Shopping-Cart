@@ -4,7 +4,7 @@ import {FaShoppingBag, FaHeart} from "react-icons/fa"
 import { useStore } from '../Store/context'
 import { Link } from 'react-router-dom'
 
-const Header = ({setRoute}) => {
+const Header = () => {
 
     const {state} = useStore()
     return (

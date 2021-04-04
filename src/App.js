@@ -6,12 +6,11 @@ import HeroSection from './Pages/HeroSection';
 import { BrowserRouter } from 'react-router-dom';
 
 function App() {
-  const [route, setRoute] = useState("home")
   return (
     <div className="App">
       <BrowserRouter>
-        <Header setRoute={setRoute}/>
-        <HeroSection route={route}/>
+        <Header/>
+        <HeroSection/>
       </BrowserRouter>
     </div>
   );

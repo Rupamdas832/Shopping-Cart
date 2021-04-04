@@ -33,6 +33,9 @@ const ProductsList = () => {
         if(sortBy && sortBy === "PRICE_HIGH_TO_LOW"){
             return productList.sort((a,b) => parseInt(b["price"])-parseInt(a["price"])) 
         }
+        if(sortBy && sortBy === "RATING_HIGH_TO_LOW"){
+            return productList.sort((a,b) => b["rating"]-a["rating"]) 
+        }
         return productList
     }
 
@@ -55,14 +58,21 @@ const ProductsList = () => {
                             onChange={() => productDispatch({type: "SORT", payload: "PRICE_LOW_TO_HIGH"})}
                             checked={productState.sortBy && productState.sortBy === "PRICE_LOW_TO_HIGH"}
                         />
-                        Low to High
+                        Price Low to High
                         </label></li>
                         <li><label><input 
                             type="radio" name="sort"
                             onChange={() => productDispatch({type: "SORT", payload: "PRICE_HIGH_TO_LOW"})}
                             checked={productState.sortBy && productState.sortBy === "PRICE_HIGH_TO_LOW"}
                         />
-                        High to Low
+                        Price High to Low
+                        </label></li>
+                        <li><label><input 
+                            type="radio" name="sort"
+                            onChange={() => productDispatch({type: "SORT", payload: "RATING_HIGH_TO_LOW"})}
+                            checked={productState.sortBy && productState.sortBy === "RATING_HIGH_TO_LOW"}
+                        />
+                        Rating
                         </label></li>
                     </ul>
                 </div>

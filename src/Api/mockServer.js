@@ -18,14 +18,14 @@ export default function MockServer() {
 
         
         seeds(server) {
-            for(let i=0; i<12; i++){
+            for(let i=0; i<25; i++){
                 server.create("product",{
                     name: faker.commerce.productName(),
                     price: faker.commerce.price(),
                     img: faker.random.image(),
                     desc: faker.commerce.productDescription(),
                     quantity: 1,
-                    rating: faker.datatype.number({"min": 1, "max": 5}),
+                    rating: parseFloat((Math.random()*5).toFixed(1)),
                     discount: faker.datatype.number({"min": 10, "max": 50}),
                     inStock: faker.datatype.boolean(),
                     isPrimeChoice: faker.datatype.boolean()
