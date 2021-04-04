@@ -43,20 +43,31 @@
 .actionBtn:hover{
     background-color: var(--blue);
 }
-.flatCard{
-    width: 35rem;
-    font-size: 1rem;
+
+.detailFlat.small{
+    padding: 0 0.5rem;
 }
-.imgFlat{
+.detailFlat.small h4{
+    color: black;
+}
+.priceFlat{
+    color: black;
+}
+.flatCard.small{
+    width: 30rem;
+    font-size: 0.9rem;
+    padding: 0.8rem 0.5rem;
+}
+.priceFlat.small{
+    width: 100%;
+    padding: 1rem 0;
+}
+.btnsFlat.small{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
 }
-.imgFlat img{
-    width: 80%;
-    max-height: 15rem;
-}
-.detailFlat{
-    padding: 0 0 0 0;
+.btn.cart{
+    font-size: 0.8rem;
 }

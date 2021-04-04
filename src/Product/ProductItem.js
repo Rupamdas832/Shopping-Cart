@@ -1,11 +1,12 @@
 import React from 'react'
 import { useStore } from '../Store/context'
 import { FcLikePlaceholder, FcLike } from "react-icons/fc";
+import { FaStar } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 const ProductItem = ({product}) => {
-    const {id, name, price, img, isWishlist, discount, inStock, inCart, isPrimeChoice} = product
+    const {id, name, price, img, isWishlist, discount, inStock, inCart, isPrimeChoice, rating} = product
     const {dispatch} = useStore()
 
     const toggleWishlist = () => {
@@ -53,9 +54,13 @@ const ProductItem = ({product}) => {
                     <img src={img} alt="product"/>
                 </div>
                 <div className="cardBody">
-                    <p>{name}</p>
+                    <div className="cardTitle">
+                        <p>{name}</p>
+                        <span><FaStar/>{rating}</span>
+                        
+                    </div>
+                    
                 <div className="cardPrice">
-                {isPrimeChoice ? "Prime" : " "}
                     <h4>₹ {price}</h4>
                     <h5>{discount}% off</h5>
                 </div>

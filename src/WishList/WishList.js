@@ -10,7 +10,7 @@ const WishList = () => {
             <h1>WishList</h1>
             <div className="wishList">
                 {state.products.map(product => {
-                    const {id, name, price, isWishlist, img} = product;
+                    const {id, name, price, isWishlist, img, inCart} = product;
                     return <div key={id}>
                     {isWishlist && <div className="ecommerceCard" key={id}>
                     <div className="cardImg">
@@ -24,7 +24,7 @@ const WishList = () => {
                     </div>
                     <div className="cardFooter">
                         <button className="btn outline" onClick={() => dispatch({type: "REMOVE_FROM_WISHLIST", payload: id})}>Remove</button>
-                        <button className="btn" onClick={() => dispatch({type: "ADD_TO_CART", payload: product})}>Add to Cart</button>
+                        <button className="btn" disabled={inCart} onClick={() => dispatch({type: "ADD_TO_CART", payload: product})}>{inCart ? "In Cart" : "Add To Cart"}</button>
                     </div>   
                 </div>}
                     </div> 
