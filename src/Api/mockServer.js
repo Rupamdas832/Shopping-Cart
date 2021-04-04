@@ -30,7 +30,7 @@ export default function MockServer() {
                     inStock: faker.datatype.boolean(),
                     isPrimeChoice: faker.datatype.boolean(),
                     category: faker.random.arrayElement([
-                        "MEN", "WOMEN", "GIRL", "BOY"
+                        "AAA", "SPORTS", "RPG", "ACTION"
                     ]),
                     date: faker.date.past(),
                     })

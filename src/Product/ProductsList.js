@@ -53,17 +53,17 @@ const ProductsList = () => {
     }
 
     const getCategory = (productList, category) => {
-        if(category && category === "MEN"){
-            return productList.filter((product) => product.category === "MEN")
+        if(category && category === "AAA"){
+            return productList.filter((product) => product.category === "AAA")
         }
-        if(category && category === "WOMEN"){
-            return productList.filter((product) => product.category === "WOMEN")
+        if(category && category === "SPORTS"){
+            return productList.filter((product) => product.category === "SPORTS")
         }
-        if(category && category === "GIRL"){
-            return productList.filter((product) => product.category === "GIRL")
+        if(category && category === "RPG"){
+            return productList.filter((product) => product.category === "RPG")
         }
-        if(category && category === "BOY"){
-            return productList.filter((product) => product.category === "BOY")
+        if(category && category === "ACTION"){
+            return productList.filter((product) => product.category === "ACTION")
         }
         return productList
     }
@@ -126,31 +126,31 @@ const ProductsList = () => {
                     <ul>
                     <li><label><input 
                     type="radio" name="category" 
-                    onChange={() => productDispatch({type: "CATEGORY", payload: "MEN"})}
-                    checked={productState.category && productState.category === "MEN"}
+                    onChange={() => productDispatch({type: "CATEGORY", payload: "AAA"})}
+                    checked={productState.category && productState.category === "AAA"}
                 />
-                Men
+                AAA
                 </label></li>
                 <li><label><input 
                     type="radio" name="category"
-                    onChange={() => productDispatch({type: "CATEGORY", payload: "WOMEN"})}
-                    checked={productState.category && productState.category === "WOMEN"}
+                    onChange={() => productDispatch({type: "CATEGORY", payload: "SPORTS"})}
+                    checked={productState.category && productState.category === "SPORTS"}
                 />
-                Women
+                Sports
                 </label></li>
                 <li><label><input 
                     type="radio" name="category"
-                    onChange={() => productDispatch({type: "CATEGORY", payload: "GIRL"})}
-                    checked={productState.category && productState.category === "GIRL"}
+                    onChange={() => productDispatch({type: "CATEGORY", payload: "RPG"})}
+                    checked={productState.category && productState.category === "RPG"}
                 />
-                Girl
+                RPG
                 </label></li>
                 <li><label><input 
                     type="radio" name="category"
-                    onChange={() => productDispatch({type: "CATEGORY", payload: "BOY"})}
-                    checked={productState.category && productState.category === "BOY"}
+                    onChange={() => productDispatch({type: "CATEGORY", payload: "ACTION"})}
+                    checked={productState.category && productState.category === "ACTION"}
                 />
-                Boy
+                Action
                 </label></li>
                     </ul>
                 </div>

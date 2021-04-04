@@ -14,7 +14,7 @@ const Header = () => {
     return (
         <div className="navbar">
     <div className="navLogo">
-        LOGO
+        GG
     </div>
     <div className="navLinks">
         <NavLink to="/" activeStyle={{fontWeight: "bold",color: "red"}}><button className="navBtn">Home</button></NavLink>
