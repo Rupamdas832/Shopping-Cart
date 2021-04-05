@@ -40,9 +40,8 @@ const Home = () => {
             
             <div className="homeProductsList">
                 {slicedProducts.map(product => {
-                    const {id, name, price, img} = product;
-                    return <Link key={id} to="/products">
-                        <div className="ecommerceCard" key={id}>
+                    const {id, name, price, img, discount} = product;
+                    return <div className="ecommerceCard" key={id}>
                             <div className="cardImg">
                                 <img src={img} alt="product"/>
                             </div>
@@ -50,10 +49,13 @@ const Home = () => {
                                 <p>{name}</p>
                                 <div className="cardPrice">
                                     <h4>₹ {price}</h4>
+                                    <h5>{discount}% off</h5>
                                 </div>
+                            </div>
+                            <div className="cardFooter">
+                                <Link to={`/productDetail/${id}`}><button className="btn">Detail...</button></Link>
                             </div>   
                         </div>
-                    </Link>
                 })}
                 <Link to="/products"><p>More...</p></Link>
             </div>
