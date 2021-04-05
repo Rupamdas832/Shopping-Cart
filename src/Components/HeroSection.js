@@ -1,10 +1,10 @@
 import React, {useEffect} from 'react'
 import {Switch, Route} from "react-router-dom"
-import CartList from './CartList'
-import ProductsList from './ProductsList'
-import ProductDetail from './ProductDetail'
+import CartList from '../Pages/CartList'
+import ProductsList from '../Pages/ProductsList'
+import ProductDetail from '../Pages/ProductDetail'
 import WishList from '../WishList/WishList'
-import Home from './Home'
+import Home from '../Pages/Home'
 import axios from "axios"
 import { useStore } from '../Store/context'
 
