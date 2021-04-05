@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 const ProductItem = ({product}) => {
-    const {id, name, price, img, isWishlist, discount, inStock, isPrimeChoice, rating, category} = product
+    const {id, name, price, img, isWishlist, discount, inCart, inStock, isPrimeChoice, rating, category} = product
     const {dispatch} = useStore()
 
     const toggleWishlist = () => {
@@ -26,6 +26,21 @@ const ProductItem = ({product}) => {
             fetchData();
         }
     }
+    const addToCart = (product) => {
+        product.inCart = true;
+        async function fetchData() {
+            try {
+                const response = await axios.post("/api/cart", product)
+                if(response.status === 201){
+                    dispatch({type: "ADD_TO_CART", payload: product})
+                }
+            } catch (error) {
+                console.log(error)
+            }
+            
+        }
+        fetchData();  
+    }
 
     return (
         <div className="ecommerceCard">
@@ -35,6 +50,9 @@ const ProductItem = ({product}) => {
                {isPrimeChoice && <div className="cardBadge">
                     <h5>Prime</h5>
                 </div>}
+                <div className="cardLike">
+                    <button className="btn outline" onClick={() => toggleWishlist(id)}>{isWishlist ? <FcLike/> : <FcLikePlaceholder/>}</button>
+                </div>
                 <div className="cardImg">
                     <img src={img} alt="product"/>
                 </div>
@@ -48,9 +66,9 @@ const ProductItem = ({product}) => {
                     <h5>{discount}% off</h5>
                 </div>
                 </div>
-                <div className="cardFooter">
-                    <button className="btn outline" onClick={() => toggleWishlist(id)}>{isWishlist ? <FcLike/> : <FcLikePlaceholder/>}</button>
-                    <Link to={`/productDetail/${id}`}><button className="actionBtn">Detail...</button></Link>
+                <div className="cardFooter">  
+                    <Link to={`/productDetail/${id}`}><button className="btn outline">Detail...</button></Link>
+                    {inCart ? (<Link to="/cart"><button className="actionBtn">Go to Cart</button></Link>) : (<button className="btn" onClick={() => addToCart(product)}>Add to Cart</button>)}
                 </div>   
             </div>
     )

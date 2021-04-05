@@ -5,8 +5,7 @@ import { Link } from 'react-router-dom'
 
 const Home = () => {
     const {state} = useStore()
-    const slicedProducts = state.products.slice(0,3)
-    console.log(slicedProducts)
+    const slicedProducts = state.products.slice(0,5)
     return (
         <div className="home">
         {state.isLoading === "loading" ? <div className="spinner"></div> : 
@@ -16,7 +15,7 @@ const Home = () => {
                 <h1>GRAD GAMES</h1>
                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
             </div>
-            <h2>Categories</h2>
+            <h2 className="homeSubHeading">Categories</h2>
             <div className="homeCategoryDiv">
                 
                 <Link to="/products" className="homeCategory">
@@ -36,12 +35,12 @@ const Home = () => {
                     <p>Action</p>
                 </Link>
             </div>
-            <h2>Products</h2>
+            <h2 className="homeSubHeading">Products</h2>
             
             <div className="homeProductsList">
                 {slicedProducts.map(product => {
                     const {id, name, price, img, discount} = product;
-                    return <div className="ecommerceCard" key={id}>
+                    return <div className="ecommerceCard home" key={id}>
                             <div className="cardImg">
                                 <img src={img} alt="product"/>
                             </div>
@@ -57,7 +56,7 @@ const Home = () => {
                             </div>   
                         </div>
                 })}
-                <Link to="/products"><p>More...</p></Link>
+                <Link to="/products" style={{textAlign: "center"}}><p>More...</p></Link>
             </div>
         </div>)}
         </div> 
