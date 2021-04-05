@@ -1,11 +1,16 @@
 import React from 'react'
 import "./Home.css"
-import HeroPic from "../Assets/HeroPic.jpg"
+import {useStore} from "../Store/context"
 import { Link } from 'react-router-dom'
 
 const Home = () => {
+    const {state} = useStore()
+    const slicedProducts = state.products.slice(0,3)
+    console.log(slicedProducts)
     return (
-        <div className="homeContainer">
+        <div className="home">
+        {state.isLoading === "loading" ? <div className="spinner"></div> : 
+        (<div className="homeContainer">
             <div className="homePicDiv"></div>
             <div className="homeHeading">
                 <h1>GRAD GAMES</h1>
@@ -31,7 +36,29 @@ const Home = () => {
                     <p>Action</p>
                 </Link>
             </div>
-        </div>
+            <h2>Products</h2>
+            
+            <div className="homeProductsList">
+                {slicedProducts.map(product => {
+                    const {id, name, price, isWishlist, img, inCart} = product;
+                    return <Link key={id} to="/products">
+                        <div className="ecommerceCard" key={id}>
+                            <div className="cardImg">
+                                <img src={img} alt="product"/>
+                            </div>
+                            <div className="cardBody">
+                                <p>{name}</p>
+                                <div className="cardPrice">
+                                    <h4>₹ {price}</h4>
+                                </div>
+                            </div>   
+                        </div>
+                    </Link>
+                })}
+                <Link to="/products"><p>More...</p></Link>
+            </div>
+        </div>)}
+        </div> 
     )
 }
 

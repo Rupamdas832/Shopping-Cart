@@ -2,7 +2,6 @@
     display: grid;
     grid-template-columns: 1fr 5fr;
     margin-top: 4rem;
-   
 }
 
 .productLeftContainer{
@@ -44,4 +43,22 @@
     align-items: center;
     justify-content: center;
     color: rgb(211, 210, 210);
+}
+@media only screen and (max-width: 450px){
+    body{
+        font-size: 0.7rem;
+    }
+    .productListContainer{
+        display: flex;
+        flex-direction: column;  
+    }
+    .productRightContainer{
+        padding: 0 0.5rem;
+    }
+    .ecommerceCard{
+        width: 8rem;
+    }
+    .actionBtn{
+        font-size: 0.8rem;
+    }
 }

@@ -157,7 +157,6 @@ const ProductsList = () => {
                 <button onClick={() => productDispatch({type: "RESET"})} className="btn outline">RESET</button>
             </div>
             <div className="productRightContainer">
-            {state.isLoading === "loading" ? <div className="spinner"></div> : null}
             {filteredData.map((product) => {
                 return <ProductItem product={product} key={product.id}/>
             })}

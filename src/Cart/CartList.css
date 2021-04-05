@@ -71,3 +71,13 @@
 .btn.cart{
     font-size: 0.8rem;
 }
+@media only screen and (max-width: 450px){
+    .cartListContainer{
+        display: flex;
+        flex-direction: column;
+        width: 95vw;
+    }
+    .flatCard.small{
+        width: 16rem;
+    }
+}
