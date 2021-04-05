@@ -5,13 +5,16 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import MockServer from "../src/Api/mockServer";
 import { StoreProvider } from './Store/context';
+import { ProductProvider } from './Product/productContext';
 
 MockServer();
 
 ReactDOM.render(
   <React.StrictMode>
     <StoreProvider>
-      <App />
+      <ProductProvider>
+        <App />
+      </ProductProvider>  
     </StoreProvider>
   </React.StrictMode>,
   document.getElementById('root')

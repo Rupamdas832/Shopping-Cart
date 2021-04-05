@@ -3,7 +3,6 @@ import StoreReducer from '../Store/reducer'
 
 const StoreContext = createContext()
 
-
 export const useStore = () => {
     return useContext(StoreContext)
 }

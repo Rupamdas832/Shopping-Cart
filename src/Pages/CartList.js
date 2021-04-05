@@ -1,8 +1,8 @@
 import React from 'react'
 import { useStore } from '../Store/context'
-import CartItem from './CartItem';
+import CartItem from '../Cart/CartItem';
 import "./CartList.css"
-import CartTotal from './CartTotal';
+import CartTotal from '../Cart/CartTotal';
 
 const CartList = () => {
     const {state} = useStore()

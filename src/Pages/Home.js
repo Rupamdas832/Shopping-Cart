@@ -20,19 +20,19 @@ const Home = () => {
             <div className="homeCategoryDiv">
                 
                 <Link to="/products" className="homeCategory">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROhIH-hKw_oc4B_-HNOXvhKdxyfFGPftOxFg&usqp=CAU" className="avatar lg"/>
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROhIH-hKw_oc4B_-HNOXvhKdxyfFGPftOxFg&usqp=CAU" className="avatar lg" alt="category"/>
                     <p>AAA</p>
                 </Link>
                 <Link to="/products" className="homeCategory">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQB5JxRAzOHEP2_gPQZy5Cpx9vCKNV9I9Bg7Q&usqp=CAU" className="avatar lg"/>
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQB5JxRAzOHEP2_gPQZy5Cpx9vCKNV9I9Bg7Q&usqp=CAU" className="avatar lg" alt="category"/>
                     <p>Sports</p>
                 </Link>
                 <Link to="/products" className="homeCategory">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCYjUaMM8PV27NC6iAIH6R1vQGV18wzlufkg&usqp=CAU" className="avatar lg"/>
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCYjUaMM8PV27NC6iAIH6R1vQGV18wzlufkg&usqp=CAU" className="avatar lg" alt="category"/>
                     <p>RPG</p>
                 </Link>
                 <Link to="/products" className="homeCategory">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjNDL-MrKhLgrTwNLD9TQh21mZAp_N2dgFbg&usqp=CAU" className="avatar lg"/>
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjNDL-MrKhLgrTwNLD9TQh21mZAp_N2dgFbg&usqp=CAU" className="avatar lg" alt="category"/>
                     <p>Action</p>
                 </Link>
             </div>
@@ -40,7 +40,7 @@ const Home = () => {
             
             <div className="homeProductsList">
                 {slicedProducts.map(product => {
-                    const {id, name, price, isWishlist, img, inCart} = product;
+                    const {id, name, price, img} = product;
                     return <Link key={id} to="/products">
                         <div className="ecommerceCard" key={id}>
                             <div className="cardImg">

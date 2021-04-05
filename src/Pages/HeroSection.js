@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
 import {Switch, Route} from "react-router-dom"
-import CartList from '../Cart/CartList'
-import ProductsList from '../Product/ProductsList'
+import CartList from './CartList'
+import ProductsList from './ProductsList'
 import ProductDetail from './ProductDetail'
 import WishList from '../WishList/WishList'
 import Home from './Home'
@@ -9,7 +9,7 @@ import axios from "axios"
 import { useStore } from '../Store/context'
 
 const HeroSection = () => {
-    const {state, dispatch} = useStore()
+    const {dispatch} = useStore()
     useEffect(() => {
         async function fetchData() {
             try {
