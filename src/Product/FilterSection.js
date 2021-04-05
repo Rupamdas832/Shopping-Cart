@@ -5,7 +5,7 @@ const FilterSection = () => {
 
     const {productState, productDispatch} = useProduct();
     return (
-        <div>
+        <div className="filterContainer">
         <div className="productSort">
         <p>Sort by</p>
         <ul>

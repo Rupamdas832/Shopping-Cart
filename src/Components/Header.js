@@ -14,7 +14,7 @@ const Header = () => {
     return (
         <div className="navbar">
     <div className="navLogo">
-        GG
+        <img src="https://thumbs.dreamstime.com/b/letter-gg-simple-logo-icon-design-vector-simple-circle-logo-vector-illustration-letter-gg-simple-logo-icon-design-vector-180925896.jpg" alt="logo"/>
     </div>
     <div className="navLinks">
         <NavLink to="/" activeStyle={{fontWeight: "bold",color: "red"}}><button className="navBtn">Home</button></NavLink>

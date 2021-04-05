@@ -53,7 +53,7 @@ const ProductItem = ({product}) => {
                 <div className="cardLike">
                     <button className="btn outline" onClick={() => toggleWishlist(id)}>{isWishlist ? <FcLike/> : <FcLikePlaceholder/>}</button>
                 </div>
-                <div className="cardImg">
+                <div className="cardImage">
                     <img src={img} alt="product"/>
                 </div>
                 <div className="cardBody">

@@ -44,6 +44,7 @@ export default function MockServer() {
                 return schema.products.all()
             })
 
+
             this.get("/cart", (schema) => {
                 return schema.carts.all()
             })
@@ -52,6 +53,12 @@ export default function MockServer() {
 
                 return schema.carts.create(attrs)
             })
+            this.delete("/cart/:id", (schema, request) => {
+                const id = request.params.id;
+
+                return schema.carts.find(id).destroy()
+            })
+
             this.get("/wishlist", (schema) => {
                 return schema.wishlists.all()
             })
