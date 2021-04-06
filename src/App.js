@@ -1,8 +1,6 @@
 import './App.css';
-import Header from './Components/Header';
-import HeroSection from './Components/HeroSection';
+import {Header,HeroSection, Footer} from "./Components";
 import { BrowserRouter } from 'react-router-dom';
-import Footer from './Components/Footer';
 
 function App() {
   return (

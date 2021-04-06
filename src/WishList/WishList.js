@@ -1,7 +1,7 @@
 import React from 'react'
 import "./WishList.css"
-import { useStore } from '../Store/context'
-import Toast from '../Components/Toast'
+import { useStore } from '../Store/storeContext'
+import {Toast} from '../Components'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
@@ -30,7 +30,7 @@ const WishList = () => {
     }
     return (
         <div className="wishlistContainer">
-            {state.isLoading === "adding" ? <Toast mesg="Adding to Cart"/> : null}
+            {state.isLoading === "adding" ? <Toast message="Adding to Cart"/> : null}
             <h1>WishList</h1>
             <div className="wishList">
                 {state.products.map(product => {

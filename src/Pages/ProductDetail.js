@@ -1,26 +1,27 @@
 import React from 'react'
 import { useParams } from 'react-router'
-import { useStore } from '../Store/context'
+import { useStore } from '../Store/storeContext'
 import { FcLikePlaceholder, FcLike } from "react-icons/fc";
 import { FaStar } from "react-icons/fa";
 import "./ProductDetail.css"
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import {Toast} from '../Components';
 
-const ProductDetail = () => {
+export const ProductDetail = () => {
 
     const {productId} = useParams()
     const {state, dispatch} = useStore()
 
-    
-
     const  SelectedProduct = state.products.find(product => product.id === productId)
     const {id, img, name, price, desc, rating, discount, isWishlist, inCart} = SelectedProduct
+
     const toggleWishlist = () => {
         if(isWishlist){
             dispatch({type: "REMOVE_FROM_WISHLIST", payload: id})
         } else {
             async function fetchData() {
+                dispatch({type: "IS_LOADING", payload: "wishlisting"})
                 try {
                     const response = await axios.post("/api/wishlist", SelectedProduct)
                     if(response.status === 201){
@@ -29,6 +30,9 @@ const ProductDetail = () => {
                 } catch (error) {
                     console.log(error)
                 }
+                finally{
+                    dispatch({type: "IS_LOADING", payload: "success"})
+                }
             }
             fetchData();
         }
@@ -36,6 +40,7 @@ const ProductDetail = () => {
     const addToCart = (product) => {
         product.inCart = true;
         async function fetchData() {
+            dispatch({type: "IS_LOADING", payload: "adding"})
             try {
                 const response = await axios.post("/api/cart", product)
                 if(response.status === 201){
@@ -44,6 +49,9 @@ const ProductDetail = () => {
             } catch (error) {
                 console.log(error)
             }
+            finally{
+                dispatch({type: "IS_LOADING", payload: "success"})
+            }
             
         }
         fetchData();  
@@ -51,6 +59,8 @@ const ProductDetail = () => {
     
     return (
         <div className="productDetailContainer">
+        {state.isLoading === "adding" ? <Toast message="Adding to Cart"/> : null}
+        {state.isLoading === "wishlisting" ? <Toast message="Adding to Wishlist"/> : null}
             <div className="flatCard">
                 <div className="imgFlat">
                     <img src={img} alt="card"/>
@@ -74,5 +84,3 @@ const ProductDetail = () => {
         </div>
     )
 }
-
-export default ProductDetail

@@ -25,14 +25,14 @@ const StoreReducer = (state,action) => {
                     }
                     return product
                 })}
-        case "INC_COUNT":
+        case "INCREASE_COUNT":
             return {...state, cart: state.cart.map(cart => {
                 if(cart.id === action.payload){
                     return {...cart, quantity: cart.quantity + 1}
                 }
                 return cart
             })}
-        case "DEC_COUNT":
+        case "DECREASE_COUNT":
             return {...state, cart: state.cart.map(cart => {
                 if(cart.id === action.payload){
                     return {...cart, quantity: cart.quantity - 1}

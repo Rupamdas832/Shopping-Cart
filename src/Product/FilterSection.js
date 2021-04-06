@@ -1,7 +1,7 @@
 import React from 'react'
 import { useProduct } from './productContext'
 
-const FilterSection = () => {
+export const FilterSection = () => {
 
     const {productState, productDispatch} = useProduct();
     return (
@@ -88,5 +88,3 @@ const FilterSection = () => {
         </div>
     )
 }
-
-export default FilterSection

@@ -1,10 +1,10 @@
 import React from 'react'
 import "./Header.css"
 import {FaShoppingBag, FaHeart} from "react-icons/fa"
-import { useStore } from '../Store/context'
+import { useStore } from '../Store/storeContext'
 import { Link, NavLink } from 'react-router-dom'
 
-const Header = () => {
+export const Header = () => {
 
     const {state} = useStore()
 
@@ -17,8 +17,8 @@ const Header = () => {
         <img src="https://thumbs.dreamstime.com/b/letter-gg-simple-logo-icon-design-vector-simple-circle-logo-vector-illustration-letter-gg-simple-logo-icon-design-vector-180925896.jpg" alt="logo"/>
     </div>
     <div className="navLinks">
-        <NavLink to="/" activeStyle={{fontWeight: "bold",color: "red"}}><button className="navBtn">Home</button></NavLink>
-        <NavLink to="/products" activeStyle={{fontWeight: "bold",color: "red"}}><button className="navBtn">Products</button></NavLink>
+        <NavLink to="/" exact><button className="navBtn">Home</button></NavLink>
+        <NavLink to="/products" exact><button className="navBtn">Products</button></NavLink>
     </div>
     <div className="navAction">
         <div className="tooltip">
@@ -34,5 +34,3 @@ const Header = () => {
 </div>
     )
 }
-
-export default Header

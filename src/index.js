@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import MockServer from "../src/Api/mockServer";
-import { StoreProvider } from './Store/context';
+import { StoreProvider } from './Store/storeContext';
 import { ProductProvider } from './Product/productContext';
 
 MockServer();

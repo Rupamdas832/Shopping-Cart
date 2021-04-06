@@ -1,9 +1,9 @@
 import React from 'react'
 import "./Home.css"
-import {useStore} from "../Store/context"
+import {useStore} from "../Store/storeContext"
 import { Link } from 'react-router-dom'
 
-const Home = () => {
+export const Home = () => {
     const {state} = useStore()
     const slicedProducts = state.products.slice(0,5)
     return (
@@ -62,5 +62,3 @@ const Home = () => {
         </div> 
     )
 }
-
-export default Home

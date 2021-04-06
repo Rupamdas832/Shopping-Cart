@@ -1,12 +1,14 @@
 import React from 'react'
-import { useStore } from '../Store/context'
+import { useStore } from '../Store/storeContext'
 
-const CartTotal = () => {
+export const CartTotal = () => {
 
     const {state} = useStore();
+
     const getTotal = (array) => {
         return array.reduce((total, {price,quantity}) => total + parseInt(price)*quantity,0)
     }
+
     return (
         <div className="cartPriceDetails">
             <h4>PRICE DETAILS({state.cart.length} items)</h4>
@@ -30,5 +32,3 @@ const CartTotal = () => {
         </div>
     )
 }
-
-export default CartTotal

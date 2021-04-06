@@ -1,33 +1,37 @@
-import React from 'react'
-import { useStore } from '../Store/context'
+import React, { useEffect } from 'react'
+import { useStore } from '../Store/storeContext'
 import { FcLikePlaceholder, FcLike } from "react-icons/fc";
 import { FaStar } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import useAxios from '../Hooks/useAxios';
 
-const ProductItem = ({product}) => {
+export const ProductItem = ({product}) => {
     const {id, name, price, img, isWishlist, discount, inCart, inStock, isPrimeChoice, rating, category} = product
-    const {state, dispatch} = useStore()
+    const {dispatch} = useStore()
+    const {response, errorMessage, isLoading, apiCall} = useAxios()
+
+    useEffect(() => {
+        if(response){
+            if(response.status === 201){
+                dispatch({type: "ADD_TO_WISHLIST", payload: id})
+            }
+        }
+        if(!isLoading){
+            dispatch({type: "IS_LOADING", payload: "success"})
+        }
+    },[response, isLoading])
 
     const toggleWishlist = () => {
         if(isWishlist){
             dispatch({type: "REMOVE_FROM_WISHLIST", payload: id})
         } else {
             dispatch({type: "IS_LOADING", payload: "wishlisting"})
-            async function fetchData() {
-                try {
-                    const response = await axios.post("/api/wishlist", product)
-                    if(response.status === 201){
-                        dispatch({type: "ADD_TO_WISHLIST", payload: id})
-                    }
-                } catch (error) {
-                    console.log(error)
-                }
-                finally{
-                    dispatch({type: "IS_LOADING", payload: "success"})
-                }
-            }
-            fetchData();
+            apiCall({
+                type: "post",
+                url: "/api/wishlist",
+                body: product
+            })
         }
     }
     const addToCart = (product) => {
@@ -81,5 +85,3 @@ const ProductItem = ({product}) => {
             </div>
     )
 }
-
-export default ProductItem

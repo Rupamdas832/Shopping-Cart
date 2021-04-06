@@ -1,8 +1,8 @@
 import axios from 'axios';
 import React from 'react'
-import { useStore } from '../Store/context'
+import { useStore } from '../Store/storeContext'
 
-const CartItem = ({cartItem}) => {
+export const CartItem = ({cartItem}) => {
     
     const {id, name, price, quantity, isWishlist, img} = cartItem;
     const {dispatch} = useStore()
@@ -40,9 +40,9 @@ const CartItem = ({cartItem}) => {
                 <div className="priceFlat small">
                     <h4>₹{price}</h4>
                     <div>
-                        <button className="btn outline" onClick={() => dispatch({type: "DEC_COUNT", payload: id})}>-</button>
+                        <button className="btn outline" onClick={() => dispatch({type: "DECREASE_COUNT", payload: id})}>-</button>
                         {quantity}
-                        <button className="btn outline" onClick={() => dispatch({type: "INC_COUNT", payload: id})}>+</button>
+                        <button className="btn outline" onClick={() => dispatch({type: "INCREASE_COUNT", payload: id})}>+</button>
                     </div>
                     
                 </div>
@@ -54,5 +54,3 @@ const CartItem = ({cartItem}) => {
         </div>
     )
 }
-
-export default CartItem

@@ -5,7 +5,10 @@
     font-size: 1rem;
     display: inline-block;
     padding: 0 1rem;
-    background-color: green;
-    color: var(--whitePale);
+    border-radius: 0.2rem;
+    border: 1px solid black;
+    border-bottom: 5px solid green;
+    background-color: var(--whitePale);
+    color: black;
     z-index: 11;
 }

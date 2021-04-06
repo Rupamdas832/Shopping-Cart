@@ -1,12 +1,11 @@
 import React from 'react'
 import "./Toast.css"
+import { FcApproval } from "react-icons/fc";
 
-const Toast = ({mesg}) => {
+export const Toast = ({message}) => {
     return (
         <div className="toast">
-            <p>{mesg}...</p>
+            <p><FcApproval/> {message}...</p>
         </div>
     )
 }
-
-export default Toast

@@ -1,22 +1,18 @@
 import React, {useEffect} from 'react'
 import {Switch, Route} from "react-router-dom"
-import CartList from '../Pages/CartList'
-import ProductsList from '../Pages/ProductsList'
-import ProductDetail from '../Pages/ProductDetail'
 import WishList from '../WishList/WishList'
-import Home from '../Pages/Home'
+import {Home, CartList, ProductDetail, ProductsList} from '../Pages'
 import axios from "axios"
-import { useStore } from '../Store/context'
+import { useStore } from '../Store/storeContext'
 
-
-const HeroSection = () => {
+export const HeroSection = () => {
     const {dispatch} = useStore()
     useEffect(() => {
         async function fetchData() {
             dispatch({type: "IS_LOADING", payload: "loading"})
             try {
                 const response = await axios.get("/api/products")
-                const data = await response.data.products
+                const data = response.data.products
                 if(response.status === 200){
                     dispatch({type: "IS_LOADING"})
                     dispatch({type: "LOAD_PRODUCTS", payload: data})
@@ -35,12 +31,12 @@ const HeroSection = () => {
             dispatch({type: "IS_LOADING", payload: "loading"})
             try {
                 const response = await axios.get("/api/cart")
-                const data = await response.data.carts
+                const data = response.data.carts
                 if(response.status){
                     dispatch({type: "LOAD_CART_ITEMS", payload: data})
                 }
             } catch (error) {
-                console.log(error, "FROM HERO")
+                console.log(error)
             }
             finally{
                 dispatch({type: "IS_LOADING", payload: "success"})
@@ -58,4 +54,3 @@ const HeroSection = () => {
             </Switch>
     )       
 }
-export default HeroSection

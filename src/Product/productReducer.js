@@ -1,4 +1,4 @@
-const ProductReducer = (state, action) => {
+export const ProductReducer = (state, action) => {
     switch (action.type) {
         case "SORT": 
             return {...state, sortBy: action.payload}
@@ -18,5 +18,3 @@ const ProductReducer = (state, action) => {
             return state
     }
 }
-
-export default ProductReducer

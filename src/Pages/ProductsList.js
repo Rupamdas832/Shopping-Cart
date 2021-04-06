@@ -1,13 +1,11 @@
 import React from 'react'
-import ProductItem from '../Product/ProductItem'
-import FilterSection from "../Product/FilterSection"
-import { useStore } from '../Store/context'
-import { useProduct } from '../Product/productContext'  
+import { useStore } from '../Store/storeContext'
+import { useProduct, ProductItem, FilterSection } from '../Product'  
 import {getSortedData, getCategory, getFilteredData} from "../Product/ProductFilter"
 import "./ProductList.css"
-import Toast from '../Components/Toast'
+import {Toast} from '../Components'
 
-const ProductsList = () => {
+export const ProductsList = () => {
     
     const {state} = useStore();
     const {productState} = useProduct();
@@ -18,8 +16,8 @@ const ProductsList = () => {
 
     return (
         <div className="productListContainer">
-        {state.isLoading === "adding" ? <Toast mesg="Adding to Cart"/> : null}
-        {state.isLoading === "wishlisting" ? <Toast mesg="Adding to Wishlist"/> : null}
+        {state.isLoading === "adding" ? <Toast message="Adding to Cart"/> : null}
+        {state.isLoading === "wishlisting" ? <Toast message="Adding to Wishlist"/> : null}
             <div className="productLeftContainer">
                 <FilterSection/>
             </div>
@@ -32,5 +30,3 @@ const ProductsList = () => {
         </div>
     )
 }
-
-export default ProductsList
