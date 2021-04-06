@@ -1,0 +1,10 @@
+.toast{
+    position: fixed;
+    right: 2rem;
+    top: 5rem;
+    font-size: 1rem;
+    display: inline-block;
+    padding: 0 1rem;
+    background-color: green;
+    color: var(--whitePale);
+}

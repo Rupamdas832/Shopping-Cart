@@ -5,6 +5,7 @@ import { useStore } from '../Store/context'
 import { useProduct } from '../Product/productContext'  
 import {getSortedData, getCategory, getFilteredData} from "../Product/ProductFilter"
 import "./ProductList.css"
+import Toast from '../Components/Toast'
 
 const ProductsList = () => {
     
@@ -17,6 +18,8 @@ const ProductsList = () => {
 
     return (
         <div className="productListContainer">
+        {state.isLoading === "adding" ? <Toast mesg="Adding to Cart"/> : null}
+        {state.isLoading === "wishlisting" ? <Toast mesg="Adding to Wishlist"/> : null}
             <div className="productLeftContainer">
                 <FilterSection/>
             </div>

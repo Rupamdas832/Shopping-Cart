@@ -7,12 +7,13 @@ import axios from 'axios';
 
 const ProductItem = ({product}) => {
     const {id, name, price, img, isWishlist, discount, inCart, inStock, isPrimeChoice, rating, category} = product
-    const {dispatch} = useStore()
+    const {state, dispatch} = useStore()
 
     const toggleWishlist = () => {
         if(isWishlist){
             dispatch({type: "REMOVE_FROM_WISHLIST", payload: id})
         } else {
+            dispatch({type: "IS_LOADING", payload: "wishlisting"})
             async function fetchData() {
                 try {
                     const response = await axios.post("/api/wishlist", product)
@@ -22,6 +23,9 @@ const ProductItem = ({product}) => {
                 } catch (error) {
                     console.log(error)
                 }
+                finally{
+                    dispatch({type: "IS_LOADING", payload: "success"})
+                }
             }
             fetchData();
         }
@@ -29,6 +33,7 @@ const ProductItem = ({product}) => {
     const addToCart = (product) => {
         product.inCart = true;
         async function fetchData() {
+            dispatch({type: "IS_LOADING", payload: "adding"})
             try {
                 const response = await axios.post("/api/cart", product)
                 if(response.status === 201){
@@ -36,6 +41,9 @@ const ProductItem = ({product}) => {
                 }
             } catch (error) {
                 console.log(error)
+            }
+            finally{
+                dispatch({type: "IS_LOADING", payload: "success"})
             }
             
         }

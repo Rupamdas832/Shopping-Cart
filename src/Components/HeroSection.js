@@ -8,10 +8,12 @@ import Home from '../Pages/Home'
 import axios from "axios"
 import { useStore } from '../Store/context'
 
+
 const HeroSection = () => {
     const {dispatch} = useStore()
     useEffect(() => {
         async function fetchData() {
+            dispatch({type: "IS_LOADING", payload: "loading"})
             try {
                 const response = await axios.get("/api/products")
                 const data = await response.data.products
@@ -23,13 +25,14 @@ const HeroSection = () => {
                 console.log(error)
             }
             finally{
-                dispatch({type: "IS_LOADING"})
+                dispatch({type: "IS_LOADING", payload: "success"})
             }
         }
-        fetchData();
+    fetchData();
     },[])
     useEffect(() => {
         async function fetchData() {
+            dispatch({type: "IS_LOADING", payload: "loading"})
             try {
                 const response = await axios.get("/api/cart")
                 const data = await response.data.carts
@@ -40,7 +43,7 @@ const HeroSection = () => {
                 console.log(error, "FROM HERO")
             }
             finally{
-                dispatch({type: "IS_LOADING"})
+                dispatch({type: "IS_LOADING", payload: "success"})
             }
         }
         fetchData();

@@ -12,7 +12,7 @@ export const StoreProvider = ({children}) => {
     const initialState = {
         products: [], 
         cart: [],
-        isLoading: "loading"
+        isLoading: null
     }
 
     const [state, dispatch] = useReducer(StoreReducer, initialState)

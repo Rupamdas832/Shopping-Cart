@@ -14,6 +14,7 @@ const CartItem = ({cartItem}) => {
 
     const removeItem = (id) => {
         async function fetchData() {
+            dispatch({type: "IS_LOADING", payload: "removing"})
             try {
                 const response = await axios.delete(`/api/cart/${id}`)
                 if(response.status === 204){
@@ -21,6 +22,9 @@ const CartItem = ({cartItem}) => {
                 } 
             } catch (error) {
                 console.log(error)
+            }
+            finally{
+                dispatch({type: "IS_LOADING", payload: "success"})
             }
         }
         fetchData();

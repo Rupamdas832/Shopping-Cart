@@ -1,6 +1,9 @@
 .home{
-    margin-top: 3rem;
     min-height: 80vh;
+    position: relative;
+}
+.spinner{
+    margin-top: 3rem;
 }
 .homeContainer{
     margin-top: 3rem;

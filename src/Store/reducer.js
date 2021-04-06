@@ -1,7 +1,7 @@
 const StoreReducer = (state,action) => {
     switch (action.type) {
         case "IS_LOADING": 
-            return {...state, isLoading: "success"}
+            return {...state, isLoading: action.payload}
         case "LOAD_PRODUCTS":
             return {...state, products: action.payload.map(product => ({...product, isWishlist: false, inCart: false}))}
         case "LOAD_CART_ITEMS":
