@@ -70,7 +70,7 @@
     grid-template-columns: 1fr 1fr 1fr;
     flex-wrap: wrap;
     width: 70%;
-    justify-content: center;
+    justify-content: baseline;
     align-items: center;
     
 }
@@ -107,7 +107,7 @@
 @media only screen and (max-width: 376px){
     .homeHeading{
         width: 90%;
-        font-size: 0.8rem;
+        font-size: 0.9rem;
     }
     .homeCategoryDiv{
         width: 90%;
@@ -115,5 +115,9 @@
     .homeCategory{
         padding: 0;
         width: 40%;
+    }
+    .ecommerceCard.home{
+        width: 10rem;
+        font-size: 0.8rem;
     }
 }
