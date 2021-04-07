@@ -107,9 +107,9 @@
         font-size: 0.8rem;
     }
 }
-@media only screen and (max-width: 350px){
+@media only screen and (max-width: 376px){
     .flatCard.small{
-        width: 17rem;
+        width: 20rem;
     }
     .detailFlat.small{
         width: 95%;
@@ -123,5 +123,10 @@
     }
     .cartPriceDetails{
         width: 70%;
+    }
+}
+@media only screen and (max-width: 350px){
+    .flatCard.small{
+        width: 17rem;
     }
 }

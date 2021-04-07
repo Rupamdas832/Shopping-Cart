@@ -82,9 +82,6 @@
     .ecommerceCard{
         width: 9rem;
     }
-    .productRightContainer{
-        background-color: red;
-    }
 }
 @media only screen and (max-width: 350px){
     .ecommerceCard{
