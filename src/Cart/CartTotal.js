@@ -28,7 +28,7 @@ export const CartTotal = () => {
                 <h5>Total Amount</h5>
                 <p>₹{getTotal(state.cart)- 40}</p>
             </div>
-            <button className="actionBtn">Checkout</button>
+            <button className="actionBtn cart">Checkout</button>
         </div>
     )
 }

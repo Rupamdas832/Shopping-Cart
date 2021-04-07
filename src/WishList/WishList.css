@@ -9,3 +9,6 @@
     flex-direction: row;
     flex-wrap: wrap;
 }
+.btn.outline.wishList{
+    z-index: 10;
+}

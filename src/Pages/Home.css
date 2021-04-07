@@ -93,10 +93,27 @@
     .homeHeading h1{
         font-size: 2rem;
     }
+    .homeCategoryDiv{
+        width: 90%;
+    }
     .homeProductsList{
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
         width: 95vw;
+    }
+}
+
+@media only screen and (max-width: 376px){
+    .homeHeading{
+        width: 90%;
+        font-size: 0.8rem;
+    }
+    .homeCategoryDiv{
+        width: 90%;
+    }
+    .homeCategory{
+        padding: 0;
+        width: 40%;
     }
 }

@@ -35,7 +35,7 @@ const StoreReducer = (state,action) => {
         case "DECREASE_COUNT":
             return {...state, cart: state.cart.map(cart => {
                 if(cart.id === action.payload){
-                    return {...cart, quantity: cart.quantity - 1}
+                    return {...cart, quantity: cart.quantity <= 1 ? 1 : cart.quantity - 1}
                 }
                 return cart
         })}
