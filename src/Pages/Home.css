@@ -70,7 +70,7 @@
     grid-template-columns: 1fr 1fr 1fr;
     flex-wrap: wrap;
     width: 70%;
-    justify-content: baseline;
+    justify-content: center;
     align-items: center;
     
 }
@@ -117,7 +117,7 @@
         width: 40%;
     }
     .ecommerceCard.home{
-        width: 10rem;
+        width: 8rem;
         font-size: 0.8rem;
     }
 }
