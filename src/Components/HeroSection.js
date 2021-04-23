@@ -11,7 +11,8 @@ export const HeroSection = () => {
         async function fetchData() {
             dispatch({type: "IS_LOADING", payload: "loading"})
             try {
-                const response = await axios.get("/api/products")
+                const response = await axios.get("https://Shopping-Cart-Server.rupamdas.repl.co/products")
+                console.log(response)
                 const data = response.data.products
                 if(response.status === 200){
                     dispatch({type: "IS_LOADING"})

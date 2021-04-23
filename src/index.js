@@ -7,7 +7,7 @@ import MockServer from "../src/Api/mockServer";
 import { StoreProvider } from './Store/storeContext';
 import { ProductProvider } from './Product/productContext';
 
-MockServer();
+
 
 ReactDOM.render(
   <React.StrictMode>

@@ -25,8 +25,8 @@ export const getCategory = (productList, category) => {
         if(category && category === "RPG"){
             return productList.filter((product) => product.category === "RPG")
         }
-        if(category && category === "ACTION"){
-            return productList.filter((product) => product.category === "ACTION")
+        if(category && category === "COMBAT"){
+            return productList.filter((product) => product.category === "COMBAT")
         }
         return productList
     }

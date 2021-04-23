@@ -77,10 +77,10 @@ export const FilterSection = () => {
     </label></li>
     <li><label><input 
         type="radio" name="category"
-        onChange={() => productDispatch({type: "CATEGORY", payload: "ACTION"})}
-        checked={productState.category && productState.category === "ACTION"}
+        onChange={() => productDispatch({type: "CATEGORY", payload: "COMBAT"})}
+        checked={productState.category && productState.category === "COMBAT"}
     />
-    Action
+    Combat
     </label></li>
         </ul>
     </div>
