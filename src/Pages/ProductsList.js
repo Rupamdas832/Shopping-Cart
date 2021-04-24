@@ -23,7 +23,7 @@ export const ProductsList = () => {
             </div>
             <div className="productRightContainer">
             {filteredData.map((product) => {
-                return <ProductItem product={product} key={product.id}/>
+                return <ProductItem product={product} key={product._id}/>
             })}
             </div>
             

@@ -13,19 +13,19 @@ export const ProductDetail = () => {
     const {productId} = useParams()
     const {state, dispatch} = useStore()
 
-    const  SelectedProduct = state.products.find(product => product.id === productId)
-    const {id, img, name, price, desc, rating, discount, isWishlist, inCart} = SelectedProduct
+    const  SelectedProduct = state.products.find(product => product._id === productId)
+    const {_id, img, name, price, desc, rating, discount, isWishlist, inCart} = SelectedProduct
 
     const toggleWishlist = () => {
         if(isWishlist){
-            dispatch({type: "REMOVE_FROM_WISHLIST", payload: id})
+            dispatch({type: "REMOVE_FROM_WISHLIST", payload: _id})
         } else {
             async function fetchData() {
                 dispatch({type: "IS_LOADING", payload: "wishlisting"})
                 try {
                     const response = await axios.post("/api/wishlist", SelectedProduct)
                     if(response.status === 201){
-                        dispatch({type: "ADD_TO_WISHLIST", payload: id})
+                        dispatch({type: "ADD_TO_WISHLIST", payload: _id})
                     }
                 } catch (error) {
                     console.log(error)
@@ -76,7 +76,7 @@ export const ProductDetail = () => {
                     </div>
                     <p>{desc}</p>
                     <div className="btnsFlat">
-                    <button className="btn outline" onClick={() => toggleWishlist(id)}>{isWishlist ? <FcLike/> : <FcLikePlaceholder/>}</button>
+                    <button className="btn outline" onClick={() => toggleWishlist(_id)}>{isWishlist ? <FcLike/> : <FcLikePlaceholder/>}</button>
                     {inCart ? (<Link to="/cart"><button className="actionBtn">Go to Cart</button></Link>) : (<button className="btn" onClick={() => addToCart(SelectedProduct)}>Add to Cart</button>)}
                     </div>
                 </div>

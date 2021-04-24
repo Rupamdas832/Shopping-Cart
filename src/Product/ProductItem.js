@@ -7,14 +7,14 @@ import axios from 'axios';
 import useAxios from '../Hooks/useAxios';
 
 export const ProductItem = ({product}) => {
-    const {id, name, price, img, isWishlist, discount, inCart, inStock, isPrimeChoice, rating, category} = product
+    const {_id, name, price, img, isWishlist, discount, inCart, inStock, isPrimeChoice, rating, category} = product
     const {dispatch} = useStore()
     const {response, errorMessage, isLoading, apiCall} = useAxios()
 
     useEffect(() => {
         if(response){
             if(response.status === 201){
-                dispatch({type: "ADD_TO_WISHLIST", payload: id})
+                dispatch({type: "ADD_TO_WISHLIST", payload: _id})
             }
         }
         if(!isLoading){
@@ -24,7 +24,7 @@ export const ProductItem = ({product}) => {
 
     const toggleWishlist = () => {
         if(isWishlist){
-            dispatch({type: "REMOVE_FROM_WISHLIST", payload: id})
+            dispatch({type: "REMOVE_FROM_WISHLIST", payload: _id})
         } else {
             dispatch({type: "IS_LOADING", payload: "wishlisting"})
             apiCall({
@@ -63,7 +63,7 @@ export const ProductItem = ({product}) => {
                     <h5>Prime</h5>
                 </div>}
                 <div className="cardLike">
-                    <button className="btn outline" onClick={() => toggleWishlist(id)}>{isWishlist ? <FcLike/> : <FcLikePlaceholder/>}</button>
+                    <button className="btn outline" onClick={() => toggleWishlist(_id)}>{isWishlist ? <FcLike/> : <FcLikePlaceholder/>}</button>
                 </div>
                 <div className="cardImage">
                     <img src={img} alt="product"/>
@@ -79,7 +79,7 @@ export const ProductItem = ({product}) => {
                 </div>
                 </div>
                 <div className="cardFooter">  
-                    <Link to={`/productDetail/${id}`}><button className="btn outline">Detail...</button></Link>
+                    <Link to={`/productDetail/${_id}`}><button className="btn outline">Detail...</button></Link>
                     {inCart ? (<Link to="/cart"><button className="actionBtn">Go to Cart</button></Link>) : (<button className="btn" onClick={() => addToCart(product)}>Add to Cart</button>)}
                 </div>   
             </div>

@@ -39,9 +39,9 @@ export const Home = () => {
             
             <div className="homeProductsList">
                 {slicedProducts.map(product => {
-                    const {id, name, price, img, discount} = product;
-                    return <div className="ecommerceCard home" key={id}>
-                            <div className="cardImg">
+                    const {_id, name, price, img, discount} = product;
+                    return <div className="ecommerceCard1" key={_id}>
+                            <div className="cardImg1">
                                 <img src={img} alt="product"/>
                             </div>
                             <div className="cardBody">
@@ -52,7 +52,7 @@ export const Home = () => {
                                 </div>
                             </div>
                             <div className="cardFooter">
-                                <Link to={`/productDetail/${id}`}><button className="btn">Detail...</button></Link>
+                                <Link to={`/productDetail/${_id}`}><button className="btn">Detail...</button></Link>
                             </div>   
                         </div>
                 })}

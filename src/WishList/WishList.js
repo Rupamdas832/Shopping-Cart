@@ -34,9 +34,9 @@ const WishList = () => {
             <h1>WishList</h1>
             <div className="wishList">
                 {state.products.map(product => {
-                    const {id, name, price, isWishlist, img, inCart, inStock} = product;
-                    return <div key={id}>
-                    {isWishlist && <div className="ecommerceCard" key={id}>
+                    const {_id, name, price, isWishlist, img, inCart, inStock} = product;
+                    return <div key={_id}>
+                    {isWishlist && <div className="ecommerceCard" key={_id}>
                     {!inStock && <div className="outOfStockCard">
                         <h2>Out of Stock</h2>
                     </div>}
@@ -50,7 +50,7 @@ const WishList = () => {
                     </div>
                     </div>
                     <div className="cardFooter">
-                        <button className="btn outline wishList" onClick={() => dispatch({type: "REMOVE_FROM_WISHLIST", payload: id})}>Remove</button>
+                        <button className="btn outline wishList" onClick={() => dispatch({type: "REMOVE_FROM_WISHLIST", payload: _id})}>Remove</button>
                         {inCart ? (<Link to="/cart"><button className="actionBtn">Go to Cart</button></Link>) : (<button className="btn" onClick={() => addToCart(product)}>Add to Cart</button>)}
                     </div>   
                 </div>}
