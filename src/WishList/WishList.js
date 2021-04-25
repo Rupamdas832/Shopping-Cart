@@ -7,22 +7,23 @@ import { Link } from 'react-router-dom'
 
 const WishList = () => {
 
-    const {state, dispatch} = useStore()
+    const {storeState, storeDispatch} = useStore()
+    const {isLoading, products} = storeState
 
     const addToCart = (product) => {
         product.inCart = true;
         async function fetchData() {
-            dispatch({type: "IS_LOADING", payload: "adding"})
+            storeDispatch({type: "IS_LOADING", payload: "adding"})
             try {
                 const response = await axios.post("/api/cart", product)
                 if(response.status === 201){
-                    dispatch({type: "ADD_TO_CART", payload: product})
+                    storeDispatch({type: "ADD_TO_CART", payload: product})
                 }
             } catch (error) {
                 console.log(error)
             }
             finally{
-                dispatch({type: "IS_LOADING", payload: "success"})
+                storeDispatch({type: "IS_LOADING", payload: "success"})
             }
             
         }
@@ -30,10 +31,10 @@ const WishList = () => {
     }
     return (
         <div className="wishlistContainer">
-            {state.isLoading === "adding" ? <Toast message="Adding to Cart"/> : null}
+            {isLoading === "adding" ? <Toast message="Adding to Cart"/> : null}
             <h1>WishList</h1>
             <div className="wishList">
-                {state.products.map(product => {
+                {products.map(product => {
                     const {_id, name, price, isWishlist, img, inCart, inStock} = product;
                     return <div key={_id}>
                     {isWishlist && <div className="ecommerceCard" key={_id}>
@@ -50,7 +51,7 @@ const WishList = () => {
                     </div>
                     </div>
                     <div className="cardFooter">
-                        <button className="btn outline wishList" onClick={() => dispatch({type: "REMOVE_FROM_WISHLIST", payload: _id})}>Remove</button>
+                        <button className="btn outline wishList" onClick={() => storeDispatch({type: "REMOVE_FROM_WISHLIST", payload: _id})}>Remove</button>
                         {inCart ? (<Link to="/cart"><button className="actionBtn">Go to Cart</button></Link>) : (<button className="btn" onClick={() => addToCart(product)}>Add to Cart</button>)}
                     </div>   
                 </div>}

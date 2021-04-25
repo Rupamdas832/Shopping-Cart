@@ -1,0 +1,10 @@
+.login{
+    min-height: 90vh;
+    position: relative;
+    display: flex;
+    place-items: center;
+    justify-content: center;
+}
+.formCard{
+    background-color: white;
+}

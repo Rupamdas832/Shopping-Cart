@@ -1,37 +1,38 @@
 import React from 'react'
 import { useParams } from 'react-router'
-import { useStore } from '../Store/storeContext'
 import { FcLikePlaceholder, FcLike } from "react-icons/fc";
 import { FaStar } from "react-icons/fa";
 import "./ProductDetail.css"
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import {Toast} from '../Components';
+import { useStore } from '../Store';
 
 export const ProductDetail = () => {
 
     const {productId} = useParams()
-    const {state, dispatch} = useStore()
+    const {storeState, storeDispatch} = useStore()
+    const {isLoading, products} = storeState;
 
-    const  SelectedProduct = state.products.find(product => product._id === productId)
+    const  SelectedProduct = products.find(product => product._id === productId)
     const {_id, img, name, price, desc, rating, discount, isWishlist, inCart} = SelectedProduct
 
     const toggleWishlist = () => {
         if(isWishlist){
-            dispatch({type: "REMOVE_FROM_WISHLIST", payload: _id})
+            storeDispatch({type: "REMOVE_FROM_WISHLIST", payload: _id})
         } else {
             async function fetchData() {
-                dispatch({type: "IS_LOADING", payload: "wishlisting"})
+                storeDispatch({type: "IS_LOADING", payload: "wishlisting"})
                 try {
                     const response = await axios.post("/api/wishlist", SelectedProduct)
                     if(response.status === 201){
-                        dispatch({type: "ADD_TO_WISHLIST", payload: _id})
+                        storeDispatch({type: "ADD_TO_WISHLIST", payload: _id})
                     }
                 } catch (error) {
                     console.log(error)
                 }
                 finally{
-                    dispatch({type: "IS_LOADING", payload: "success"})
+                    storeDispatch({type: "IS_LOADING", payload: "success"})
                 }
             }
             fetchData();
@@ -40,17 +41,17 @@ export const ProductDetail = () => {
     const addToCart = (product) => {
         product.inCart = true;
         async function fetchData() {
-            dispatch({type: "IS_LOADING", payload: "adding"})
+            storeDispatch({type: "IS_LOADING", payload: "adding"})
             try {
                 const response = await axios.post("/api/cart", product)
                 if(response.status === 201){
-                    dispatch({type: "ADD_TO_CART", payload: product})
+                    storeDispatch({type: "ADD_TO_CART", payload: product})
                 }
             } catch (error) {
                 console.log(error)
             }
             finally{
-                dispatch({type: "IS_LOADING", payload: "success"})
+                storeDispatch({type: "IS_LOADING", payload: "success"})
             }
             
         }
@@ -59,8 +60,8 @@ export const ProductDetail = () => {
     
     return (
         <div className="productDetailContainer">
-        {state.isLoading === "adding" ? <Toast message="Adding to Cart"/> : null}
-        {state.isLoading === "wishlisting" ? <Toast message="Adding to Wishlist"/> : null}
+        {isLoading === "adding" ? <Toast message="Adding to Cart"/> : null}
+        {isLoading === "wishlisting" ? <Toast message="Adding to Wishlist"/> : null}
             <div className="flatCard">
                 <div className="imgFlat">
                     <img src={img} alt="card"/>

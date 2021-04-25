@@ -1,9 +1,11 @@
 import React from 'react'
-import { useStore } from '../Store/storeContext'
+import { useStore } from '../Store';
+
 
 export const CartTotal = () => {
 
-    const {state} = useStore();
+    const {storeState} = useStore();
+    const {cart} = storeState
 
     const getTotal = (array) => {
         return array.reduce((total, {price,quantity}) => total + parseInt(price)*quantity,0)
@@ -11,10 +13,10 @@ export const CartTotal = () => {
 
     return (
         <div className="cartPriceDetails">
-            <h4>PRICE DETAILS({state.cart.length} items)</h4>
+            <h4>PRICE DETAILS({cart.length} items)</h4>
             <div className="price">
                 <p>Price</p>
-                <p>₹{getTotal(state.cart)}</p>
+                <p>₹{getTotal(cart)}</p>
             </div>
             <div className="price">
                 <p>Discount</p>
@@ -26,7 +28,7 @@ export const CartTotal = () => {
             </div>
             <div className="price total">
                 <h5>Total Amount</h5>
-                <p>₹{getTotal(state.cart)- 40}</p>
+                <p>₹{getTotal(cart)- 40}</p>
             </div>
             <button className="actionBtn cart">Checkout</button>
         </div>

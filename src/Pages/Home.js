@@ -1,14 +1,16 @@
 import React from 'react'
 import "./Home.css"
-import {useStore} from "../Store/storeContext"
 import { Link } from 'react-router-dom'
+import { useStore } from '../Store'
 
 export const Home = () => {
-    const {state} = useStore()
-    const slicedProducts = state.products.slice(0,5)
+    const {storeState} = useStore()
+    const {isLoading, products} = storeState
+    
+    const slicedProducts = products.slice(0,5)
     return (
         <div className="home">
-        {state.isLoading === "loading" ? <div className="spinner"></div> : 
+        {isLoading === "loading" ? <div className="spinner"></div> : 
         (<div className="homeContainer">
             <div className="homePicDiv"></div>
             <div className="homeHeading">

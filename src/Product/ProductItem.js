@@ -1,32 +1,32 @@
 import React, { useEffect } from 'react'
-import { useStore } from '../Store/storeContext'
 import { FcLikePlaceholder, FcLike } from "react-icons/fc";
 import { FaStar } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import useAxios from '../Hooks/useAxios';
+import { useStore } from '../Store';
 
 export const ProductItem = ({product}) => {
     const {_id, name, price, img, isWishlist, discount, inCart, inStock, isPrimeChoice, rating, category} = product
-    const {dispatch} = useStore()
+    const {storeDispatch} = useStore()
     const {response, errorMessage, isLoading, apiCall} = useAxios()
 
     useEffect(() => {
         if(response){
             if(response.status === 201){
-                dispatch({type: "ADD_TO_WISHLIST", payload: _id})
+                storeDispatch({type: "ADD_TO_WISHLIST", payload: _id})
             }
         }
         if(!isLoading){
-            dispatch({type: "IS_LOADING", payload: "success"})
+            storeDispatch({type: "IS_LOADING", payload: "success"})
         }
     },[response, isLoading])
 
     const toggleWishlist = () => {
         if(isWishlist){
-            dispatch({type: "REMOVE_FROM_WISHLIST", payload: _id})
+            storeDispatch({type: "REMOVE_FROM_WISHLIST", payload: _id})
         } else {
-            dispatch({type: "IS_LOADING", payload: "wishlisting"})
+            storeDispatch({type: "IS_LOADING", payload: "wishlisting"})
             apiCall({
                 type: "post",
                 url: "/api/wishlist",
@@ -37,17 +37,17 @@ export const ProductItem = ({product}) => {
     const addToCart = (product) => {
         product.inCart = true;
         async function fetchData() {
-            dispatch({type: "IS_LOADING", payload: "adding"})
+            storeDispatch({type: "IS_LOADING", payload: "adding"})
             try {
                 const response = await axios.post("/api/cart", product)
                 if(response.status === 201){
-                    dispatch({type: "ADD_TO_CART", payload: product})
+                    storeDispatch({type: "ADD_TO_CART", payload: product})
                 }
             } catch (error) {
                 console.log(error)
             }
             finally{
-                dispatch({type: "IS_LOADING", payload: "success"})
+                storeDispatch({type: "IS_LOADING", payload: "success"})
             }
             
         }

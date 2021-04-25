@@ -1,12 +1,20 @@
 import React from 'react'
 import "./Header.css"
 import {FaShoppingBag, FaHeart} from "react-icons/fa"
-import { useStore } from '../Store/storeContext'
+
 import { Link, NavLink } from 'react-router-dom'
+import { useAuth, useStore, useUser } from '../Store'
 
 export const Header = () => {
 
-    const {state} = useStore()
+    const {storeState} = useStore()
+    const {cart} = storeState
+    
+    const {authState,authDispatch} = useAuth()
+    const {isUserLogin} = authState;
+
+    const {userState} = useUser()
+    const {user} = userState
 
     const getAllCartItems = (array) => {
         return array.reduce((total, {quantity}) => total + quantity,0)
@@ -21,15 +29,22 @@ export const Header = () => {
         <NavLink to="/products" exact><button className="navBtn">Products</button></NavLink>
     </div>
     <div className="navAction">
-        <div className="tooltip">
-            <Link to="/wishlist"><button className="navBtn"><FaHeart/></button></Link>
-                <span className="tooltipText">WishList</span>
-        </div>
-        <div className="tooltip">
-            <Link to="/cart"><button className="navBtn"><FaShoppingBag/></button></Link>
-                <span className="tooltipText">Shopping Bag</span>
-                {state.cart.length === 0 ? null : <span className="badge">{getAllCartItems(state.cart)}</span>}
-        </div>
+        {isUserLogin && user ? (<>
+                                    <div className="tooltip">
+                                        <Link to="/wishlist"><button className="navBtn"><FaHeart/></button></Link>
+                                        <span className="tooltipText">WishList</span>
+                                    </div>
+                                    <div className="tooltip">
+                                        <Link to="/cart"><button className="navBtn"><FaShoppingBag/></button></Link>
+                                        <span className="tooltipText">Shopping Bag</span>
+                                        {cart.length === 0 ? null : <span className="badge">{getAllCartItems(cart)}</span>}
+                                    </div>
+            </>) 
+            : (
+                <Link to="/login"><button className="navBtn">Login</button></Link>
+                )}
+        
+        
 	</div>
 </div>
     )

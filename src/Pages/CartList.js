@@ -1,21 +1,22 @@
 import React from 'react'
-import { useStore } from '../Store/storeContext'
 import "./CartList.css"
 import {CartItem, CartTotal} from "../Cart"
 import {Toast} from '../Components';
+import { useStore } from '../Store';
 
 export const CartList = () => {
-    const {state} = useStore()
+    const {storeState} = useStore()
+    const {isLoading, cart} = storeState
 
     return (
         <div className="cartContainer">
-        {state.isLoading === "removing" ? <Toast message="Removing from Cart"/> : null}
+        {isLoading === "removing" ? <Toast message="Removing from Cart"/> : null}
             <h1>Cart</h1>
-            {state.cart.length === 0 ? (<p>Your Shopping bag is empty!</p>) : 
+            {cart.length === 0 ? (<p>Your Shopping bag is empty!</p>) : 
                 (
                 <div className="cartListContainer">
                     <div className="cartList">
-                        {state.cart.map(cartItem => {
+                        {cart.map(cartItem => {
                             return <CartItem cartItem={cartItem} key={cartItem.id}/>
                         })}
                     </div>

@@ -15,8 +15,8 @@ export const StoreProvider = ({children}) => {
         isLoading: null
     }
 
-    const [state, dispatch] = useReducer(StoreReducer, initialState)
+    const [storeState, storeDispatch] = useReducer(StoreReducer, initialState)
 
-    return <StoreContext.Provider value={ {state, dispatch} }>{children}</StoreContext.Provider>
+    return <StoreContext.Provider value={ {storeState, storeDispatch} }>{children}</StoreContext.Provider>
 }
 
