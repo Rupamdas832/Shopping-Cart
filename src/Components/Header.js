@@ -19,6 +19,12 @@ export const Header = () => {
     const getAllCartItems = (array) => {
         return array.reduce((total, {quantity}) => total + quantity,0)
     }
+
+    const logoutUser = () => {
+        localStorage.removeItem("CartLoginUser")
+        authDispatch({type: "USER_LOGOUT"})
+    }
+
     return (
         <div className="navbar">
     <div className="navLogo">
@@ -39,12 +45,11 @@ export const Header = () => {
                                         <span className="tooltipText">Shopping Bag</span>
                                         {cart.length === 0 ? null : <span className="badge">{getAllCartItems(cart)}</span>}
                                     </div>
+                                    <button className="navBtn" onClick={logoutUser}>Logout</button>
             </>) 
             : (
                 <Link to="/login"><button className="navBtn">Login</button></Link>
-                )}
-        
-        
+                )} 
 	</div>
 </div>
     )

@@ -17,7 +17,7 @@ export const CartList = () => {
                 <div className="cartListContainer">
                     <div className="cartList">
                         {cart.map(cartItem => {
-                            return <CartItem cartItem={cartItem} key={cartItem.id}/>
+                            return <CartItem cartItem={cartItem} key={cartItem._id}/>
                         })}
                     </div>
                     <div className="cartTotal">

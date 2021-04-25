@@ -5,12 +5,17 @@ const StoreReducer = (state,action) => {
         case "LOAD_PRODUCTS":
             return {...state, products: action.payload.map(product => ({...product, isWishlist: false, inCart: false}))}
         case "LOAD_CART_ITEMS":
-            return {...state, cart: action.payload}
+            return {...state, cart: action.payload.map(item => {
+                let productFound = state.products.find(product => product._id === item.productId)
+                    return productFound
+            })
+        
+        }
         case "ADD_TO_CART":
             return {...state, 
                 cart: state.cart.concat(action.payload), 
                 products: state.products.map((product) => {
-                    if(product.id === action.payload.id){
+                    if(product._id === action.payload._id){
                         product.inCart = true;
                     }
                     return product

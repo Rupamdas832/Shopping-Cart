@@ -4,12 +4,20 @@ import { FaStar } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import useAxios from '../Hooks/useAxios';
-import { useStore } from '../Store';
+import { useAuth, useStore, useUser } from '../Store';
 
 export const ProductItem = ({product}) => {
+
     const {_id, name, price, img, isWishlist, discount, inCart, inStock, isPrimeChoice, rating, category} = product
     const {storeDispatch} = useStore()
     const {response, errorMessage, isLoading, apiCall} = useAxios()
+
+    const {authState, authDispatch} = useAuth()
+    const {isUserLogin} = authState;
+
+    const {userState} = useUser();
+    const {user} = userState
+
 
     useEffect(() => {
         if(response){
@@ -21,6 +29,15 @@ export const ProductItem = ({product}) => {
             storeDispatch({type: "IS_LOADING", payload: "success"})
         }
     },[response, isLoading])
+
+
+
+    const loginToggler = () => {
+        if(isUserLogin){
+            return authDispatch({type: "LOGIN_MODAL", payload: false})
+        }
+        else return authDispatch({type: "LOGIN_MODAL", payload: true})
+    }
 
     const toggleWishlist = () => {
         if(isWishlist){
@@ -39,7 +56,9 @@ export const ProductItem = ({product}) => {
         async function fetchData() {
             storeDispatch({type: "IS_LOADING", payload: "adding"})
             try {
-                const response = await axios.post("/api/cart", product)
+                const response = await axios.post(`https://Shopping-Cart-Server.rupamdas.repl.co/cart/${user.cartId}`, {
+                    "productId" : _id
+                })
                 if(response.status === 201){
                     storeDispatch({type: "ADD_TO_CART", payload: product})
                 }
@@ -80,7 +99,12 @@ export const ProductItem = ({product}) => {
                 </div>
                 <div className="cardFooter">  
                     <Link to={`/productDetail/${_id}`}><button className="btn outline">Detail...</button></Link>
-                    {inCart ? (<Link to="/cart"><button className="actionBtn">Go to Cart</button></Link>) : (<button className="btn" onClick={() => addToCart(product)}>Add to Cart</button>)}
+                    {isUserLogin ? (<div>
+                            {inCart ? (<Link to="/cart"><button className="actionBtn">Go to Cart</button></Link>) : (<button className="btn" onClick={() => addToCart(product)}>Add to Cart</button>)}
+                        </div>) : (
+                            <button className="btn" onClick={() => loginToggler()}>Add to Cart</button>
+                        )}
+                    
                 </div>   
             </div>
     )

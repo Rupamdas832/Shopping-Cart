@@ -13,6 +13,7 @@ export const AuthProvider = ({children}) => {
 
     const initalState = {
         isUserLogin: false,
+        isLoginModalOpen: false
     }
 
    
