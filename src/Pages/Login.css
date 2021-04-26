@@ -1,0 +1,17 @@
+.login{
+    min-height: 90vh;
+    position: relative;
+    display: flex;
+    place-items: center;
+    justify-content: center;
+}
+.formCard{
+    background-color: white;
+}
+.errorMessage{
+    background-color: rgba(255, 71, 71, 0.603);
+    padding: 0.5rem;
+    font-size: 1rem;
+    width: 100%;
+    text-align: center;
+}

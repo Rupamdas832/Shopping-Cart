@@ -1,0 +1,144 @@
+.cartContainer{
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    min-height: 80vh;
+    align-items: center;
+    margin-top: 4rem;
+}
+.cartListContainer{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    width: 60vw;
+}
+.cartList{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.cartPriceDetails{
+    height: auto;
+    background-color: rgb(255, 255, 255);
+    padding: 1rem 1rem;
+    display: flex;
+    flex-direction: column;
+}
+.cartPriceDetails h4{
+    border-bottom: 1px solid black;
+}
+.cartPriceDetails p{
+    font-size: 1rem;
+    
+}
+.cartPriceDetails h5{
+    padding: 1rem 0;
+}
+.price{
+    display: flex;
+    justify-content: space-between;
+}
+.price.total{
+    border-top: 1px dotted rgb(138, 137, 137);
+}
+.actionBtn:hover{
+    background-color: var(--blue);
+}
+
+.detailFlat.small{
+    padding: 0 0.5rem;
+}
+.detailFlat.small h4{
+    color: black;
+}
+.priceFlat{
+    color: black;
+}
+.flatCard.small{
+    width: 30rem;
+    font-size: 0.9rem;
+    padding: 0.8rem 0.5rem;
+}
+.imgFlat.small{
+    height: 10rem;
+}
+.imgFlat.small img{
+    height: 100%;
+}
+.priceFlat.small{
+    width: 100%;
+    padding: 1rem 0;
+}
+.btnsFlat.small{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.btn.cart{
+    font-size: 0.8rem;
+}
+@media only screen and (max-width: 450px){
+    .cartContainer{
+        margin-top: 2rem;
+    }
+    .cartListContainer{
+        display: flex;
+        flex-direction: column;
+        width: 90%;
+        font-size: 1rem;
+    }
+    .flatCard.small{
+        width: 23rem;
+        display: flex;
+        flex-direction: row;
+        font-size: 0.7rem;
+    }
+    .imgFlat.small{
+        height: 7rem;
+    }
+    .detailFlat.small{
+        width: 80%;
+    }
+    .cartTotal{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .cartPriceDetails{
+        height: auto;
+        width: 60%;
+        background-color: rgb(255, 255, 255);
+        padding: 1rem 1rem;
+        display: flex;
+        flex-direction: column;
+    }
+    .actionBtn.cart{
+        font-size: 0.8rem;
+    }
+}
+@media only screen and (max-width: 376px){
+    .flatCard.small{
+        width: 20rem;
+    }
+    .detailFlat.small{
+        width: 95%;
+        font-size: 0.6rem;
+    }
+    .priceFlat.small{
+        font-size: 0.7rem;
+    }
+    .btn.outline.cart{
+        font-size: 0.5rem;
+    }
+    .btn.cart{
+        font-size: 0.7rem;
+    }
+    .cartPriceDetails{
+        width: 70%;
+    }
+}
+@media only screen and (max-width: 350px){
+    .flatCard.small{
+        width: 17rem;
+    }
+}

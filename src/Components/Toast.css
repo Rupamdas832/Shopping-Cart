@@ -1,0 +1,22 @@
+.toast{
+    position: fixed;
+    right: 2rem;
+    top: 5rem;
+    font-size: 1rem;
+    display: inline-block;
+    padding: 0 1rem;
+    border-radius: 0.2rem;
+    border: 1px solid black;
+    border-bottom: 5px solid green;
+    background-color: var(--whitePale);
+    color: black;
+    z-index: 11;
+}
+@media only screen and (max-width: 450px){
+    .toast{
+        right: 1rem;
+        top: 3rem;
+        font-size: 0.8rem;
+        padding: 0 0.5rem;
+    }
+}

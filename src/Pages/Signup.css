@@ -1,0 +1,7 @@
+.signup{
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    place-items: center;
+    justify-content: center;
+}

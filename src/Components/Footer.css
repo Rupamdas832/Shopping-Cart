@@ -1,0 +1,28 @@
+.footer{
+    background-color: var(--darkGreen);
+    height: 14vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+}
+.footer span{
+    color: white;
+}
+.socialLinks{
+    width: 60%;
+    font-size: 2rem;
+    color: white;
+    text-shadow: 0px 1px 2px black;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.socialLinks a{
+    color: white;
+}
+.socialLinks:hover{
+    color: red;
+}

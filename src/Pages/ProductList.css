@@ -1,0 +1,99 @@
+.productListContainer{
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    margin-top: 4rem;
+    min-height: 80vh;
+    width: 100vw;
+}
+
+.productLeftContainer{
+    padding: 0 1rem;
+}
+.productLeftContainer ul{
+    list-style: none;
+}
+.productLeftContainer li{
+    list-style: none;
+    margin-left: -2rem;
+}
+.productLeftContainer ul:hover{
+    cursor: pointer;
+}
+.productRightContainer{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: baseline;
+    padding: 0 1rem;
+    position: relative;
+}
+.spinner{
+    position: absolute;
+    left: 40%;
+}
+.ecommerceCard{
+    background-color: white;
+    position: relative;
+    height: 25rem;
+}
+.cardImage{
+    height: 60%;
+}
+.outOfStockCard{
+    position: absolute;
+    background-color: rgba(138, 132, 132, 0.664);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: rgb(211, 210, 210);
+}
+@media only screen and (max-width: 450px){
+    .productListContainer{
+        display: flex;
+        flex-direction: column;
+        width: 100vw;
+        font-size: 0.5rem;
+        margin-top: 3rem;
+    }
+    .filterContainer{
+        width: 95%;
+        display: flex;
+        flex-direction: row;
+        align-items: baseline;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    .productRightContainer{
+        justify-content: center;
+    }
+    .ecommerceCard{
+        width: 7rem;
+        font-size: 0.5rem;
+        height: 13rem;
+    }
+    .cardImage{
+        height: 60%;
+    }
+    .actionBtn{
+        font-size: 0.5rem;
+        padding: 0.5rem;
+    }
+    .btn{
+        font-size: 0.5rem;
+        padding: 0.3rem;
+    }
+}
+@media only screen and (max-width: 376px){
+    .ecommerceCard{
+        width: 9rem;
+    }
+}
+@media only screen and (max-width: 350px){
+    .ecommerceCard{
+        width: 8rem;
+    }
+}

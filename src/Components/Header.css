@@ -1,0 +1,24 @@
+.navbar{
+    position: fixed;
+    top: 0;
+    z-index: 10;
+}
+@media only screen and (max-width: 450px){
+    .navbar{
+        height: 4vh;
+    }
+    .navBtn{
+        font-size: 0.8rem;
+    }
+}
+@media only screen and (max-width: 350px){
+    .navbar{
+        height: 4vh;
+    }
+    .navBtn{
+        font-size: 0.7rem;
+    }
+    .navAction{
+        width: 30%;
+    }
+}

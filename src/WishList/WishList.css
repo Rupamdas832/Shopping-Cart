@@ -1,0 +1,14 @@
+.wishlistContainer{
+    margin-top: 4rem;
+    width: 100vw;
+    min-height: 80vh;
+    padding: 0 1rem;
+}
+.wishList{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.btn.outline.wishList{
+    z-index: 10;
+}

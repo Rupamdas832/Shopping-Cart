@@ -1,0 +1,25 @@
+.productDetailContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    min-height: 100vh;
+}
+.flatCard{
+    width: 60rem;
+}
+.imgFlat.large{
+    height: 25rem;
+}
+.imgFlat.large img{
+    height: 100%;
+}
+@media only screen and (max-width: 450px){
+    .flatCard{
+        width: 80%;
+    }
+    .imgFlat.large{
+        height: 12rem;
+    }
+}
