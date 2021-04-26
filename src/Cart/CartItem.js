@@ -11,9 +11,22 @@ export const CartItem = ({cartItem}) => {
     const {userState} = useUser()
     const {user} = userState
 
-    const toggleWishlist = (_id) => {
-        {isWishlist ? (storeDispatch({type: "REMOVE_FROM_WISHLIST", payload: _id})) : (storeDispatch({type: "ADD_TO_WISHLIST", payload: _id}))}
-        storeDispatch({type: "REMOVE_FROM_CART", payload: _id})
+    const toggleWishlist = async (_id) => {
+        storeDispatch({type: "IS_LOADING", payload: "wishlisting"})
+            try {
+                const response = await axios.post(`https://Shopping-Cart-Server.rupamdas.repl.co/wishlist/${user.wishlistId}`, {
+                    "productId" : _id
+                })
+                if(response.status === 201){
+                    storeDispatch({type: "ADD_TO_WISHLIST", payload: _id})
+                }
+            } catch (error) {
+                console.log(error)
+            }
+            finally{
+                storeDispatch({type: "IS_LOADING", payload: "success"})
+            }
+        removeItem(_id)
     }
 
     const removeItem = (_id) => {

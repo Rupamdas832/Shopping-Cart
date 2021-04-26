@@ -1,34 +1,20 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { FcLikePlaceholder, FcLike } from "react-icons/fc";
 import { FaStar } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import useAxios from '../Hooks/useAxios';
 import { useAuth, useStore, useUser } from '../Store';
 
 export const ProductItem = ({product}) => {
 
     const {_id, name, price, img, isWishlist, discount, inCart, inStock, isPrimeChoice, rating, category} = product
     const {storeDispatch} = useStore()
-    const {response, errorMessage, isLoading, apiCall} = useAxios()
 
     const {authState, authDispatch} = useAuth()
     const {isUserLogin} = authState;
 
     const {userState} = useUser();
     const {user} = userState
-
-
-    useEffect(() => {
-        if(response){
-            if(response.status === 201){
-                storeDispatch({type: "ADD_TO_WISHLIST", payload: _id})
-            }
-        }
-        if(!isLoading){
-            storeDispatch({type: "IS_LOADING", payload: "success"})
-        }
-    },[response, isLoading])
 
 
 
@@ -70,26 +56,22 @@ export const ProductItem = ({product}) => {
             }
         }
     }
-    const addToCart = (product) => {
+    const addToCart = async (product) => {
         product.inCart = true;
-        async function fetchData() {
-            storeDispatch({type: "IS_LOADING", payload: "adding"})
-            try {
-                const response = await axios.post(`https://Shopping-Cart-Server.rupamdas.repl.co/cart/${user.cartId}`, {
-                    "productId" : _id
-                })
-                if(response.status === 201){
-                    storeDispatch({type: "ADD_TO_CART", payload: product})
-                }
-            } catch (error) {
-                console.log(error)
+        storeDispatch({type: "IS_LOADING", payload: "adding"})
+        try {
+            const response = await axios.post(`https://Shopping-Cart-Server.rupamdas.repl.co/cart/${user.cartId}`, {
+                "productId" : _id
+            })
+            if(response.status === 201){
+                storeDispatch({type: "ADD_TO_CART", payload: product})
             }
-            finally{
-                storeDispatch({type: "IS_LOADING", payload: "success"})
-            }
-            
+        } catch (error) {
+            console.log(error)
         }
-        fetchData();  
+        finally{
+            storeDispatch({type: "IS_LOADING", payload: "success"})
+        } 
     }
 
     return (
@@ -101,7 +83,11 @@ export const ProductItem = ({product}) => {
                     <h5>Prime</h5>
                 </div>}
                 <div className="cardLike">
-                    <button className="btn outline" onClick={() => toggleWishlist(_id)}>{isWishlist ? <FcLike/> : <FcLikePlaceholder/>}</button>
+                    {isUserLogin ? (
+                        <button className="btn outline" onClick={() => toggleWishlist(_id)}>{isWishlist ? <FcLike/> : <FcLikePlaceholder/>}</button>
+                    ) : (
+                        <button className="btn outline" onClick={() => loginToggler()}>{isWishlist ? <FcLike/> : <FcLikePlaceholder/>}</button>
+                    )}
                 </div>
                 <div className="cardImage">
                     <img src={img} alt="product"/>

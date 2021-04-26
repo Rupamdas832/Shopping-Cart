@@ -1,9 +1,7 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import {Routes, Route} from "react-router-dom"
 import WishList from '../WishList/WishList'
 import {Home, CartList, ProductDetail, ProductsList, Login, Signup} from '../Pages'
-import axios from "axios"
-import { useStore } from '../Store'
 import {PrivateRoute} from "./PrivateRoute/PrivateRoute"
 
 export const HeroSection = () => {

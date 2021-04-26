@@ -32,25 +32,35 @@ export const ProductDetail = () => {
         else return authDispatch({type: "LOGIN_MODAL", payload: true})
     }
 
-    const toggleWishlist = () => {
+    const toggleWishlist = async () => {
         if(isWishlist){
-            storeDispatch({type: "REMOVE_FROM_WISHLIST", payload: _id})
-        } else {
-            async function fetchData() {
-                storeDispatch({type: "IS_LOADING", payload: "wishlisting"})
-                try {
-                    const response = await axios.post("/api/wishlist", SelectedProduct)
-                    if(response.status === 201){
-                        storeDispatch({type: "ADD_TO_WISHLIST", payload: _id})
-                    }
-                } catch (error) {
-                    console.log(error)
-                }
-                finally{
-                    storeDispatch({type: "IS_LOADING", payload: "success"})
-                }
+            storeDispatch({type: "IS_LOADING", payload: "removing from wishlist"})
+            try {
+                const response = await axios.delete(`https://Shopping-Cart-Server.rupamdas.repl.co/wishlist/${user.wishlistId}/${_id}`)
+                if(response.status === 202){
+                    storeDispatch({type: "REMOVE_FROM_WISHLIST", payload: _id})
+                } 
+            } catch (error) {
+                console.log(error.response.data)
             }
-            fetchData();
+            finally{
+                storeDispatch({type: "IS_LOADING", payload: "success"})
+            }
+        } else {
+            storeDispatch({type: "IS_LOADING", payload: "wishlisting"})
+            try {
+                const response = await axios.post(`https://Shopping-Cart-Server.rupamdas.repl.co/wishlist/${user.wishlistId}`, {
+                    "productId" : _id
+                })
+                if(response.status === 201){
+                    storeDispatch({type: "ADD_TO_WISHLIST", payload: _id})
+                }
+            } catch (error) {
+                console.log(error)
+            }
+            finally{
+                storeDispatch({type: "IS_LOADING", payload: "success"})
+            }
         }
     }
     const addToCart = (product) => {
@@ -80,6 +90,7 @@ export const ProductDetail = () => {
         {isLoginModalOpen && <LoginModal/>}
         {isLoading === "adding" ? <Toast message="Adding to Cart"/> : null}
         {isLoading === "wishlisting" ? <Toast message="Adding to Wishlist"/> : null}
+        {isLoading === "removing from wishlist" ? <Toast message="Removing from Wishlist"/> : null}
             <div className="flatCard">
                 <div className="imgFlat large">
                     <img src={img} alt="card"/>
@@ -95,7 +106,11 @@ export const ProductDetail = () => {
                     </div>
                     <p>{desc}</p>
                     <div className="btnsFlat">
-                    <button className="btn outline" onClick={() => toggleWishlist(_id)}>{isWishlist ? <FcLike/> : <FcLikePlaceholder/>}</button>
+                    {isUserLogin ? (
+                        <button className="btn outline" onClick={() => toggleWishlist(_id)}>{isWishlist ? <FcLike/> : <FcLikePlaceholder/>}</button>
+                    ) : (
+                        <button className="btn outline" onClick={() => loginToggler()}>{isWishlist ? <FcLike/> : <FcLikePlaceholder/>}</button>
+                    )}
                     {isUserLogin ? (<div>
                         {inCart ? (<Link to="/cart"><button className="actionBtn">Go to Cart</button></Link>) : (<button className="btn" onClick={() => addToCart(SelectedProduct)}>Add to Cart</button>)}
                     </div>) : (

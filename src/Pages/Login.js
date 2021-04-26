@@ -31,6 +31,17 @@ export const Login = () => {
           console.log(error.response.data)
         }
       }
+    
+      const fetchWishlist = async (wishlistId) => {
+        try{
+          const response = await axios.get(`https://Shopping-Cart-Server.rupamdas.repl.co/wishlist/${wishlistId}`)
+          if(response.status === 200){
+            storeDispatch({type: "LOAD_WISHLIST_ITEMS", payload: response.data.products})
+          }
+        } catch(error){
+          console.log(error.response.data)
+        }
+      }
 
     const loginWithCredentials = async () => {
         storeDispatch({type: "IS_LOADING", payload: "loggingIn"})
@@ -48,6 +59,7 @@ export const Login = () => {
                 userId: user._id
             }))
             fetchCart(user.cartId)
+            fetchWishlist(user.wishlistId)
             navigate(state?.from ? state.from : "/")
         }
     } catch (error) {
