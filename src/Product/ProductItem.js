@@ -39,16 +39,35 @@ export const ProductItem = ({product}) => {
         else return authDispatch({type: "LOGIN_MODAL", payload: true})
     }
 
-    const toggleWishlist = () => {
+    const toggleWishlist = async () => {
         if(isWishlist){
-            storeDispatch({type: "REMOVE_FROM_WISHLIST", payload: _id})
+            storeDispatch({type: "IS_LOADING", payload: "removing from wishlist"})
+            try {
+                const response = await axios.delete(`https://Shopping-Cart-Server.rupamdas.repl.co/wishlist/${user.wishlistId}/${_id}`)
+                if(response.status === 202){
+                    storeDispatch({type: "REMOVE_FROM_WISHLIST", payload: _id})
+                } 
+            } catch (error) {
+                console.log(error.response.data)
+            }
+            finally{
+                storeDispatch({type: "IS_LOADING", payload: "success"})
+            }
         } else {
             storeDispatch({type: "IS_LOADING", payload: "wishlisting"})
-            apiCall({
-                type: "post",
-                url: "/api/wishlist",
-                body: product
-            })
+            try {
+                const response = await axios.post(`https://Shopping-Cart-Server.rupamdas.repl.co/wishlist/${user.wishlistId}`, {
+                    "productId" : _id
+                })
+                if(response.status === 201){
+                    storeDispatch({type: "ADD_TO_WISHLIST", payload: _id})
+                }
+            } catch (error) {
+                console.log(error)
+            }
+            finally{
+                storeDispatch({type: "IS_LOADING", payload: "success"})
+            }
         }
     }
     const addToCart = (product) => {

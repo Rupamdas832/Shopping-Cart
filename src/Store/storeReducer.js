@@ -18,6 +18,23 @@ const StoreReducer = (state,action) => {
                         return product
                     })
         }
+        case "LOAD_WISHLIST_ITEMS":
+            return {...state, 
+                cart: state.cart.map(cartItem => {
+                    let productFound = action.payload.find(item => cartItem._id === item.productId)
+                        if(productFound){
+                            cartItem.isWishlist = true
+                        }
+                        return cartItem
+                    }),
+                products: state.products.map(product => {
+                    let productFound = action.payload.find(item => product._id === item.productId)
+                        if(productFound){
+                            product.isWishlist = true
+                        }
+                        return product
+                    })
+        }
         case "ADD_TO_CART":
             return {...state, 
                 cart: state.cart.concat(action.payload), 
@@ -54,13 +71,13 @@ const StoreReducer = (state,action) => {
         case "ADD_TO_WISHLIST":
             return {...state, 
                 products: state.products.map(product => {
-                    if(product.id === action.payload){
+                    if(product._id === action.payload){
                         return {...product, isWishlist: true}
                     }
                     return product
                     }),
                 cart: state.cart.map(product => {
-                    if(product.id === action.payload){
+                    if(product._id === action.payload){
                         return {...product, isWishlist: true}
                     }
                 return product
@@ -69,13 +86,13 @@ const StoreReducer = (state,action) => {
         case "REMOVE_FROM_WISHLIST":
             return {...state, 
                 products: state.products.map(product => {
-                    if(product.id === action.payload){
+                    if(product._id === action.payload){
                         return {...product, isWishlist: false}
                     }
                     return product
                     }),
                 cart: state.cart.map(product => {
-                    if(product.id === action.payload){
+                    if(product._id === action.payload){
                         return {...product, isWishlist: false}
                     }
                 return product})

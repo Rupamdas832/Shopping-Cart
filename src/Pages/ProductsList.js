@@ -24,6 +24,7 @@ export const ProductsList = () => {
         {isLoginModalOpen && <LoginModal/>}
         {isLoading === "adding" ? <Toast message="Adding to Cart"/> : null}
         {isLoading === "wishlisting" ? <Toast message="Adding to Wishlist"/> : null}
+        {isLoading === "removing from wishlist" ? <Toast message="Removing from Wishlist"/> : null}
             <div className="productLeftContainer">
                 <FilterSection/>
             </div>

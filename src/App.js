@@ -23,6 +23,16 @@ function App() {
       console.log(error.response.data)
     }
   }
+  const fetchWishlist = async (wishlistId) => {
+    try{
+      const response = await axios.get(`https://Shopping-Cart-Server.rupamdas.repl.co/wishlist/${wishlistId}`)
+      if(response.status === 200){
+        storeDispatch({type: "LOAD_WISHLIST_ITEMS", payload: response.data.products})
+      }
+    } catch(error){
+      console.log(error.response.data)
+    }
+  }
 
   const fetchUser = async (userId) => {
         try {
@@ -33,6 +43,7 @@ function App() {
             if(response.status === 200){
               userDispatch({type: "LOAD_USER", payload: user})
               fetchCart(user.cartId)
+              fetchWishlist(user.wishlistId)
             }
         } catch (error) {
             console.log(error.response.data)
