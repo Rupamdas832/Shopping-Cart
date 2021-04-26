@@ -6,7 +6,7 @@ import "./ProductDetail.css"
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import {LoginModal, Toast} from '../Components';
-import { useAuth, useStore } from '../Store';
+import { useAuth, useStore, useUser } from '../Store';
 
 export const ProductDetail = () => {
 
@@ -17,6 +17,9 @@ export const ProductDetail = () => {
 
     const {authState, authDispatch} = useAuth();
     const {isUserLogin, isLoginModalOpen} = authState;
+
+    const {userState} = useUser();
+    const {user} = userState
 
     const  SelectedProduct = products.find(product => product._id === productId)
     const {_id, img, name, price, desc, rating, discount, isWishlist, inCart} = SelectedProduct
@@ -55,7 +58,9 @@ export const ProductDetail = () => {
         async function fetchData() {
             storeDispatch({type: "IS_LOADING", payload: "adding"})
             try {
-                const response = await axios.post("/api/cart", product)
+                const response = await axios.post(`https://Shopping-Cart-Server.rupamdas.repl.co/cart/${user.cartId}`, {
+                    "productId" : _id
+                })
                 if(response.status === 201){
                     storeDispatch({type: "ADD_TO_CART", payload: product})
                 }
@@ -76,7 +81,7 @@ export const ProductDetail = () => {
         {isLoading === "adding" ? <Toast message="Adding to Cart"/> : null}
         {isLoading === "wishlisting" ? <Toast message="Adding to Wishlist"/> : null}
             <div className="flatCard">
-                <div className="imgFlat">
+                <div className="imgFlat large">
                     <img src={img} alt="card"/>
                 </div>
                 <div className="detailFlat">

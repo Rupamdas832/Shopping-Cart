@@ -21,6 +21,17 @@ export const Login = () => {
 
     const {userDispatch} = useUser()
 
+    const fetchCart = async (cartId) => {
+        try{
+          const response = await axios.get(`https://Shopping-Cart-Server.rupamdas.repl.co/cart/${cartId}`)
+          if(response.status === 200){
+            storeDispatch({type: "LOAD_CART_ITEMS", payload: response.data.products})
+          }
+        } catch(error){
+          console.log(error.response.data)
+        }
+      }
+
     const loginWithCredentials = async () => {
         storeDispatch({type: "IS_LOADING", payload: "loggingIn"})
     try {
@@ -36,6 +47,7 @@ export const Login = () => {
                 isUserLogin: true,
                 userId: user._id
             }))
+            fetchCart(user.cartId)
             navigate(state?.from ? state.from : "/")
         }
     } catch (error) {

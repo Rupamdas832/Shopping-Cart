@@ -1,12 +1,15 @@
 import axios from 'axios';
 import React from 'react'
-import { useStore } from '../Store';
+import { useStore, useUser } from '../Store';
 
 
 export const CartItem = ({cartItem}) => {
     
     const {_id, name, price, quantity, isWishlist, img} = cartItem;
     const {storeDispatch} = useStore()
+
+    const {userState} = useUser()
+    const {user} = userState
 
     const toggleWishlist = (_id) => {
         {isWishlist ? (storeDispatch({type: "REMOVE_FROM_WISHLIST", payload: _id})) : (storeDispatch({type: "ADD_TO_WISHLIST", payload: _id}))}
@@ -17,12 +20,12 @@ export const CartItem = ({cartItem}) => {
         async function fetchData() {
             storeDispatch({type: "IS_LOADING", payload: "removing"})
             try {
-                const response = await axios.delete(`/api/cart/${_id}`)
-                if(response.status === 204){
+                const response = await axios.delete(`https://Shopping-Cart-Server.rupamdas.repl.co/cart/${user.cartId}/${_id}`)
+                if(response.status === 202){
                     storeDispatch({type: "REMOVE_FROM_CART", payload: _id})
                 } 
             } catch (error) {
-                console.log(error)
+                console.log(error.response.data)
             }
             finally{
                 storeDispatch({type: "IS_LOADING", payload: "success"})

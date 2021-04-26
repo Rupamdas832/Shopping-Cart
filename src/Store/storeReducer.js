@@ -5,11 +5,18 @@ const StoreReducer = (state,action) => {
         case "LOAD_PRODUCTS":
             return {...state, products: action.payload.map(product => ({...product, isWishlist: false, inCart: false}))}
         case "LOAD_CART_ITEMS":
-            return {...state, cart: action.payload.map(item => {
-                let productFound = state.products.find(product => product._id === item.productId)
-                    return productFound
-            })
-        
+            return {...state, 
+                cart: action.payload.map(item => {
+                    let productFound = state.products.find(product => product._id === item.productId)
+                        return productFound
+                    }),
+                products: state.products.map(product => {
+                    let productFound = action.payload.find(item => product._id === item.productId)
+                        if(productFound){
+                            product.inCart = true
+                        }
+                        return product
+                    })
         }
         case "ADD_TO_CART":
             return {...state, 
@@ -23,23 +30,23 @@ const StoreReducer = (state,action) => {
             }
         case "REMOVE_FROM_CART":
             return {...state, 
-                cart: state.cart.filter(cart => cart.id !== action.payload), 
+                cart: state.cart.filter(cart => cart._id !== action.payload), 
                 products: state.products.map(product => {
-                    if(product.id === action.payload){
+                    if(product._id === action.payload){
                         product.inCart = false;
                     }
                     return product
                 })}
         case "INCREASE_COUNT":
             return {...state, cart: state.cart.map(cart => {
-                if(cart.id === action.payload){
+                if(cart._id === action.payload){
                     return {...cart, quantity: cart.quantity + 1}
                 }
                 return cart
             })}
         case "DECREASE_COUNT":
             return {...state, cart: state.cart.map(cart => {
-                if(cart.id === action.payload){
+                if(cart._id === action.payload){
                     return {...cart, quantity: cart.quantity <= 1 ? 1 : cart.quantity - 1}
                 }
                 return cart

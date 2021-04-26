@@ -58,6 +58,12 @@
     font-size: 0.9rem;
     padding: 0.8rem 0.5rem;
 }
+.imgFlat.small{
+    height: 10rem;
+}
+.imgFlat.small img{
+    height: 100%;
+}
 .priceFlat.small{
     width: 100%;
     padding: 1rem 0;
@@ -85,7 +91,10 @@
         width: 23rem;
         display: flex;
         flex-direction: row;
-        font-size: 0.6rem;
+        font-size: 0.7rem;
+    }
+    .imgFlat.small{
+        height: 7rem;
     }
     .detailFlat.small{
         width: 80%;
@@ -113,7 +122,10 @@
     }
     .detailFlat.small{
         width: 95%;
-        font-size: 0.5rem;
+        font-size: 0.6rem;
+    }
+    .priceFlat.small{
+        font-size: 0.7rem;
     }
     .btn.outline.cart{
         font-size: 0.5rem;

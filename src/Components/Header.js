@@ -4,10 +4,11 @@ import {FaShoppingBag, FaHeart} from "react-icons/fa"
 
 import { Link, NavLink } from 'react-router-dom'
 import { useAuth, useStore, useUser } from '../Store'
+import axios from 'axios'
 
 export const Header = () => {
 
-    const {storeState} = useStore()
+    const {storeState, storeDispatch} = useStore()
     const {cart} = storeState
     
     const {authState,authDispatch} = useAuth()
@@ -20,9 +21,27 @@ export const Header = () => {
         return array.reduce((total, {quantity}) => total + quantity,0)
     }
 
+    const fetchProducts= async() => {
+        storeDispatch({type: "IS_LOADING", payload: "loading"})
+        try {
+            const response = await axios.get("https://Shopping-Cart-Server.rupamdas.repl.co/products")
+            const data = response.data.products
+            if(response.status === 200){
+                storeDispatch({type: "IS_LOADING"})
+                storeDispatch({type: "LOAD_PRODUCTS", payload: data})
+            }
+        } catch (error) {
+            console.log(error)
+        }
+        finally{
+            storeDispatch({type: "IS_LOADING", payload: "success"})
+        }
+    }
+
     const logoutUser = () => {
         localStorage.removeItem("CartLoginUser")
         authDispatch({type: "USER_LOGOUT"})
+        fetchProducts()
     }
 
     return (
