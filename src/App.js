@@ -15,7 +15,7 @@ function App() {
 
   const fetchCart = async (cartId) => {
     try{
-      const response = await axios.get(`https://Shopping-Cart-Server.rupamdas.repl.co/cart/${cartId}`)
+      const response = await axios.get(`https://Shopping-cart-server.rupamdas.repl.co/cart/${cartId}`)
       if(response.status === 200){
         storeDispatch({type: "LOAD_CART_ITEMS", payload: response.data.products})
       }
@@ -25,7 +25,7 @@ function App() {
   }
   const fetchWishlist = async (wishlistId) => {
     try{
-      const response = await axios.get(`https://Shopping-Cart-Server.rupamdas.repl.co/wishlist/${wishlistId}`)
+      const response = await axios.get(`https://Shopping-cart-server.rupamdas.repl.co/wishlist/${wishlistId}`)
       if(response.status === 200){
         storeDispatch({type: "LOAD_WISHLIST_ITEMS", payload: response.data.products})
       }
@@ -36,7 +36,7 @@ function App() {
 
   const fetchUser = async (userId) => {
         try {
-            const response = await axios.post("https://Shopping-Cart-Server.rupamdas.repl.co/user", {
+            const response = await axios.post("https://Shopping-cart-server.rupamdas.repl.co/user", {
             "userId": userId
             })
             const user = response.data.user
