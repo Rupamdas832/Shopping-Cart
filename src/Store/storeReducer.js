@@ -97,6 +97,8 @@ const StoreReducer = (state,action) => {
                     }
                 return product})
         }
+        case "ADD_ADDRESS":
+            return {...state, address: state.address.concat(action.payload)}
         default:
             return state
     }

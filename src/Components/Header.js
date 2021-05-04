@@ -54,7 +54,7 @@ export const Header = () => {
         <NavLink to="/products" exact><button className="navBtn">Products</button></NavLink>
     </div>
     <div className="navAction">
-        {isUserLogin && user ? (<>
+        {isUserLogin && user ? (<div className="navActionItems">
                                     <div className="tooltip">
                                         <Link to="/wishlist"><button className="navBtn"><FaHeart/></button></Link>
                                         <span className="tooltipText">WishList</span>
@@ -64,8 +64,16 @@ export const Header = () => {
                                         <span className="tooltipText">Shopping Bag</span>
                                         {cart.length === 0 ? null : <span className="badge">{getAllCartItems(cart)}</span>}
                                     </div>
-                                    <button className="navBtn" onClick={logoutUser}>Logout</button>
-            </>) 
+                                    <div className="dropdown">
+                                        <button className="btnFloat">{user.name.charAt(0).toUpperCase()}</button>
+	                                    <div className="dropdownContent">
+                                            <ul>
+                                                <Link to="/profile"><li>Profile</li></Link>
+                                                <li onClick={logoutUser}>Logout</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+            </div>) 
             : (
                 <Link to="/login"><button className="navBtn">Login</button></Link>
                 )} 
