@@ -21,6 +21,7 @@
     flex-direction: row;
     width: 100%;
     justify-content: space-around;
+    align-items: center;
 }
 .input{
     width: 40vw;
@@ -41,6 +42,12 @@
     width: 25rem;
 }
 .cardBody.address p{
+    font-size: 0.9rem;
+}
+.card.debit{
+    width: 20rem;
+}
+.cardBody.debit p{
     font-size: 0.9rem;
 }
 

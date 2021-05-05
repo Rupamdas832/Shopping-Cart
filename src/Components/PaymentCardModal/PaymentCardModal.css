@@ -1,0 +1,8 @@
+.input.date{
+    display: flex;
+    flex-direction: row;
+}
+.inputSmall{
+    width: 4rem;
+    display: inline-block;
+}

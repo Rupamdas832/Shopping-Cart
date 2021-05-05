@@ -13,7 +13,8 @@ export const StoreProvider = ({children}) => {
         products: [], 
         cart: [],
         isLoading: null,
-        address: []
+        address: [],
+        paymentCards: []
     }
 
     const [storeState, storeDispatch] = useReducer(StoreReducer, initialState)

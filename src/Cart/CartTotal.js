@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import { useStore } from '../Store';
 
 
@@ -9,6 +10,9 @@ export const CartTotal = () => {
 
     const getTotal = (array) => {
         return array.reduce((total, {price,quantity}) => total + parseInt(price)*quantity,0)
+    }
+    const TotalAfterDiscount = () => {
+        return getTotal(cart) - 40
     }
 
     return (
@@ -28,9 +32,9 @@ export const CartTotal = () => {
             </div>
             <div className="price total">
                 <h5>Total Amount</h5>
-                <p>₹{getTotal(cart)- 40}</p>
+                <p>₹{TotalAfterDiscount()}</p>
             </div>
-            <button className="actionBtn cart">Checkout</button>
+            <Link to="/checkout" state={{from: TotalAfterDiscount()}}><button className="actionBtn cart">Checkout</button></Link>
         </div>
     )
 }

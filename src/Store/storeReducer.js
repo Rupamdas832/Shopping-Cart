@@ -99,6 +99,8 @@ const StoreReducer = (state,action) => {
         }
         case "ADD_ADDRESS":
             return {...state, address: state.address.concat(action.payload)}
+        case "ADD_PAYMENT_CARD":
+            return {...state, paymentCards: state.paymentCards.concat(action.payload)}
         default:
             return state
     }
