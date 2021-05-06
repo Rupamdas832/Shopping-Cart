@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import {v4} from "uuid"
 import { useStore } from '../../Store'
 import "./AddressModal.css"
 
@@ -15,6 +16,7 @@ export const AddressModal = ({isAddressModalOpen, setIsAddressModalOpen}) => {
 
     const addAddress = () => {
         const newAddress = {
+            _id: v4(),
             senderName: name,
             address: address,
             pincode: pincode,

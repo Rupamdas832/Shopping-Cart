@@ -16,6 +16,8 @@ export const Profile = () => {
     const {storeState} = useStore()
     const {address, paymentCards} = storeState
 
+    
+
     return (
         <div className="profileContainer">
             {isAddressModalOpen && <AddressModal setIsAddressModalOpen={setIsAddressModalOpen} isAddressModalOpen={isAddressModalOpen}/>}
@@ -43,9 +45,11 @@ export const Profile = () => {
                 <div className="cardDetails">
                 {paymentCards && paymentCards.map((item,idx) => {
                     const {name, cardType, cardNumber, month, year} = item
+                    const hashCardNumber = new Array(cardNumber.length - 3).join("*") + cardNumber.slice(-4)
+                    
                     return <div className="card debit" key={idx}>
                                 <div className="cardBody debit">
-                                    <p style={{fontWeight: "700"}}><span style={{marginRight: "5rem"}}>{cardType}</span>{cardNumber}</p>
+                                    <p style={{fontWeight: "700"}}><span style={{marginRight: "5rem"}}>{cardType}</span>{hashCardNumber}</p>
                                     <p>{name} <span style={{marginLeft: "5rem"}}>{month}/{year}</span></p>
                                 </div>
                                 <div className="cardFooter debit">

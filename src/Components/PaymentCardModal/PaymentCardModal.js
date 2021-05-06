@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import {v4} from "uuid"
 import { useStore } from '../../Store'
 import "./PaymentCardModal.css"
 
@@ -14,6 +15,7 @@ export const PaymentCardModal = ({isPaymentModalOpen, setIsPaymentModalOpen}) =>
 
     const addPaymentCard = () => {
         const newPaymentCard = {
+            _id: v4(),
             name: name,
             cardType: cardType,
             month: month,
@@ -33,7 +35,7 @@ export const PaymentCardModal = ({isPaymentModalOpen, setIsPaymentModalOpen}) =>
                 </div>
                 <div className="input">
                     <label>Card Number</label>
-                    <input type="number" placeholder="Enter Card Number" onChange={(e) => setCardNumber(e.target.value)}/>
+                    <input type="number" placeholder="Enter Card Number" maxLength={16} size={16} onChange={(e) => setCardNumber(e.target.value)}/>
                 </div>
                 <div className="input">
                     <label>Name</label>
@@ -41,8 +43,8 @@ export const PaymentCardModal = ({isPaymentModalOpen, setIsPaymentModalOpen}) =>
                 </div>
                 <div className="input date">
                     <label>Valid Upto</label>
-                    <input type="number" placeholder="Month" onChange={(e) => setMonth(e.target.value)} className="inputSmall"/>
-                    <input type="number" placeholder="Year" onChange={(e) => setYear(e.target.value)} className="inputSmall"/>
+                    <input type="number" placeholder="Month" maxLength={2}size={2}onChange={(e) => setMonth(e.target.value)} className="inputSmall"/>
+                    <input type="number" placeholder="Year" maxLength={2}size={2}onChange={(e) => setYear(e.target.value)} className="inputSmall"/>
                 </div>
                 <div className="isLoginBtns">  
                     <button className="btn outline" onClick={() => setIsPaymentModalOpen(!isPaymentModalOpen)}>Cancel</button>
