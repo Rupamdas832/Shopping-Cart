@@ -1,7 +1,7 @@
 import React from 'react'
 import {Routes, Route} from "react-router-dom"
 import WishList from '../WishList/WishList'
-import {Home, CartList, ProductDetail, ProductsList, Login, Signup, Profile, Checkout} from '../Pages'
+import {Home, CartList, ProductDetail, ProductsList, Login, Signup, Profile, Checkout, OrderList} from '../Pages'
 import {PrivateRoute} from "../Components"
 
 
@@ -17,6 +17,7 @@ export const HeroSection = () => {
                 <Route path="/signup" element={<Signup/>}/>
                 <PrivateRoute path="/profile" element={<Profile/>}/>
                 <PrivateRoute path="/checkout" element={<Checkout/>}/>
+                <PrivateRoute path="/order" element={<OrderList/>}/>
             </Routes>
     )       
 }

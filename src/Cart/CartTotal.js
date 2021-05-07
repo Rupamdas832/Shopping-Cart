@@ -34,7 +34,7 @@ export const CartTotal = () => {
                 <h5>Total Amount</h5>
                 <p>₹{TotalAfterDiscount()}</p>
             </div>
-            <Link to="/checkout" state={{from: TotalAfterDiscount()}}><button className="actionBtn cart">Checkout</button></Link>
+            <Link to="/checkout" state={{price: TotalAfterDiscount(), cartItems: cart}}><button className="actionBtn cart">Checkout</button></Link>
         </div>
     )
 }

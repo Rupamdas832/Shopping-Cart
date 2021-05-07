@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React from 'react'
 import { useStore, useUser } from '../Store';
+import {URL} from "../Api/apiURL"
 
 
 export const CartItem = ({cartItem}) => {
@@ -11,10 +12,11 @@ export const CartItem = ({cartItem}) => {
     const {userState} = useUser()
     const {user} = userState
 
+    
     const toggleWishlist = async (_id) => {
         storeDispatch({type: "IS_LOADING", payload: "wishlisting"})
             try {
-                const response = await axios.post(`https://Shopping-Cart-Server.rupamdas.repl.co/wishlist/${user.wishlistId}`, {
+                const response = await axios.post(`${URL}/wishlist/${user.wishlistId}`, {
                     "productId" : _id
                 })
                 if(response.status === 201){
@@ -33,7 +35,7 @@ export const CartItem = ({cartItem}) => {
         async function fetchData() {
             storeDispatch({type: "IS_LOADING", payload: "removing"})
             try {
-                const response = await axios.delete(`https://Shopping-Cart-Server.rupamdas.repl.co/cart/${user.cartId}/${_id}`)
+                const response = await axios.delete(`${URL}/cart/${user.cartId}/${_id}`)
                 if(response.status === 202){
                     storeDispatch({type: "REMOVE_FROM_CART", payload: _id})
                 } 

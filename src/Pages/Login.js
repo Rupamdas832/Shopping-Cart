@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { Toast } from '../Components'
 import { useAuth, useStore, useUser } from '../Store'
 import "./Login.css"
+import {URL} from "../Api/apiURL"
 
 export const Login = () => {
 
@@ -23,7 +24,7 @@ export const Login = () => {
 
     const fetchCart = async (cartId) => {
         try{
-          const response = await axios.get(`https://Shopping-cart-server-github.rupamdas.repl.co/cart/${cartId}`)
+          const response = await axios.get(`${URL}/cart/${cartId}`)
           if(response.status === 200){
             storeDispatch({type: "LOAD_CART_ITEMS", payload: response.data.products})
           }
@@ -34,7 +35,7 @@ export const Login = () => {
     
       const fetchWishlist = async (wishlistId) => {
         try{
-          const response = await axios.get(`https://Shopping-cart-server-github.rupamdas.repl.co/wishlist/${wishlistId}`)
+          const response = await axios.get(`${URL}/wishlist/${wishlistId}`)
           if(response.status === 200){
             storeDispatch({type: "LOAD_WISHLIST_ITEMS", payload: response.data.products})
           }
@@ -46,7 +47,7 @@ export const Login = () => {
     const loginWithCredentials = async () => {
         storeDispatch({type: "IS_LOADING", payload: "loggingIn"})
     try {
-        const response = await axios.post("https://Shopping-cart-server-github.rupamdas.repl.co/login",{
+        const response = await axios.post(`${URL}/login`,{
                 "email": email,
                 "password": password
         })

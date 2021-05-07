@@ -5,6 +5,7 @@ import {FaShoppingBag, FaHeart} from "react-icons/fa"
 import { Link, NavLink } from 'react-router-dom'
 import { useAuth, useStore, useUser } from '../Store'
 import axios from 'axios'
+import {URL} from "../Api/apiURL"
 
 export const Header = () => {
 
@@ -24,7 +25,7 @@ export const Header = () => {
     const fetchProducts= async() => {
         storeDispatch({type: "IS_LOADING", payload: "loading"})
         try {
-            const response = await axios.get("https://Shopping-Cart-Server.rupamdas.repl.co/products")
+            const response = await axios.get(`${URL}/products`)
             const data = response.data.products
             if(response.status === 200){
                 storeDispatch({type: "IS_LOADING"})
@@ -42,6 +43,7 @@ export const Header = () => {
         localStorage.removeItem("CartLoginUser")
         authDispatch({type: "USER_LOGOUT"})
         fetchProducts()
+
     }
 
     return (
@@ -69,6 +71,7 @@ export const Header = () => {
 	                                    <div className="dropdownContent">
                                             <ul>
                                                 <Link to="/profile"><li>Profile</li></Link>
+                                                <Link to="/order"><li>Orders</li></Link>
                                                 <li onClick={logoutUser}>Logout</li>
                                             </ul>
                                         </div>

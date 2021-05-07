@@ -12,3 +12,16 @@
     justify-content: space-between;
     align-items: center;
 }
+.btn.placeOrder{
+    background-color: var(--blue);
+}
+.eachSteps{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.onStep{
+    color: var(--orange);
+    font-weight: 900;
+}

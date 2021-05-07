@@ -101,6 +101,8 @@ const StoreReducer = (state,action) => {
             return {...state, address: state.address.concat(action.payload)}
         case "ADD_PAYMENT_CARD":
             return {...state, paymentCards: state.paymentCards.concat(action.payload)}
+        case "ADD_TO_ORDER":
+            return {...state, orders: state.orders.concat(action.payload)}
         default:
             return state
     }

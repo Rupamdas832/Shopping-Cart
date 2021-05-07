@@ -5,6 +5,7 @@ export const Step1 = () => {
 
     const {storeState} = useStore()
     const {address} = storeState
+    console.log(address)
 
     const {checkoutState, checkoutDispatch} = useCheckout()
     const {addressSelected} = checkoutState
@@ -42,6 +43,7 @@ export const Step1 = () => {
 export const Step2 = () => {
     const {storeState} = useStore()
     const {paymentCards} = storeState
+    console.log(paymentCards)
 
     const {checkoutState, checkoutDispatch} = useCheckout()
     const {cardSelected} = checkoutState

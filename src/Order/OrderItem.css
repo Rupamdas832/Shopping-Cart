@@ -1,0 +1,12 @@
+.card.orderItem{
+    width: 60vw;
+}
+.orderItemName{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+}
+.cardBody.orderItem{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
