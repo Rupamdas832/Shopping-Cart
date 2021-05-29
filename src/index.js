@@ -3,10 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { StoreProvider } from './Store/storeContext';
+import { AuthProvider, CheckoutProvider, StoreProvider, UserProvider } from './Store';
 import { ProductProvider } from './Product/productContext';
-import {AuthProvider} from "./Store/authContext"
-import {UserProvider} from "./Store/userContext"
 
 
 ReactDOM.render(
@@ -15,7 +13,9 @@ ReactDOM.render(
       <StoreProvider>
       <UserProvider>
         <ProductProvider>
-          <App />
+          <CheckoutProvider>
+            <App />
+          </CheckoutProvider> 
         </ProductProvider>
       </UserProvider>   
       </StoreProvider>
@@ -24,7 +24,4 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();

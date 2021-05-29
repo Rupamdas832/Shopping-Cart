@@ -8,7 +8,6 @@ export const LoginModal = () => {
     const {authDispatch} = useAuth()
     return (
         <div className="modal">
-           
             <div className="modalBox">
                 <h3>To checkout you have to be <span style={{color: "green"}}>Logged In</span></h3>
                 <p>Do you want to login?</p>

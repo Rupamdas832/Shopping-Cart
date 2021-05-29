@@ -7,6 +7,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import {LoginModal, Toast} from '../Components';
 import { useAuth, useStore, useUser } from '../Store';
+import {URL} from "../Api/apiURL"
 
 export const ProductDetail = () => {
 
@@ -36,7 +37,7 @@ export const ProductDetail = () => {
         if(isWishlist){
             storeDispatch({type: "IS_LOADING", payload: "removing from wishlist"})
             try {
-                const response = await axios.delete(`https://Shopping-Cart-Server.rupamdas.repl.co/wishlist/${user.wishlistId}/${_id}`)
+                const response = await axios.delete(`${URL}/wishlist/${user.wishlistId}/${_id}`)
                 if(response.status === 202){
                     storeDispatch({type: "REMOVE_FROM_WISHLIST", payload: _id})
                 } 
@@ -49,7 +50,7 @@ export const ProductDetail = () => {
         } else {
             storeDispatch({type: "IS_LOADING", payload: "wishlisting"})
             try {
-                const response = await axios.post(`https://Shopping-Cart-Server.rupamdas.repl.co/wishlist/${user.wishlistId}`, {
+                const response = await axios.post(`${URL}/wishlist/${user.wishlistId}`, {
                     "productId" : _id
                 })
                 if(response.status === 201){
@@ -68,7 +69,7 @@ export const ProductDetail = () => {
         async function fetchData() {
             storeDispatch({type: "IS_LOADING", payload: "adding"})
             try {
-                const response = await axios.post(`https://Shopping-Cart-Server.rupamdas.repl.co/cart/${user.cartId}`, {
+                const response = await axios.post(`${URL}/cart/${user.cartId}`, {
                     "productId" : _id
                 })
                 if(response.status === 201){

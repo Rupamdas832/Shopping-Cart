@@ -4,6 +4,7 @@ import "./Signup.css"
 import {useAuth, useStore, useUser} from "../Store"
 import {Toast} from "../Components"
 import axios from 'axios'
+import {URL} from "../Api/apiURL"
 
 export const Signup = () => {
 
@@ -21,9 +22,20 @@ export const Signup = () => {
     const {storeState, storeDispatch} = useStore()
     const {isLoading} = storeState
 
+    const fetchWishlist = async (wishlistId) => {
+        try{
+          const response = await axios.get(`${URL}/wishlist/${wishlistId}`)
+          if(response.status === 200){
+            storeDispatch({type: "LOAD_WISHLIST_ITEMS", payload: response.data.products})
+          }
+        } catch(error){
+          console.log(error.response.data)
+        }
+      }
+
     const fetchCart = async (cartId) => {
         try{
-          const response = await axios.get(`https://Shopping-Cart-Server.rupamdas.repl.co/cart/${cartId}`)
+          const response = await axios.get(`${URL}/cart/${cartId}`)
           if(response.status === 200){
             storeDispatch({type: "LOAD_CART_ITEMS", payload: response.data.products})
           }
@@ -35,7 +47,7 @@ export const Signup = () => {
     const signUpUser = async () => {
         storeDispatch({type: "IS_LOADING", payload: "signup"})
         try {
-            const response = await axios.post("https://Shopping-Cart-Server.rupamdas.repl.co/signup" ,{
+            const response = await axios.post(`${URL}/signup` ,{
                     "name": name,
                     "email": email,
                     "password": password
@@ -50,6 +62,7 @@ export const Signup = () => {
                     userId: user._id
                 }))
                 fetchCart(user.cartId)
+                fetchWishlist(user.wishlistId)
                 navigate(state?.from ? state.from : "/")
             }
         } catch (error) {

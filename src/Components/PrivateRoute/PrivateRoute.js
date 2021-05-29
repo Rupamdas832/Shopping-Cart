@@ -1,16 +1,15 @@
 import React from 'react'
 
 import { Route , Navigate} from "react-router-dom"
-import { useAuth } from '../../Store'
 
 export const PrivateRoute = ({path, ...props}) => {
 
-    const {authState} = useAuth()
-    const {isUserLogin} = authState
+    const loginStatus = JSON.parse(localStorage.getItem("CartLoginUser"))
     
-    return (isUserLogin ? (
+    return (loginStatus?.isUserLogin ? (
         <Route {...props}/>
     ) : (
         <Navigate replace state={{from: path}} to="/login"/>
     ))
+    
 }

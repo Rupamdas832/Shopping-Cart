@@ -3,6 +3,17 @@
     top: 0;
     z-index: 10;
 }
+.navActionItems{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.btnFloat{
+    background-color: white;
+    color: black;
+    margin-left: 0.5rem;
+}
 @media only screen and (max-width: 450px){
     .navbar{
         height: 4vh;
