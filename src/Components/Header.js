@@ -3,7 +3,7 @@ import "./Header.css";
 import { FaShoppingBag, FaHeart } from "react-icons/fa";
 
 import { Link, NavLink } from "react-router-dom";
-import { useAuth, useStore, useUser } from "../Store";
+import { useStore, useUser } from "../Store";
 import axios from "axios";
 import { URL } from "../Api/apiURL";
 
@@ -87,16 +87,16 @@ export const Header = () => {
                 <span className="badge">{getAllCartItems(cart)}</span>
               )}
             </div>
-            <div className="dropdown">
+            <div className="dropdown header">
               <button className="btnFloat">
                 {user.name.charAt(0).toUpperCase()}
               </button>
-              <div className="dropdownContent">
+              <div className="dropdownContent header">
                 <ul>
-                  <Link to="/profile">
+                  <Link to="/profile" className="routerLink">
                     <li>Profile</li>
                   </Link>
-                  <Link to="/order">
+                  <Link to="/order" className="routerLink">
                     <li>Orders</li>
                   </Link>
                   <li onClick={logoutUser}>Logout</li>

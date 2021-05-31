@@ -3,7 +3,7 @@ import { FcLikePlaceholder, FcLike } from "react-icons/fc";
 import { FaStar } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { useAuth, useStore, useUser } from "../Store";
+import { useStore, useUser } from "../Store";
 import { URL } from "../Api/apiURL";
 
 export const ProductItem = ({ product }) => {
@@ -22,20 +22,33 @@ export const ProductItem = ({ product }) => {
   } = product;
   const { storeDispatch } = useStore();
 
-  const { userState } = useUser();
-  const { user, isUserLogin } = userState;
+  const { userState, userDispatch } = useUser();
+  const { isUserLogin, token } = userState;
 
-  const loginToggler = () => {};
+  const loginToggler = () => {
+    if (isUserLogin) {
+      return userDispatch({ type: "LOGIN_MODAL", payload: false });
+    } else return userDispatch({ type: "LOGIN_MODAL", payload: true });
+  };
 
   const toggleWishlist = async () => {
     if (isWishlist) {
       storeDispatch({ type: "IS_LOADING", payload: "removing from wishlist" });
       try {
-        const response = await axios.delete(
-          `${URL}/wishlist/${user.wishlistId}/${_id}`
-        );
-        if (response.status === 202) {
+        const {
+          data: { wishlist },
+          status,
+        } = await axios.delete(`${URL}/wishlist`, {
+          headers: { Authorization: token },
+          data: {
+            _id: _id,
+          },
+        });
+        if (status === 200) {
           storeDispatch({ type: "REMOVE_FROM_WISHLIST", payload: _id });
+          const loginStatus = JSON.parse(localStorage.getItem("CartLoginUser"));
+          loginStatus.wishlist = wishlist.products;
+          localStorage.setItem("CartLoginUser", JSON.stringify(loginStatus));
         }
       } catch (error) {
         console.log(error.response.data);
@@ -46,13 +59,19 @@ export const ProductItem = ({ product }) => {
       storeDispatch({ type: "IS_LOADING", payload: "wishlisting" });
       try {
         const response = await axios.post(
-          `${URL}/wishlist/${user.wishlistId}`,
+          `${URL}/wishlist/`,
           {
-            productId: _id,
+            _id: _id,
+          },
+          {
+            headers: { Authorization: token },
           }
         );
         if (response.status === 201) {
           storeDispatch({ type: "ADD_TO_WISHLIST", payload: _id });
+          const loginStatus = JSON.parse(localStorage.getItem("CartLoginUser"));
+          loginStatus.wishlist.push({ _id });
+          localStorage.setItem("CartLoginUser", JSON.stringify(loginStatus));
         }
       } catch (error) {
         console.log(error);
@@ -61,15 +80,27 @@ export const ProductItem = ({ product }) => {
       }
     }
   };
-  const addToCart = async (product) => {
-    product.inCart = true;
+  const addToCart = async () => {
     storeDispatch({ type: "IS_LOADING", payload: "adding" });
     try {
-      const response = await axios.post(`${URL}/cart/${user.cartId}`, {
-        productId: _id,
-      });
+      const response = await axios.post(
+        `${URL}/cart`,
+        {
+          _id: _id,
+        },
+        {
+          headers: { Authorization: token },
+        }
+      );
       if (response.status === 201) {
-        storeDispatch({ type: "ADD_TO_CART", payload: product });
+        const newCartItem = {
+          _id: _id,
+          quantity: 1,
+        };
+        storeDispatch({ type: "ADD_TO_CART", payload: newCartItem });
+        const loginStatus = JSON.parse(localStorage.getItem("CartLoginUser"));
+        loginStatus.cart.push(newCartItem);
+        localStorage.setItem("CartLoginUser", JSON.stringify(loginStatus));
       }
     } catch (error) {
       console.log(error);
@@ -130,7 +161,7 @@ export const ProductItem = ({ product }) => {
                 <button className="actionBtn">Go to Cart</button>
               </Link>
             ) : (
-              <button className="btn" onClick={() => addToCart(product)}>
+              <button className="btn" onClick={() => addToCart()}>
                 Add to Cart
               </button>
             )}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useProduct, ProductItem, FilterSection } from "../Product";
 import {
   getSortedData,
@@ -7,7 +7,7 @@ import {
 } from "../Product/ProductFilter";
 import "./ProductList.css";
 import { LoginModal, Toast } from "../Components";
-import { useAuth, useStore } from "../Store";
+import { useStore, useUser } from "../Store";
 
 export const ProductsList = () => {
   const { storeState } = useStore();
@@ -15,8 +15,8 @@ export const ProductsList = () => {
 
   const { productState } = useProduct();
 
-  const { authState } = useAuth();
-  const { isLoginModalOpen } = authState;
+  const { userState } = useUser();
+  const { isLoginModalOpen } = userState;
 
   const sortedData = getSortedData(products, productState.sortBy);
   const categoryData = getCategory(sortedData, productState.category);
@@ -25,6 +25,10 @@ export const ProductsList = () => {
     productState.showPrimeChoice,
     productState.showInventoryAll
   );
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="productListContainer">

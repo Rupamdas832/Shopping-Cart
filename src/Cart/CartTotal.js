@@ -9,7 +9,7 @@ export const CartTotal = () => {
   const getTotal = () => {
     let sum = 0;
     cart.map((item) => {
-      products.map((product) => {
+      return products.map((product) => {
         if (product._id === item._id) {
           return (sum = sum + parseInt(product.price) * item.quantity);
         }

@@ -8,16 +8,25 @@ export const CartItem = ({ cartItem, quantity }) => {
   const { storeDispatch } = useStore();
 
   const { userState } = useUser();
-  const { user } = userState;
+  const { token } = userState;
 
   const toggleWishlist = async (_id) => {
     storeDispatch({ type: "IS_LOADING", payload: "wishlisting" });
     try {
-      const response = await axios.post(`${URL}/wishlist/${user.wishlistId}`, {
-        productId: _id,
-      });
+      const response = await axios.post(
+        `${URL}/wishlist/`,
+        {
+          _id: _id,
+        },
+        {
+          headers: { Authorization: token },
+        }
+      );
       if (response.status === 201) {
         storeDispatch({ type: "ADD_TO_WISHLIST", payload: _id });
+        const loginStatus = JSON.parse(localStorage.getItem("CartLoginUser"));
+        loginStatus.wishlist.push({ _id });
+        localStorage.setItem("CartLoginUser", JSON.stringify(loginStatus));
       }
     } catch (error) {
       console.log(error);
@@ -27,23 +36,82 @@ export const CartItem = ({ cartItem, quantity }) => {
     removeItem(_id);
   };
 
-  const removeItem = (_id) => {
-    async function fetchData() {
+  const removeItem = async (_id) => {
+    storeDispatch({ type: "IS_LOADING", payload: "removing" });
+    try {
+      const {
+        data: { cart },
+        status,
+      } = await axios.delete(`${URL}/cart/`, {
+        headers: { Authorization: token },
+        data: {
+          _id: _id,
+        },
+      });
+      if (status === 200) {
+        storeDispatch({ type: "REMOVE_FROM_CART", payload: _id });
+        const loginStatus = JSON.parse(localStorage.getItem("CartLoginUser"));
+        loginStatus.cart = cart.products;
+        localStorage.setItem("CartLoginUser", JSON.stringify(loginStatus));
+      }
+    } catch (error) {
+      console.log(error.response.data);
+    } finally {
+      storeDispatch({ type: "IS_LOADING", payload: "success" });
+    }
+  };
+
+  const decreaseCount = async () => {
+    if (quantity > 1) {
       storeDispatch({ type: "IS_LOADING", payload: "removing" });
       try {
-        const response = await axios.delete(
-          `${URL}/cart/${user.cartId}/${_id}`
-        );
-        if (response.status === 202) {
-          storeDispatch({ type: "REMOVE_FROM_CART", payload: _id });
+        const {
+          data: { cart },
+          status,
+        } = await axios.delete(`${URL}/cart/${_id}`, {
+          headers: { Authorization: token },
+        });
+        if (status === 200) {
+          console.log("HIIII", quantity);
+          storeDispatch({ type: "DECREASE_COUNT", payload: _id });
+          const loginStatus = JSON.parse(localStorage.getItem("CartLoginUser"));
+          loginStatus.cart = cart.products;
+          localStorage.setItem("CartLoginUser", JSON.stringify(loginStatus));
         }
       } catch (error) {
         console.log(error.response.data);
       } finally {
         storeDispatch({ type: "IS_LOADING", payload: "success" });
       }
+    } else return null;
+  };
+
+  const increaseCount = async () => {
+    storeDispatch({ type: "IS_LOADING", payload: "adding" });
+    try {
+      const {
+        data: { cart },
+        status,
+      } = await axios.post(
+        `${URL}/cart`,
+        {
+          _id: _id,
+        },
+        {
+          headers: { Authorization: token },
+        }
+      );
+      if (status === 201) {
+        storeDispatch({ type: "INCREASE_COUNT", payload: _id });
+        const loginStatus = JSON.parse(localStorage.getItem("CartLoginUser"));
+        loginStatus.cart = cart.products;
+        localStorage.setItem("CartLoginUser", JSON.stringify(loginStatus));
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      storeDispatch({ type: "IS_LOADING", payload: "success" });
     }
-    fetchData();
   };
 
   return (
@@ -56,21 +124,11 @@ export const CartItem = ({ cartItem, quantity }) => {
         <div className="priceFlat small">
           <h4>₹{price}</h4>
           <div>
-            <button
-              className="btn outline"
-              onClick={() =>
-                storeDispatch({ type: "DECREASE_COUNT", payload: _id })
-              }
-            >
+            <button className="btn outline" onClick={() => decreaseCount()}>
               -
             </button>
             {quantity}
-            <button
-              className="btn outline"
-              onClick={() =>
-                storeDispatch({ type: "INCREASE_COUNT", payload: _id })
-              }
-            >
+            <button className="btn outline" onClick={() => increaseCount()}>
               +
             </button>
           </div>

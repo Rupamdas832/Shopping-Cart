@@ -42,9 +42,12 @@ export const Login = () => {
             wishlist: wishlist.products,
           })
         );
+        navigate(state?.from ? state.from : "/");
       }
     } catch (error) {
       setError(error.response.data.message);
+    } finally {
+      storeDispatch({ type: "IS_LOADING", payload: "success" });
     }
   };
 
@@ -77,13 +80,10 @@ export const Login = () => {
       if (status === 200) {
         userDispatch({ type: "LOAD_USER", payload: { user, token } });
         fetchCart(user, token);
-        navigate(state?.from ? state.from : "/");
       }
     } catch (error) {
       console.log(error);
       setError(error.response.data.message);
-    } finally {
-      storeDispatch({ type: "IS_LOADING", payload: "success" });
     }
   };
 

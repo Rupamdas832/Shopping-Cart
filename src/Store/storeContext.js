@@ -17,6 +17,7 @@ if (loginStatus?.isUserLogin) {
     cart: loginStatus.cart,
     wishlist: loginStatus.wishlist,
     isLoading: null,
+    orders: [],
   };
 } else {
   initialState = {
@@ -24,6 +25,7 @@ if (loginStatus?.isUserLogin) {
     cart: [],
     wishlist: [],
     isLoading: null,
+    orders: [],
   };
 }
 

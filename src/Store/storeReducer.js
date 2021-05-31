@@ -53,7 +53,7 @@ const StoreReducer = (state, action) => {
     case "REMOVE_FROM_CART":
       return {
         ...state,
-        cart: state.cart.filter((cart) => cart._id !== action.payload),
+        cart: state.cart.filter((item) => item._id !== action.payload),
         products: state.products.map((product) => {
           if (product._id === action.payload) {
             product.inCart = false;
@@ -74,26 +74,17 @@ const StoreReducer = (state, action) => {
     case "DECREASE_COUNT":
       return {
         ...state,
-        cart: state.cart.map((cart) => {
-          if (cart._id === action.payload) {
-            return {
-              ...cart,
-              quantity: cart.quantity <= 1 ? 1 : cart.quantity - 1,
-            };
+        cart: state.cart.map((cartItem) => {
+          if (cartItem._id === action.payload) {
+            return { ...cartItem, quantity: cartItem.quantity - 1 };
           }
-          return cart;
+          return cartItem;
         }),
       };
     case "ADD_TO_WISHLIST":
       return {
         ...state,
         products: state.products.map((product) => {
-          if (product._id === action.payload) {
-            return { ...product, isWishlist: true };
-          }
-          return product;
-        }),
-        cart: state.cart.map((product) => {
           if (product._id === action.payload) {
             return { ...product, isWishlist: true };
           }

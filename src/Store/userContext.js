@@ -18,12 +18,14 @@ if (loginStatus?.isUserLogin) {
     },
     isUserLogin: true,
     token: loginStatus.token,
+    isLoginModalOpen: false,
   };
 } else {
   initialState = {
     user: null,
     isUserLogin: false,
     token: "",
+    isLoginModalOpen: false,
   };
 }
 
