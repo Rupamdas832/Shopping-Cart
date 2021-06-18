@@ -18,6 +18,8 @@ if (loginStatus?.isUserLogin) {
     wishlist: loginStatus.wishlist,
     isLoading: null,
     orders: [],
+    address: loginStatus.address,
+    paymentCards: loginStatus.paymentCards,
   };
 } else {
   initialState = {
@@ -26,6 +28,8 @@ if (loginStatus?.isUserLogin) {
     wishlist: [],
     isLoading: null,
     orders: [],
+    address: [],
+    paymentCards: [],
   };
 }
 

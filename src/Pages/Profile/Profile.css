@@ -1,67 +1,70 @@
-.profileContainer{
-    min-height: 85vh;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    margin-top: 4rem;
-    justify-content: center;
+.profileContainer {
+  min-height: 85vh;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 4rem;
+  justify-content: center;
 }
-.profileLeftSection{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.profileLeftSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.profileRightSection{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.profileRightSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.addressSectionHeader{
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    justify-content: space-around;
-    align-items: center;
+.addressSectionHeader {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
 }
-.input{
-    width: 40vw;
-    display: grid;
-    grid-template-columns: 1fr 3fr;
-    box-shadow: 0 3px 5px rgba(117, 117, 117, 0);  
+.input {
+  width: 40vw;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  box-shadow: 0 3px 5px rgba(117, 117, 117, 0);
 }
-.input input{
-    background: none;
-    background-color: white;
-    border-right: 5px solid var(--orange);
+.input input {
+  background: none;
+  background-color: white;
+  border-right: 5px solid var(--orange);
 }
-.input label{
-    color: black;
+.input label {
+  color: black;
 }
 
-.card.address{
-    width: 25rem;
+.card.address {
+  width: 25rem;
 }
-.cardBody.address p{
-    font-size: 0.9rem;
+.cardBody.address p {
+  font-size: 0.9rem;
 }
-.card.debit{
+.card.debit {
+  width: 20rem;
+}
+.cardBody.debit p {
+  font-size: 0.9rem;
+}
+
+@media only screen and (max-width: 450px) {
+  .profileDetail {
+    margin-left: -2rem;
+  }
+  .input {
+    width: 80vw;
+  }
+  .btn.outline.address {
+    font-size: 0.8rem;
+  }
+  .btn.unstyled.address {
+    font-size: 0.8rem;
+  }
+  .card.address {
     width: 20rem;
-}
-.cardBody.debit p{
-    font-size: 0.9rem;
-}
-
-@media only screen and (max-width: 450px){
-    .profileDetail{
-        margin-left: -2rem;
-    }
-    .input{
-        width: 80vw;
-    }
-    .btn.outline.address{
-        font-size: 0.8rem;
-    }
-    .btn.unstyled.address{
-        font-size: 0.8rem;
-    }
+  }
 }

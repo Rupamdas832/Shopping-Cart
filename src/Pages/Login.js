@@ -40,6 +40,8 @@ export const Login = () => {
             userEmail: user.email,
             cart: cart.products,
             wishlist: wishlist.products,
+            paymentCards: user.paymentCards,
+            address: user.address,
           })
         );
         navigate(state?.from ? state.from : "/");

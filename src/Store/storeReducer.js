@@ -108,14 +108,19 @@ const StoreReducer = (state, action) => {
         }),
       };
     case "ADD_ADDRESS":
-      return { ...state, address: state.address.concat(action.payload) };
+      return { ...state, address: action.payload };
     case "ADD_PAYMENT_CARD":
+      return { ...state, paymentCards: action.payload };
+    case "REMOVE_ADDRESS":
+      return { ...state, address: action.payload };
+    case "REMOVE_PAYMENT_CARD":
+      return { ...state, paymentCards: action.payload };
+    case "ADD_TO_ORDER":
       return {
         ...state,
-        paymentCards: state.paymentCards.concat(action.payload),
+        orders: state.orders.concat(action.payload),
+        cart: [],
       };
-    case "ADD_TO_ORDER":
-      return { ...state, orders: state.orders.concat(action.payload) };
     default:
       return state;
   }

@@ -1,12 +1,17 @@
-.card.orderItem{
-    width: 60vw;
+.card.orderItem {
+  width: 60vw;
 }
-.orderItemName{
-    width: 100%;
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
+.orderItemName {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
 }
-.cardBody.orderItem{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+.cardBody.orderItem {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+@media only screen and (max-width: 450px) {
+  .card.orderItem {
+    width: 20rem;
+  }
 }

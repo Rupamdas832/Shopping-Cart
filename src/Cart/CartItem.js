@@ -72,7 +72,6 @@ export const CartItem = ({ cartItem, quantity }) => {
           headers: { Authorization: token },
         });
         if (status === 200) {
-          console.log("HIIII", quantity);
           storeDispatch({ type: "DECREASE_COUNT", payload: _id });
           const loginStatus = JSON.parse(localStorage.getItem("CartLoginUser"));
           loginStatus.cart = cart.products;
