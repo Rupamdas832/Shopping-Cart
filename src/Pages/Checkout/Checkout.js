@@ -6,6 +6,9 @@ import { useCheckout, useStore, useUser } from "../../Store";
 import { CartList } from "../CartList";
 import "./Checkout.css";
 import { URL } from "../../Api/apiURL";
+import ReactDOM from "react-dom";
+
+const PayPalButton = window.paypal.Buttons.driver("react", { React, ReactDOM });
 
 export const Checkout = () => {
   const location = useLocation();
@@ -60,6 +63,27 @@ export const Checkout = () => {
     }
   };
 
+  const createOrder = (data, actions) => {
+    return actions.order.create({
+      purchase_units: [
+        {
+          amount: {
+            currency_code: "INR",
+            value: price,
+          },
+        },
+      ],
+    });
+  };
+
+  const onApprove = (data, actions) => {
+    return actions.order.capture();
+  };
+
+  const onError = (error) => {
+    console.log(error);
+  };
+
   return !price ? (
     <PrivateRoute path="/cart" element={<CartList />} />
   ) : (
@@ -67,9 +91,16 @@ export const Checkout = () => {
       {isLoading === "checking out" ? <Toast message="Placing Order" /> : null}
       <h2>Total Price : ₹{price}</h2>
       {cardSelected && addressSelected && (
-        <button className="btn placeOrder" onClick={placeOrderBtn}>
-          Place Order
-        </button>
+        <>
+          <PayPalButton
+            createOrder={(data, actions) => createOrder(data, actions)}
+            onApprove={(data, actions) => onApprove(data, actions)}
+            onError={(error) => onError(error)}
+          />
+          <button className="btn placeOrder" onClick={() => placeOrderBtn()}>
+            Fake checkout
+          </button>
+        </>
       )}
       <div className="stepsSection">
         <button onClick={() => changeStep("Decrease")} className="btn outline">
