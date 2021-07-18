@@ -80,7 +80,7 @@ export const Profile = () => {
       )}
       <div className="profileLeftSection">
         <p>
-          Hii{" "}
+          Hey{" "}
           <span style={{ color: "var(--blue)" }}>
             {user.name.toUpperCase()}
           </span>
@@ -135,7 +135,7 @@ export const Profile = () => {
                     >
                       Remove
                     </button>
-                    <button className="btn unstyled debit">Edit</button>
+                    {/*<button className="btn unstyled debit">Edit</button>*/}
                   </div>
                 </div>
               );
@@ -172,7 +172,7 @@ export const Profile = () => {
                   >
                     Remove
                   </button>
-                  <button className="btn unstyled address">Edit</button>
+                  {/*<button className="btn unstyled address">Edit</button>*/}
                 </div>
               </div>
             );

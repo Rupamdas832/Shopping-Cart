@@ -6,12 +6,14 @@ import "./AddressModal.css";
 import { URL } from "../../Api/apiURL";
 
 export const AddressModal = ({ isAddressModalOpen, setIsAddressModalOpen }) => {
-  const [name, setName] = useState("");
-  const [newAddress, setNewAddress] = useState("");
-  const [pincode, setPincode] = useState("");
-  const [mobile, setMobile] = useState("");
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("");
+  const [name, setName] = useState("Rupam Das");
+  const [newAddress, setNewAddress] = useState(
+    "H.No - 38, R.L.Y Traffic Colony"
+  );
+  const [pincode, setPincode] = useState("831007");
+  const [mobile, setMobile] = useState("1234560789");
+  const [city, setCity] = useState("Jamshedpur");
+  const [state, setState] = useState("Jharkhand");
 
   const { storeDispatch } = useStore();
   const { userState } = useUser();
@@ -58,6 +60,7 @@ export const AddressModal = ({ isAddressModalOpen, setIsAddressModalOpen }) => {
             type="text"
             placeholder="Enter Name"
             onChange={(e) => setName(e.target.value)}
+            value={name}
           />
         </div>
         <div className="input">
@@ -66,6 +69,7 @@ export const AddressModal = ({ isAddressModalOpen, setIsAddressModalOpen }) => {
             type="text"
             placeholder="Enter Address(House No, Building, Street"
             onChange={(e) => setNewAddress(e.target.value)}
+            value={newAddress}
           />
         </div>
         <div className="input">
@@ -74,6 +78,7 @@ export const AddressModal = ({ isAddressModalOpen, setIsAddressModalOpen }) => {
             type="number"
             placeholder="Enter Pincode"
             onChange={(e) => setPincode(e.target.value)}
+            value={pincode}
           />
         </div>
         <div className="input">
@@ -82,6 +87,7 @@ export const AddressModal = ({ isAddressModalOpen, setIsAddressModalOpen }) => {
             type="number"
             placeholder="Enter Mobile Number"
             onChange={(e) => setMobile(e.target.value)}
+            value={mobile}
           />
         </div>
         <div className="input">
@@ -90,6 +96,7 @@ export const AddressModal = ({ isAddressModalOpen, setIsAddressModalOpen }) => {
             type="text"
             placeholder="Enter City"
             onChange={(e) => setCity(e.target.value)}
+            value={city}
           />
         </div>
         <div className="input">
@@ -98,6 +105,7 @@ export const AddressModal = ({ isAddressModalOpen, setIsAddressModalOpen }) => {
             type="text"
             placeholder="Enter State"
             onChange={(e) => setState(e.target.value)}
+            value={state}
           />
         </div>
         <div className="isLoginBtns">

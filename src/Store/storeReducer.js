@@ -39,6 +39,12 @@ const StoreReducer = (state, action) => {
           return product;
         }),
       };
+    case "LOAD_USER_DATA":
+      return {
+        ...state,
+        address: action.payload.address,
+        paymentCards: action.payload.paymentCards,
+      };
     case "ADD_TO_CART":
       return {
         ...state,
@@ -119,6 +125,10 @@ const StoreReducer = (state, action) => {
       return {
         ...state,
         orders: state.orders.concat(action.payload),
+        products: state.products.map((product) => ({
+          ...product,
+          inCart: false,
+        })),
         cart: [],
       };
     default:

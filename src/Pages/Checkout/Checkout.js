@@ -54,6 +54,10 @@ export const Checkout = () => {
       if (status === 200) {
         storeDispatch({ type: "ADD_TO_ORDER", payload: newOrder });
         checkoutDispatch({ type: "DONE_CHECKOUT" });
+        const storage = JSON.parse(localStorage.getItem("CartLoginUser"));
+        storage.cart = [];
+        storage.orders = storage.orders.concat(newOrder);
+        localStorage.setItem("CartLoginUser", JSON.stringify(storage));
         navigate("/order");
       }
     } catch (error) {
@@ -89,6 +93,9 @@ export const Checkout = () => {
   ) : (
     <div className="checkoutSection">
       {isLoading === "checking out" ? <Toast message="Placing Order" /> : null}
+      <Link to="/cart" className="backToCart">
+        <button className="btn outline">Back to Cart</button>
+      </Link>
       <h2>Total Price : ₹{price}</h2>
       {cardSelected && addressSelected && (
         <>

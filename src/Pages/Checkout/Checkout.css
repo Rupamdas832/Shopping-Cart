@@ -1,27 +1,33 @@
-.checkoutSection{
-    min-height: 90vh;
-    padding-top: 3rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.checkoutSection {
+  min-height: 90vh;
+  padding-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
 }
-.stepsSection{
-    display: flex;
-    width: 50%;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+.stepsSection {
+  display: flex;
+  width: 50%;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
-.btn.placeOrder{
-    background-color: var(--blue);
+.btn.placeOrder {
+  background-color: var(--blue);
 }
-.eachSteps{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    align-items: center;
+.backToCart {
+  position: absolute;
+  top: 5rem;
+  left: 3rem;
 }
-.onStep{
-    color: var(--orange);
-    font-weight: 900;
+.eachSteps {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.onStep {
+  color: var(--orange);
+  font-weight: 900;
 }

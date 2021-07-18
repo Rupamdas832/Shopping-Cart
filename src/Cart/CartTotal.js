@@ -31,11 +31,11 @@ export const CartTotal = () => {
       </div>
       <div className="price">
         <p>Discount</p>
-        <p style={{ color: "greenyellow" }}>-₹40</p>
+        <p style={{ color: "green" }}>-₹40</p>
       </div>
       <div className="price">
         <p>Delivery Charges</p>
-        <p style={{ color: "greenyellow" }}>FREE</p>
+        <p style={{ color: "green" }}>FREE</p>
       </div>
       <div className="price total">
         <h5>Total Amount</h5>

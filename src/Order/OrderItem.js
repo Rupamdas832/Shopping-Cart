@@ -46,10 +46,10 @@ export const OrderItem = ({ totalPrice, shippedAddress, cartItems }) => {
           <p>{mobile}</p>
         </div>
       </div>
-      <div className="cardFooter">
+      {/*<div className="cardFooter">
         <button className="btn outline">Delete</button>
         <button className="actionBtn">Details...</button>
-      </div>
+          </div>*/}
     </div>
   );
 };

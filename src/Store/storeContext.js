@@ -17,7 +17,7 @@ if (loginStatus?.isUserLogin) {
     cart: loginStatus.cart,
     wishlist: loginStatus.wishlist,
     isLoading: null,
-    orders: [],
+    orders: loginStatus.orders,
     address: loginStatus.address,
     paymentCards: loginStatus.paymentCards,
   };

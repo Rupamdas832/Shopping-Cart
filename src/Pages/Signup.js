@@ -41,6 +41,7 @@ export const Signup = () => {
             userEmail: user.email,
             cart: cart.products,
             wishlist: wishlist.products,
+            orders: [],
           })
         );
         navigate(state?.from ? state.from : "/");

@@ -9,11 +9,11 @@ export const PaymentCardModal = ({
   isPaymentModalOpen,
   setIsPaymentModalOpen,
 }) => {
-  const [name, setName] = useState("");
-  const [cardType, setCardType] = useState("");
-  const [month, setMonth] = useState("");
-  const [year, setYear] = useState("");
-  const [cardNumber, setCardNumber] = useState("");
+  const [name, setName] = useState("Rupam Das");
+  const [cardType, setCardType] = useState("Visa");
+  const [month, setMonth] = useState("08");
+  const [year, setYear] = useState("2032");
+  const [cardNumber, setCardNumber] = useState("1234567891234567");
 
   const { storeDispatch } = useStore();
   const { userState } = useUser();
@@ -59,6 +59,7 @@ export const PaymentCardModal = ({
             type="text"
             placeholder="Enter Card Type(Like Master/Visa)"
             onChange={(e) => setCardType(e.target.value)}
+            value={cardType}
           />
         </div>
         <div className="input">
@@ -69,6 +70,7 @@ export const PaymentCardModal = ({
             maxLength={16}
             size={16}
             onChange={(e) => setCardNumber(e.target.value)}
+            value={cardNumber}
           />
         </div>
         <div className="input">
@@ -77,6 +79,7 @@ export const PaymentCardModal = ({
             type="text"
             placeholder="Enter Name On Card"
             onChange={(e) => setName(e.target.value)}
+            value={name}
           />
         </div>
         <div className="input date">
@@ -88,6 +91,7 @@ export const PaymentCardModal = ({
             size={2}
             onChange={(e) => setMonth(e.target.value)}
             className="inputSmall"
+            value={month}
           />
           <input
             type="number"
@@ -96,6 +100,7 @@ export const PaymentCardModal = ({
             size={2}
             onChange={(e) => setYear(e.target.value)}
             className="inputSmall"
+            value={year}
           />
         </div>
         <div className="isLoginBtns">

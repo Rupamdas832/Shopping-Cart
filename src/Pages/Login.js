@@ -7,8 +7,8 @@ import "./Login.css";
 import { URL } from "../Api/apiURL";
 
 export const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("rupam@gmail.com");
+  const [password, setPassword] = useState("123");
   const [error, setError] = useState(null);
 
   const { state } = useLocation();
@@ -30,6 +30,10 @@ export const Login = () => {
       if (status === 200) {
         storeDispatch({ type: "LOAD_CART", payload: cart.products });
         storeDispatch({ type: "LOAD_WISHLIST", payload: wishlist.products });
+        storeDispatch({
+          type: "LOAD_USER_DATA",
+          payload: { address: user.address, paymentCards: user.paymentCards },
+        });
         localStorage.setItem(
           "CartLoginUser",
           JSON.stringify({
@@ -42,6 +46,7 @@ export const Login = () => {
             wishlist: wishlist.products,
             paymentCards: user.paymentCards,
             address: user.address,
+            orders: [],
           })
         );
         navigate(state?.from ? state.from : "/");
@@ -101,6 +106,7 @@ export const Login = () => {
           <input
             placeholder="Type your email"
             type="email"
+            value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
@@ -109,6 +115,7 @@ export const Login = () => {
           <input
             placeholder="Type your password"
             type="password"
+            value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
@@ -120,6 +127,17 @@ export const Login = () => {
           <p>
             new to GradGrams! <Link to="/signup"> Signup here</Link>
           </p>
+        </div>
+      </div>
+      <div className="demoCredentials">
+        <p>Login credentials</p>
+        <div className="credentials">
+          <p>Email</p>
+          <p>rupam@gmail.com</p>
+        </div>
+        <div className="credentials">
+          <p>Password</p>
+          <p>123</p>
         </div>
       </div>
     </div>
