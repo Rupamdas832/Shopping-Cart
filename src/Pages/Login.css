@@ -16,19 +16,3 @@
   width: 100%;
   text-align: center;
 }
-.demoCredentials {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 20%;
-}
-
-.credentials {
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-}
-.credentials p {
-  margin: 0;
-}

@@ -7,8 +7,8 @@ import "./Login.css";
 import { URL } from "../Api/apiURL";
 
 export const Login = () => {
-  const [email, setEmail] = useState("rupam@gmail.com");
-  const [password, setPassword] = useState("123");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
 
   const { state } = useLocation();
@@ -18,6 +18,11 @@ export const Login = () => {
   const { isLoading } = storeState;
 
   const { userDispatch } = useUser();
+
+  const fillGuestCredentials = () => {
+    setEmail("rupam@gmail.com");
+    setPassword("Rupam@123");
+  };
 
   const fetchWishlist = async (user, token, cart) => {
     try {
@@ -120,6 +125,9 @@ export const Login = () => {
           />
         </div>
         {error && <p className="errorMessage">{error}</p>}
+        <button className="btn outline" onClick={fillGuestCredentials}>
+          Fill Guest Credentials
+        </button>
         <button className="formBtn" onClick={loginWithCredentials}>
           LogIn
         </button>
@@ -127,17 +135,6 @@ export const Login = () => {
           <p>
             new to GradGrams! <Link to="/signup"> Signup here</Link>
           </p>
-        </div>
-      </div>
-      <div className="demoCredentials">
-        <p>Login credentials</p>
-        <div className="credentials">
-          <p>Email</p>
-          <p>rupam@gmail.com</p>
-        </div>
-        <div className="credentials">
-          <p>Password</p>
-          <p>123</p>
         </div>
       </div>
     </div>

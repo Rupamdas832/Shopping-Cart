@@ -14,10 +14,6 @@ export const Header = () => {
   const { userState, userDispatch } = useUser();
   const { user, isUserLogin } = userState;
 
-  const getAllCartItems = (array) => {
-    return array.reduce((total, { quantity }) => total + quantity, 0);
-  };
-
   const fetchProducts = async () => {
     storeDispatch({ type: "IS_LOADING", payload: "fetchingProducts" });
     try {
@@ -47,6 +43,11 @@ export const Header = () => {
     localStorage.removeItem("CartLoginUser");
     userDispatch({ type: "USER_LOGOUT" });
     fetchProducts();
+  };
+
+  const getCartItems = (cart) => {
+    const activeItems = cart.filter((item) => item.status === true);
+    return activeItems.length;
   };
 
   return (
@@ -84,7 +85,7 @@ export const Header = () => {
               </Link>
               <span className="tooltipText">Shopping Bag</span>
               {cart.length === 0 ? null : (
-                <span className="badge">{getAllCartItems(cart)}</span>
+                <span className="badge">{cart.length}</span>
               )}
             </div>
             <div className="dropdown header">

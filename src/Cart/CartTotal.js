@@ -18,8 +18,14 @@ export const CartTotal = () => {
     });
     return sum;
   };
+
   const TotalAfterDiscount = () => {
     return getTotal(cart) - 40;
+  };
+
+  const getCartItems = (cart) => {
+    const activeItems = cart.filter((item) => item.status === true);
+    return activeItems.length;
   };
 
   return (

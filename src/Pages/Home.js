@@ -14,7 +14,7 @@ export const Home = () => {
   });
   return (
     <div className="home">
-      {isLoading === "loading" ? (
+      {isLoading === "fetchingProducts" ? (
         <div className="spinner"></div>
       ) : (
         <div className="homeContainer">

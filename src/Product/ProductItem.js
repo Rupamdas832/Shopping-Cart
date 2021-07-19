@@ -96,6 +96,7 @@ export const ProductItem = ({ product }) => {
         const newCartItem = {
           _id: _id,
           quantity: 1,
+          status: true,
         };
         storeDispatch({ type: "ADD_TO_CART", payload: newCartItem });
         const loginStatus = JSON.parse(localStorage.getItem("CartLoginUser"));

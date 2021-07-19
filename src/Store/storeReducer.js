@@ -131,6 +131,11 @@ const StoreReducer = (state, action) => {
         })),
         cart: [],
       };
+    case "SAVE_FOR_LATER":
+      return {
+        ...state,
+        cart: action.payload,
+      };
     default:
       return state;
   }
