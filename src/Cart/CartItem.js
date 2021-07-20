@@ -131,7 +131,7 @@ export const CartItem = ({ cartItem, quantity }) => {
       if (status === 200) {
         storeDispatch({ type: "SAVE_FOR_LATER", payload: cart.products });
         const loginStatus = JSON.parse(localStorage.getItem("CartLoginUser"));
-        loginStatus.cart = cart;
+        loginStatus.cart = cart.products;
         localStorage.setItem("CartLoginUser", JSON.stringify(loginStatus));
       }
     } catch (error) {
@@ -163,9 +163,9 @@ export const CartItem = ({ cartItem, quantity }) => {
         <div className="btnsFlat small">
           <button
             className="btn outline cart"
-            onClick={() => toggleWishlist(_id)}
+            onClick={() => saveForLater(_id)}
           >
-            {isWishlist ? "Wishlisted" : "Move to wishlist"}
+            Save for later
           </button>
           <button className="btn cart" onClick={() => removeItem(_id)}>
             Remove

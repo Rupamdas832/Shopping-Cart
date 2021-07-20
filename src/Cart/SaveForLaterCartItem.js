@@ -35,7 +35,7 @@ export const SaveForLaterCartItem = ({ cartItem, quantity }) => {
     }
   };
 
-  const saveForLater = async (id) => {
+  const moveToCart = async (id) => {
     storeDispatch({ type: "IS_LOADING", payload: "savingForLater" });
     try {
       const {
@@ -53,7 +53,7 @@ export const SaveForLaterCartItem = ({ cartItem, quantity }) => {
       if (status === 200) {
         storeDispatch({ type: "SAVE_FOR_LATER", payload: cart.products });
         const loginStatus = JSON.parse(localStorage.getItem("CartLoginUser"));
-        loginStatus.cart = cart;
+        loginStatus.cart = cart.products;
         localStorage.setItem("CartLoginUser", JSON.stringify(loginStatus));
       }
     } catch (error) {
@@ -83,10 +83,7 @@ export const SaveForLaterCartItem = ({ cartItem, quantity }) => {
           </div>
         </div>
         <div className="btnsFlat small">
-          <button
-            className="btn outline cart"
-            onClick={() => saveForLater(_id)}
-          >
+          <button className="btn outline cart" onClick={() => moveToCart(_id)}>
             Move to cart
           </button>
           <button className="btn cart" onClick={() => removeItem(_id)}>

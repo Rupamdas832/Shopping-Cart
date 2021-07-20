@@ -48,14 +48,20 @@ export const Checkout = () => {
     };
     storeDispatch({ type: "IS_LOADING", payload: "checking out" });
     try {
-      const { status } = await axios.delete(`${URL}/cart/checkout`, {
+      const {
+        data: { cart },
+        status,
+      } = await axios.delete(`${URL}/cart/checkout`, {
         headers: { Authorization: token },
       });
       if (status === 200) {
-        storeDispatch({ type: "ADD_TO_ORDER", payload: newOrder });
+        storeDispatch({
+          type: "ADD_TO_ORDER",
+          payload: { newOrder, cart: cart.products },
+        });
         checkoutDispatch({ type: "DONE_CHECKOUT" });
         const storage = JSON.parse(localStorage.getItem("CartLoginUser"));
-        storage.cart = [];
+        storage.cart = cart.products;
         storage.orders = storage.orders.concat(newOrder);
         localStorage.setItem("CartLoginUser", JSON.stringify(storage));
         navigate("/order");

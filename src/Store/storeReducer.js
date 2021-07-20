@@ -124,12 +124,18 @@ const StoreReducer = (state, action) => {
     case "ADD_TO_ORDER":
       return {
         ...state,
-        orders: state.orders.concat(action.payload),
-        products: state.products.map((product) => ({
-          ...product,
-          inCart: false,
-        })),
-        cart: [],
+        orders: state.orders.concat(action.payload.newOrder),
+        cart: action.payload.cart,
+        products: state.products.map((product) => {
+          const cartItem = action.payload.cart.find(
+            (item) => item._id === product._id
+          );
+          if (cartItem) {
+            return { ...product, inCart: true };
+          } else {
+            return { ...product, inCart: false };
+          }
+        }),
       };
     case "SAVE_FOR_LATER":
       return {

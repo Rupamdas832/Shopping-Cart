@@ -85,7 +85,7 @@ export const Header = () => {
               </Link>
               <span className="tooltipText">Shopping Bag</span>
               {cart.length === 0 ? null : (
-                <span className="badge">{cart.length}</span>
+                <span className="badge">{getCartItems(cart)}</span>
               )}
             </div>
             <div className="dropdown header">

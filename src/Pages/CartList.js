@@ -11,8 +11,6 @@ export const CartList = () => {
   const { storeState } = useStore();
   const { isLoading, cart, products } = storeState;
 
-  console.log(cart);
-
   const navigate = useNavigate();
 
   const { userState } = useUser();
@@ -34,6 +32,11 @@ export const CartList = () => {
   const getSaveForLaterItems = (cart) => {
     const inActiveItems = cart.filter((item) => item.status === false);
     return inActiveItems.length;
+  };
+
+  const getActiveItems = (cart) => {
+    const activeItems = cart.filter((item) => item.status === true);
+    return activeItems.length;
   };
 
   useEffect(() => {
@@ -58,21 +61,29 @@ export const CartList = () => {
             <div className="cartListContainer">
               <div className="cartList">
                 <div className="activeCartItems">
+                  {getActiveItems(cart) === 0 ? null : (
+                    <h3>Cart Items ({getActiveItems(cart)})</h3>
+                  )}
                   {cart.map((cartItem) => {
-                    let productFound = products.find(
-                      (product) => product._id === cartItem._id
-                    );
-                    return (
-                      <CartItem
-                        cartItem={productFound}
-                        quantity={cartItem.quantity}
-                        key={cartItem._id}
-                      />
-                    );
+                    let productFound = undefined;
+                    if (cartItem.status) {
+                      productFound = products.find(
+                        (product) => product._id === cartItem._id
+                      );
+                    }
+                    if (productFound) {
+                      return (
+                        <CartItem
+                          cartItem={productFound}
+                          quantity={cartItem.quantity}
+                          key={cartItem._id}
+                        />
+                      );
+                    } else return null;
                   })}
                 </div>
 
-                {/*<div>
+                <div>
                   <h3>Save for later ({getSaveForLaterItems(cart)})</h3>
                   {cart.map((cartItem) => {
                     let productFound = undefined;
@@ -91,11 +102,13 @@ export const CartList = () => {
                       );
                     } else return null;
                   })}
-                </div>*/}
+                </div>
               </div>
-              <div className="cartTotal">
-                <CartTotal />
-              </div>
+              {cart.find((item) => item.status === true) && (
+                <div className="cartTotal">
+                  <CartTotal />
+                </div>
+              )}
             </div>
           )}
         </div>

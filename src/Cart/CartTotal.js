@@ -8,7 +8,8 @@ export const CartTotal = () => {
 
   const getTotal = () => {
     let sum = 0;
-    cart.map((item) => {
+    let activeCartItems = cart.filter((item) => item.status === true);
+    activeCartItems.map((item) => {
       return products.map((product) => {
         if (product._id === item._id) {
           return (sum = sum + parseInt(product.price) * item.quantity);
@@ -20,7 +21,9 @@ export const CartTotal = () => {
   };
 
   const TotalAfterDiscount = () => {
-    return getTotal(cart) - 40;
+    if (getTotal() === 0) {
+      return 0;
+    } else return getTotal(cart) - 40;
   };
 
   const getCartItems = (cart) => {
@@ -30,7 +33,7 @@ export const CartTotal = () => {
 
   return (
     <div className="cartPriceDetails">
-      <h4>PRICE DETAILS({cart.length} items)</h4>
+      <h4>PRICE DETAILS({getCartItems(cart)} items)</h4>
       <div className="price">
         <p>Price</p>
         <p>₹{getTotal()}</p>
@@ -49,7 +52,10 @@ export const CartTotal = () => {
       </div>
       <Link
         to="/checkout"
-        state={{ price: TotalAfterDiscount(), cartItems: cart }}
+        state={{
+          price: TotalAfterDiscount(),
+          cartItems: cart.filter((item) => item.status === true),
+        }}
       >
         <button className="actionBtn cart">Checkout</button>
       </Link>
