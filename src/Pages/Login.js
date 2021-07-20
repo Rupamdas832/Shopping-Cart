@@ -125,9 +125,7 @@ export const Login = () => {
           />
         </div>
         {error && <p className="errorMessage">{error}</p>}
-        <button className="btn outline" onClick={fillGuestCredentials}>
-          Fill Guest Credentials
-        </button>
+
         <button className="formBtn" onClick={loginWithCredentials}>
           LogIn
         </button>
@@ -136,6 +134,9 @@ export const Login = () => {
             new to GradGrams! <Link to="/signup"> Signup here</Link>
           </p>
         </div>
+        <button className="btn outline" onClick={fillGuestCredentials}>
+          Fill Guest Credentials
+        </button>
       </div>
     </div>
   );
