@@ -50,6 +50,10 @@ export const CartList = () => {
     <div className="cartContainer">
       {isLoading === "removing" ? <Toast message="Removing from Cart" /> : null}
       {isLoading === "adding" ? <Toast message="Increasing Item" /> : null}
+      {isLoading === "moveToCart" ? <Toast message="Moving to Cart" /> : null}
+      {isLoading === "saveForLater" ? (
+        <Toast message="Saving for later" />
+      ) : null}
       <h1>Cart</h1>
       {products.length === 0 ? (
         <div className="spinner"></div>

@@ -36,7 +36,7 @@ export const SaveForLaterCartItem = ({ cartItem, quantity }) => {
   };
 
   const moveToCart = async (id) => {
-    storeDispatch({ type: "IS_LOADING", payload: "savingForLater" });
+    storeDispatch({ type: "IS_LOADING", payload: "moveToCart" });
     try {
       const {
         data: { cart },

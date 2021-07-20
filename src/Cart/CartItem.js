@@ -114,7 +114,7 @@ export const CartItem = ({ cartItem, quantity }) => {
   };
 
   const saveForLater = async (id) => {
-    storeDispatch({ type: "IS_LOADING", payload: "savingForLater" });
+    storeDispatch({ type: "IS_LOADING", payload: "saveForLater" });
     try {
       const {
         data: { cart },
