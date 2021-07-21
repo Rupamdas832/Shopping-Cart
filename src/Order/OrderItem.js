@@ -9,6 +9,7 @@ export const OrderItem = ({ totalPrice, shippedAddress, cartItems }) => {
 
   return (
     <div className="card orderItem">
+      <h4>Order Placed</h4>
       <div className="cardBody orderItem">
         <div>
           {cartItems &&
@@ -37,7 +38,7 @@ export const OrderItem = ({ totalPrice, shippedAddress, cartItems }) => {
           </div>
         </div>
         <div className="cardBody address">
-          <p>Shipping Address</p>
+          <p style={{ fontWeight: "900" }}>Shipping Address</p>
           <p style={{ fontWeight: "700" }}>{shippedAddress.name}</p>
           <p>{address}</p>
           <p>

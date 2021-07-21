@@ -3,3 +3,10 @@
   flex-direction: column;
   align-items: center;
 }
+
+.checkoutStep1 li {
+  list-style-type: none;
+}
+.checkoutStep1 li:hover {
+  cursor: pointer;
+}

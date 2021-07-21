@@ -153,7 +153,7 @@ export const ProductItem = ({ product }) => {
       </div>
       <div className="cardFooter">
         <Link to={`/productDetail/${_id}`}>
-          <button className="btn outline">Detail...</button>
+          <button className="btn outline">Details</button>
         </Link>
         {isUserLogin ? (
           <div>

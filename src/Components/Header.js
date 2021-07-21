@@ -52,12 +52,14 @@ export const Header = () => {
 
   return (
     <div className="navbar">
-      <div className="navLogo">
-        <img
-          src="https://thumbs.dreamstime.com/b/letter-gg-simple-logo-icon-design-vector-simple-circle-logo-vector-illustration-letter-gg-simple-logo-icon-design-vector-180925896.jpg"
-          alt="logo"
-        />
-      </div>
+      <NavLink to="/" exact>
+        <div className="navLogo">
+          <img
+            src="https://thumbs.dreamstime.com/b/letter-gg-simple-logo-icon-design-vector-simple-circle-logo-vector-illustration-letter-gg-simple-logo-icon-design-vector-180925896.jpg"
+            alt="logo"
+          />
+        </div>
+      </NavLink>
       <div className="navLinks">
         <NavLink to="/" exact>
           <button className="navBtn">Home</button>

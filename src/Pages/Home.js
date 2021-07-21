@@ -2,12 +2,24 @@ import React, { useEffect } from "react";
 import "./Home.css";
 import { Link } from "react-router-dom";
 import { useStore } from "../Store";
+import { useProduct } from "../Product/productContext";
 
 export const Home = () => {
   const { storeState } = useStore();
   const { isLoading, products } = storeState;
 
+  const {
+    productState: { category },
+    productDispatch,
+  } = useProduct();
+
   const slicedProducts = products.slice(0, 5);
+
+  const updateCategory = (selectedCategory) => {
+    if (!category.includes(selectedCategory)) {
+      productDispatch({ type: "ADD_CATEGORY", payload: selectedCategory });
+    }
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -28,7 +40,11 @@ export const Home = () => {
           </div>
           <h2 className="homeSubHeading">Categories</h2>
           <div className="homeCategoryDiv">
-            <Link to="/products" className="homeCategory">
+            <Link
+              to="/products"
+              className="homeCategory"
+              onClick={() => updateCategory("AAA")}
+            >
               <img
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROhIH-hKw_oc4B_-HNOXvhKdxyfFGPftOxFg&usqp=CAU"
                 className="avatar lg"
@@ -36,7 +52,11 @@ export const Home = () => {
               />
               <p>AAA</p>
             </Link>
-            <Link to="/products" className="homeCategory">
+            <Link
+              to="/products"
+              className="homeCategory"
+              onClick={() => updateCategory("Sports")}
+            >
               <img
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQB5JxRAzOHEP2_gPQZy5Cpx9vCKNV9I9Bg7Q&usqp=CAU"
                 className="avatar lg"
@@ -44,7 +64,11 @@ export const Home = () => {
               />
               <p>Sports</p>
             </Link>
-            <Link to="/products" className="homeCategory">
+            <Link
+              to="/products"
+              className="homeCategory"
+              onClick={() => updateCategory("RPG")}
+            >
               <img
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCYjUaMM8PV27NC6iAIH6R1vQGV18wzlufkg&usqp=CAU"
                 className="avatar lg"
@@ -52,13 +76,17 @@ export const Home = () => {
               />
               <p>RPG</p>
             </Link>
-            <Link to="/products" className="homeCategory">
+            <Link
+              to="/products"
+              className="homeCategory"
+              onClick={() => updateCategory("Combat")}
+            >
               <img
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjNDL-MrKhLgrTwNLD9TQh21mZAp_N2dgFbg&usqp=CAU"
                 className="avatar lg"
                 alt="category"
               />
-              <p>Action</p>
+              <p>Combat</p>
             </Link>
           </div>
           <h2 className="homeSubHeading">Products</h2>
@@ -80,13 +108,20 @@ export const Home = () => {
                   </div>
                   <div className="cardFooter">
                     <Link to={`/productDetail/${_id}`}>
-                      <button className="btn">Detail...</button>
+                      <button className="btn">Details</button>
                     </Link>
                   </div>
                 </div>
               );
             })}
-            <Link to="/products" style={{ textAlign: "center" }}>
+            <Link
+              to="/products"
+              style={{
+                textAlign: "center",
+                textDecoration: "none",
+                color: "black",
+              }}
+            >
               <p>More...</p>
             </Link>
           </div>

@@ -104,7 +104,7 @@ export const Checkout = () => {
       </Link>
       <h2>Total Price : ₹{price}</h2>
       {cardSelected && addressSelected && (
-        <>
+        <div className="paymentBtns">
           <PayPalButton
             createOrder={(data, actions) => createOrder(data, actions)}
             onApprove={(data, actions) => onApprove(data, actions)}
@@ -113,7 +113,7 @@ export const Checkout = () => {
           <button className="btn placeOrder" onClick={() => placeOrderBtn()}>
             Fake checkout
           </button>
-        </>
+        </div>
       )}
       <div className="stepsSection">
         <button onClick={() => changeStep("Decrease")} className="btn outline">
